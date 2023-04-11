@@ -1,4 +1,4 @@
-import 'package:book_exchange/domain/entities/post.dart';
+import 'package:book_story/domain/entities/post.dart';
 
 import '../../entities/api_response.dart';
 

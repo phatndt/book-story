@@ -1,11 +1,12 @@
 import 'dart:developer';
 
-import 'package:book_exchange/core/route_paths.dart';
-import 'package:book_exchange/presentation/di/post_provider.dart';
-import 'package:book_exchange/presentation/views/widgets/post/post_item.dart';
+import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/presentation/di/post_provider.dart';
+import 'package:book_story/presentation/views/widgets/post/post_item.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:lottie/lottie.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 
 import '../../../../core/colors/colors.dart';

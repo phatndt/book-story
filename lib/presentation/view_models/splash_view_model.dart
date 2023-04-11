@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:book_exchange/core/route_paths.dart';
-import 'package:book_exchange/domain/use_cases/main/get_is_first_time_app.dart';
-import 'package:book_exchange/domain/use_cases/main/save_is_first_time_app.dart';
+import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/domain/use_cases/main/get_is_first_time_app.dart';
+import 'package:book_story/domain/use_cases/main/save_is_first_time_app.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:book_exchange/domain/use_cases/post/update_post_use_case.dart';
-import 'package:book_exchange/domain/use_cases/upload_image_use_case.dart';
-import 'package:book_exchange/presentation/di/post_provider.dart';
+import 'package:book_story/domain/use_cases/post/update_post_use_case.dart';
+import 'package:book_story/domain/use_cases/upload_image_use_case.dart';
+import 'package:book_story/presentation/di/post_provider.dart';
 import 'package:drop_down_list/drop_down_list.dart';
 import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/cupertino.dart';

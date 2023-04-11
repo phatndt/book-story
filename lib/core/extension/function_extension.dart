@@ -1,4 +1,4 @@
-import 'package:book_exchange/core/route_paths.dart';
+import 'package:book_story/core/route_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 import 'package:material_dialogs/widgets/buttons/icon_button.dart';

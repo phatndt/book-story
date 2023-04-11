@@ -1,6 +1,6 @@
-import 'package:book_exchange/domain/entities/book.dart';
-import 'package:book_exchange/domain/entities/api_response.dart';
-import 'package:book_exchange/domain/use_cases/book/delete_book_use_case.dart';
+import 'package:book_story/domain/entities/book.dart';
+import 'package:book_story/domain/entities/api_response.dart';
+import 'package:book_story/domain/use_cases/book/delete_book_use_case.dart';
 
 import '../../repository/book_repo.dart';
 

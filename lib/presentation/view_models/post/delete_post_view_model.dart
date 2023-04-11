@@ -1,6 +1,6 @@
-import 'package:book_exchange/domain/use_cases/post/delete_post_use_case.dart';
-import 'package:book_exchange/presentation/di/post_provider.dart';
-import 'package:book_exchange/presentation/models/book_app_model.dart';
+import 'package:book_story/domain/use_cases/post/delete_post_use_case.dart';
+import 'package:book_story/presentation/di/post_provider.dart';
+import 'package:book_story/presentation/models/book_app_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';

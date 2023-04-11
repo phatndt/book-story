@@ -1,4 +1,4 @@
-import 'package:book_exchange/domain/use_cases/book/get_list_book_by_id_use_case.dart';
+import 'package:book_story/domain/use_cases/book/get_list_book_by_id_use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/entities/book.dart';

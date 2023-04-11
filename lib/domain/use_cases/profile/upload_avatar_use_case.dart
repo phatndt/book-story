@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:book_exchange/domain/repository/profile_repo.dart';
+import 'package:book_story/domain/repository/profile_repo.dart';
 
 class UploadAvatarUseCase {
   final ProfileRepo _profileRepo;

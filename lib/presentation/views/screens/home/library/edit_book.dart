@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:book_exchange/presentation/views/widgets/filled_button.dart';
+import 'package:book_story/presentation/views/widgets/filled_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

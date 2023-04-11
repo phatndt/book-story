@@ -1,12 +1,12 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:book_exchange/domain/use_cases/change_information/change_avatar_path_use_case.dart';
-import 'package:book_exchange/domain/use_cases/profile/get_user_use_case.dart';
-import 'package:book_exchange/domain/use_cases/profile/upload_avatar_use_case.dart';
-import 'package:book_exchange/presentation/di/app_provider.dart';
-import 'package:book_exchange/presentation/di/profile_component.dart';
-import 'package:book_exchange/presentation/models/book_app_model.dart';
+import 'package:book_story/domain/use_cases/change_information/change_avatar_path_use_case.dart';
+import 'package:book_story/domain/use_cases/profile/get_user_use_case.dart';
+import 'package:book_story/domain/use_cases/profile/upload_avatar_use_case.dart';
+import 'package:book_story/presentation/di/app_provider.dart';
+import 'package:book_story/presentation/di/profile_component.dart';
+import 'package:book_story/presentation/models/book_app_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

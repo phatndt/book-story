@@ -1,4 +1,4 @@
-import 'package:book_exchange/domain/entities/user_post.dart';
+import 'package:book_story/domain/entities/user_post.dart';
 
 class CombinationComment {
   final String id;

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:book_exchange/domain/use_cases/upload_image_use_case.dart';
+import 'package:book_story/domain/use_cases/upload_image_use_case.dart';
 
 import '../repository/book_repo.dart';
 

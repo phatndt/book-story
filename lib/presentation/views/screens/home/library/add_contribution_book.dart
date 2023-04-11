@@ -1,7 +1,7 @@
-import 'package:book_exchange/domain/entities/book_contribution.dart';
-import 'package:book_exchange/presentation/di/book_contribution_component.dart';
-import 'package:book_exchange/presentation/views/widgets/filled_button.dart';
-import 'package:book_exchange/presentation/views/widgets/filled_icon_button.dart';
+import 'package:book_story/domain/entities/book_contribution.dart';
+import 'package:book_story/presentation/di/book_contribution_component.dart';
+import 'package:book_story/presentation/views/widgets/filled_button.dart';
+import 'package:book_story/presentation/views/widgets/filled_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

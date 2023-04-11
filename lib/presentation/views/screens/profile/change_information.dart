@@ -1,11 +1,11 @@
 import 'dart:developer';
 
-import 'package:book_exchange/presentation/di/app_provider.dart';
-import 'package:book_exchange/presentation/di/change_information.dart';
-import 'package:book_exchange/presentation/di/changing_password_component.dart';
-import 'package:book_exchange/presentation/di/profile_component.dart';
-import 'package:book_exchange/presentation/models/book_app_model.dart';
-import 'package:book_exchange/presentation/views/widgets/filled_button.dart';
+import 'package:book_story/presentation/di/app_provider.dart';
+import 'package:book_story/presentation/di/change_information.dart';
+import 'package:book_story/presentation/di/changing_password_component.dart';
+import 'package:book_story/presentation/di/profile_component.dart';
+import 'package:book_story/presentation/models/book_app_model.dart';
+import 'package:book_story/presentation/views/widgets/filled_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

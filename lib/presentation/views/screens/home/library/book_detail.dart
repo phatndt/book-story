@@ -1,7 +1,7 @@
-import 'package:book_exchange/core/widget/footer_widget.dart';
-import 'package:book_exchange/presentation/views/screens/home/library/add_contribution_book.dart';
-import 'package:book_exchange/presentation/views/screens/home/library/edit_book.dart';
-import 'package:book_exchange/presentation/views/widgets/alert_dialog.dart';
+import 'package:book_story/core/widget/footer_widget.dart';
+import 'package:book_story/presentation/views/screens/home/library/add_contribution_book.dart';
+import 'package:book_story/presentation/views/screens/home/library/edit_book.dart';
+import 'package:book_story/presentation/views/widgets/alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

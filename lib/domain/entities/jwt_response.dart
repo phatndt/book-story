@@ -1,4 +1,4 @@
-import 'package:book_exchange/domain/entities/user.dart';
+import 'package:book_story/domain/entities/user.dart';
 
 class JwtResponse {
   final String token;

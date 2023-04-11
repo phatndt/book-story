@@ -1,7 +1,7 @@
-import 'package:book_exchange/data/mapper/api_response_mapper.dart';
-import 'package:book_exchange/data/services/auth_service.dart';
-import 'package:book_exchange/domain/entities/jwt_response.dart';
-import 'package:book_exchange/domain/repository/auth_repo.dart';
+import 'package:book_story/data/mapper/api_response_mapper.dart';
+import 'package:book_story/data/services/auth_service.dart';
+import 'package:book_story/domain/entities/jwt_response.dart';
+import 'package:book_story/domain/repository/auth_repo.dart';
 
 import '../../domain/entities/api_response.dart';
 

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:book_exchange/data/entities/post_dto.dart';
-import 'package:book_exchange/presentation/models/book_app_model.dart';
+import 'package:book_story/data/entities/post_dto.dart';
+import 'package:book_story/presentation/models/book_app_model.dart';
 import 'package:dio/dio.dart';
 
 import '../../domain/entities/post.dart';

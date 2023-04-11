@@ -1,5 +1,5 @@
-import 'package:book_exchange/data/entities/post_dto.dart';
-import 'package:book_exchange/data/entities/user_post_dto.dart';
+import 'package:book_story/data/entities/post_dto.dart';
+import 'package:book_story/data/entities/user_post_dto.dart';
 
 import '../../domain/entities/post.dart';
 import '../../domain/entities/user_post.dart';

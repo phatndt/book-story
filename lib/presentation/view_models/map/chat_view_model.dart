@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:book_exchange/presentation/di/app_provider.dart';
+import 'package:book_story/presentation/di/app_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

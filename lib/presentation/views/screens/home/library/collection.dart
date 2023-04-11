@@ -1,9 +1,10 @@
-import 'package:book_exchange/core/route_paths.dart';
-import 'package:book_exchange/presentation/views/screens/home/library/book_detail.dart';
+import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/presentation/views/screens/home/library/book_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:lottie/lottie.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 
 import '../../../../../core/colors/colors.dart';

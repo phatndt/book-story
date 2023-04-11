@@ -1,4 +1,4 @@
-import 'package:book_exchange/domain/entities/api_response.dart';
+import 'package:book_story/domain/entities/api_response.dart';
 
 import '../../repository/profile_repo.dart';
 import 'change_address_use_case.dart';

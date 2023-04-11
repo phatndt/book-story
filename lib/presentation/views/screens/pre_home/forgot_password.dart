@@ -1,6 +1,6 @@
-import 'package:book_exchange/presentation/view_models/pre_home_viewmodel.dart';
-import 'package:book_exchange/presentation/views/widgets/filled_button.dart';
-import 'package:book_exchange/presentation/views/widgets/text_field.dart';
+import 'package:book_story/presentation/view_models/pre_home_viewmodel.dart';
+import 'package:book_story/presentation/views/widgets/filled_button.dart';
+import 'package:book_story/presentation/views/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

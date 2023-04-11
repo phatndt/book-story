@@ -1,8 +1,8 @@
-import 'package:book_exchange/data/mapper/api_response_mapper.dart';
-import 'package:book_exchange/data/services/comment_service.dart';
-import 'package:book_exchange/domain/entities/comment.dart';
-import 'package:book_exchange/domain/entities/api_response.dart';
-import 'package:book_exchange/domain/repository/comment_repo.dart';
+import 'package:book_story/data/mapper/api_response_mapper.dart';
+import 'package:book_story/data/services/comment_service.dart';
+import 'package:book_story/domain/entities/comment.dart';
+import 'package:book_story/domain/entities/api_response.dart';
+import 'package:book_story/domain/repository/comment_repo.dart';
 
 import '../entities/api_response_dto.dart';
 import '../entities/comment_dto.dart';

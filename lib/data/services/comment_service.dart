@@ -1,5 +1,5 @@
-import 'package:book_exchange/data/entities/comment_dto.dart';
-import 'package:book_exchange/domain/entities/comment.dart';
+import 'package:book_story/data/entities/comment_dto.dart';
+import 'package:book_story/domain/entities/comment.dart';
 import 'package:dio/dio.dart';
 
 import '../entities/api_response_dto.dart';

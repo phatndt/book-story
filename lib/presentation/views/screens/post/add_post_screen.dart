@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:book_exchange/core/app_bar.dart';
-import 'package:book_exchange/presentation/di/app_provider.dart';
-import 'package:book_exchange/presentation/di/post_provider.dart';
-import 'package:book_exchange/presentation/views/widgets/filled_button.dart';
+import 'package:book_story/core/app_bar.dart';
+import 'package:book_story/presentation/di/app_provider.dart';
+import 'package:book_story/presentation/di/post_provider.dart';
+import 'package:book_story/presentation/views/widgets/filled_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -1,5 +1,5 @@
-import 'package:book_exchange/data/services/shared_preferences_service.dart';
-import 'package:book_exchange/domain/repository/main_app_repo.dart';
+import 'package:book_story/data/services/shared_preferences_service.dart';
+import 'package:book_story/domain/repository/main_app_repo.dart';
 
 class MainAppRepoImpl extends MainAppRepo {
   final SharePreferencesService _sharePreferencesService;

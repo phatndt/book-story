@@ -1,5 +1,5 @@
-import 'package:book_exchange/core/custom_text_form_fill.dart';
-import 'package:book_exchange/presentation/views/widgets/filled_button.dart';
+import 'package:book_story/core/custom_text_form_fill.dart';
+import 'package:book_story/presentation/views/widgets/filled_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -1,7 +1,7 @@
-import 'package:book_exchange/core/route_paths.dart';
-import 'package:book_exchange/presentation/views/screens/home/library/share.dart';
-import 'package:book_exchange/presentation/views/screens/post/main_post_screen.dart';
-import 'package:book_exchange/presentation/views/screens/profile/profile_screen.dart';
+import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/presentation/views/screens/home/library/share.dart';
+import 'package:book_story/presentation/views/screens/post/main_post_screen.dart';
+import 'package:book_story/presentation/views/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

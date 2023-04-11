@@ -1,10 +1,10 @@
-import 'package:book_exchange/domain/entities/api_response.dart';
-import 'package:book_exchange/domain/entities/user_post.dart';
-import 'package:book_exchange/domain/use_cases/comment/create_comment_use_case.dart';
-import 'package:book_exchange/domain/use_cases/comment/get_comment_by_post_use_case.dart';
-import 'package:book_exchange/domain/use_cases/profile/get_user_use_case.dart';
-import 'package:book_exchange/presentation/di/post_provider.dart';
-import 'package:book_exchange/presentation/models/book_app_model.dart';
+import 'package:book_story/domain/entities/api_response.dart';
+import 'package:book_story/domain/entities/user_post.dart';
+import 'package:book_story/domain/use_cases/comment/create_comment_use_case.dart';
+import 'package:book_story/domain/use_cases/comment/get_comment_by_post_use_case.dart';
+import 'package:book_story/domain/use_cases/profile/get_user_use_case.dart';
+import 'package:book_story/presentation/di/post_provider.dart';
+import 'package:book_story/presentation/models/book_app_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

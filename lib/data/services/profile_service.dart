@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:book_exchange/data/entities/user_dto.dart';
-import 'package:book_exchange/presentation/models/book_app_model.dart';
+import 'package:book_story/data/entities/user_dto.dart';
+import 'package:book_story/presentation/models/book_app_model.dart';
 import 'package:dio/dio.dart';
 import '../../domain/entities/user.dart';
 import '../entities/api_response_dto.dart';

@@ -1,4 +1,4 @@
-import 'package:book_exchange/domain/use_cases/post/update_post_use_case.dart';
+import 'package:book_story/domain/use_cases/post/update_post_use_case.dart';
 
 import '../../entities/api_response.dart';
 import '../../entities/post.dart';

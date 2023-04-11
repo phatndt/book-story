@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:book_exchange/core/core.dart';
-import 'package:book_exchange/core/route_paths.dart';
-import 'package:book_exchange/domain/use_cases/book/upload_book_use_case.dart';
-import 'package:book_exchange/domain/use_cases/book_contribution/get_contribution_book_by_isbn_barcode_use_case.dart';
-import 'package:book_exchange/domain/use_cases/book_contribution/get_contribution_book_by_normal_barcode_use_case.dart';
-import 'package:book_exchange/domain/use_cases/upload_image_use_case.dart';
+import 'package:book_story/core/core.dart';
+import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/domain/use_cases/book/upload_book_use_case.dart';
+import 'package:book_story/domain/use_cases/book_contribution/get_contribution_book_by_isbn_barcode_use_case.dart';
+import 'package:book_story/domain/use_cases/book_contribution/get_contribution_book_by_normal_barcode_use_case.dart';
+import 'package:book_story/domain/use_cases/upload_image_use_case.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -1,4 +1,4 @@
-import 'package:book_exchange/domain/repository/comment_repo.dart';
+import 'package:book_story/domain/repository/comment_repo.dart';
 
 import '../../entities/api_response.dart';
 import '../../entities/comment.dart';

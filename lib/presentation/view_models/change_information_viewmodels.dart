@@ -1,10 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:book_exchange/domain/use_cases/change_information/change_address_use_case.dart';
-import 'package:book_exchange/domain/use_cases/change_information/change_avatar_path_use_case.dart';
-import 'package:book_exchange/domain/use_cases/change_information/change_username_use_case.dart';
-import 'package:book_exchange/presentation/di/app_provider.dart';
+import 'package:book_story/domain/use_cases/change_information/change_address_use_case.dart';
+import 'package:book_story/domain/use_cases/change_information/change_avatar_path_use_case.dart';
+import 'package:book_story/domain/use_cases/change_information/change_username_use_case.dart';
+import 'package:book_story/presentation/di/app_provider.dart';
 import 'package:cloudinary_sdk/cloudinary_sdk.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

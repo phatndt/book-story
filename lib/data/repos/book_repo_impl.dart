@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:book_exchange/data/services/book_service.dart';
-import 'package:book_exchange/domain/entities/book.dart';
-import 'package:book_exchange/domain/entities/api_response.dart';
-import 'package:book_exchange/domain/repository/book_repo.dart';
+import 'package:book_story/data/services/book_service.dart';
+import 'package:book_story/domain/entities/book.dart';
+import 'package:book_story/domain/entities/api_response.dart';
+import 'package:book_story/domain/repository/book_repo.dart';
 
 import '../mapper/book_mapper.dart';
 

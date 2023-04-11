@@ -1,4 +1,4 @@
-import 'package:book_exchange/presentation/di/profile_component.dart';
+import 'package:book_story/presentation/di/profile_component.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/use_cases/change_information/change_address_use_case_impl.dart';

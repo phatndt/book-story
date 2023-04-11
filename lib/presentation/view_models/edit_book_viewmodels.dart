@@ -1,9 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:book_exchange/core/route_paths.dart';
-import 'package:book_exchange/domain/use_cases/book/delete_book_use_case.dart';
-import 'package:book_exchange/domain/use_cases/book/edit_book_use_case.dart';
+import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/domain/use_cases/book/delete_book_use_case.dart';
+import 'package:book_story/domain/use_cases/book/edit_book_use_case.dart';
 import 'package:cloudinary_sdk/cloudinary_sdk.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

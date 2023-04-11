@@ -1,8 +1,8 @@
-import 'package:book_exchange/core/extension/function_extension.dart';
-import 'package:book_exchange/core/route_paths.dart';
-import 'package:book_exchange/presentation/di/app_provider.dart';
-import 'package:book_exchange/presentation/di/profile_component.dart';
-import 'package:book_exchange/presentation/models/book_app_model.dart';
+import 'package:book_story/core/extension/function_extension.dart';
+import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/presentation/di/app_provider.dart';
+import 'package:book_story/presentation/di/profile_component.dart';
+import 'package:book_story/presentation/models/book_app_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';

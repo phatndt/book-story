@@ -1,14 +1,15 @@
 import 'dart:developer';
 
-import 'package:book_exchange/core/app_bar.dart';
-import 'package:book_exchange/presentation/di/comment_component.dart';
-import 'package:book_exchange/presentation/di/profile_component.dart';
-import 'package:book_exchange/presentation/models/book_app_model.dart';
-import 'package:book_exchange/presentation/views/widgets/post/post_comment.dart';
+import 'package:book_story/core/app_bar.dart';
+import 'package:book_story/presentation/di/comment_component.dart';
+import 'package:book_story/presentation/di/profile_component.dart';
+import 'package:book_story/presentation/models/book_app_model.dart';
+import 'package:book_story/presentation/views/widgets/post/post_comment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 

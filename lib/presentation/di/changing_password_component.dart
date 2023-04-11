@@ -1,7 +1,7 @@
-import 'package:book_exchange/domain/use_cases/change_information/change_address_use_case.dart';
-import 'package:book_exchange/domain/use_cases/change_information/change_address_use_case_impl.dart';
-import 'package:book_exchange/domain/use_cases/change_information/change_avatar_path_use_case_impl.dart';
-import 'package:book_exchange/presentation/view_models/change_information_viewmodels.dart';
+import 'package:book_story/domain/use_cases/change_information/change_address_use_case.dart';
+import 'package:book_story/domain/use_cases/change_information/change_address_use_case_impl.dart';
+import 'package:book_story/domain/use_cases/change_information/change_avatar_path_use_case_impl.dart';
+import 'package:book_story/presentation/view_models/change_information_viewmodels.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../data/repos/profile_repo_impl.dart';
 import '../../data/services/profile_service.dart';

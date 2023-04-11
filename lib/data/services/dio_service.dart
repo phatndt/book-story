@@ -1,4 +1,4 @@
-import 'package:book_exchange/data/services/end_points.dart';
+import 'package:book_story/data/services/end_points.dart';
 import 'package:dio/dio.dart';
 
 class DioService {

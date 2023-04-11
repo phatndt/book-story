@@ -1,12 +1,12 @@
 import 'dart:core';
 
-import 'package:book_exchange/data/base/base_mapper.dart';
-import 'package:book_exchange/data/entities/api_response_dto.dart';
-import 'package:book_exchange/data/entities/jwt_response_dto.dart';
-import 'package:book_exchange/data/entities/post_dto.dart';
-import 'package:book_exchange/data/mapper/jwt_response_mapper.dart';
-import 'package:book_exchange/domain/entities/api_response.dart';
-import 'package:book_exchange/domain/entities/jwt_response.dart';
+import 'package:book_story/data/base/base_mapper.dart';
+import 'package:book_story/data/entities/api_response_dto.dart';
+import 'package:book_story/data/entities/jwt_response_dto.dart';
+import 'package:book_story/data/entities/post_dto.dart';
+import 'package:book_story/data/mapper/jwt_response_mapper.dart';
+import 'package:book_story/domain/entities/api_response.dart';
+import 'package:book_story/domain/entities/jwt_response.dart';
 
 import '../../domain/entities/post.dart';
 import '../../domain/entities/user.dart';

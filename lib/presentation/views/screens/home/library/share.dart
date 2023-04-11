@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:book_exchange/core/route_paths.dart';
-import 'package:book_exchange/presentation/di/app_provider.dart';
-import 'package:book_exchange/presentation/di/map_component.dart';
-import 'package:book_exchange/presentation/view_models/map/chat_view_model.dart';
+import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/presentation/di/app_provider.dart';
+import 'package:book_story/presentation/di/map_component.dart';
+import 'package:book_story/presentation/view_models/map/chat_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

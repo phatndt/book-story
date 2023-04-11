@@ -1,6 +1,6 @@
-import 'package:book_exchange/domain/entities/book_contribution.dart';
+import 'package:book_story/domain/entities/book_contribution.dart';
 
-import 'package:book_exchange/domain/entities/api_response.dart';
+import 'package:book_story/domain/entities/api_response.dart';
 
 import '../../repository/book_contribution_repo.dart';
 import 'get_contribution_book_by_normal_barcode_use_case.dart';

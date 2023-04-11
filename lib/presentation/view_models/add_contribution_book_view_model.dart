@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:book_exchange/domain/entities/book_contribution.dart';
-import 'package:book_exchange/domain/use_cases/book_contribution/upload_contribution_book_use_case.dart';
+import 'package:book_story/domain/entities/book_contribution.dart';
+import 'package:book_story/domain/use_cases/book_contribution/upload_contribution_book_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';

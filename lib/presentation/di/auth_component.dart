@@ -1,12 +1,12 @@
-import 'package:book_exchange/data/repos/auth_repo_impl.dart';
-import 'package:book_exchange/data/services/auth_service.dart';
-import 'package:book_exchange/domain/use_cases/auth/send_email_use_case.dart';
-import 'package:book_exchange/domain/use_cases/auth/send_email_use_case_impl.dart';
-import 'package:book_exchange/domain/use_cases/auth/set_verification_user_use_case.dart';
-import 'package:book_exchange/domain/use_cases/auth/set_verification_user_use_case_impl.dart';
-import 'package:book_exchange/domain/use_cases/auth/verify_registration_user_use_case.dart';
-import 'package:book_exchange/presentation/view_models/auth/verification_view_model.dart';
-import 'package:book_exchange/presentation/view_models/sign_up_view_model.dart';
+import 'package:book_story/data/repos/auth_repo_impl.dart';
+import 'package:book_story/data/services/auth_service.dart';
+import 'package:book_story/domain/use_cases/auth/send_email_use_case.dart';
+import 'package:book_story/domain/use_cases/auth/send_email_use_case_impl.dart';
+import 'package:book_story/domain/use_cases/auth/set_verification_user_use_case.dart';
+import 'package:book_story/domain/use_cases/auth/set_verification_user_use_case_impl.dart';
+import 'package:book_story/domain/use_cases/auth/verify_registration_user_use_case.dart';
+import 'package:book_story/presentation/view_models/auth/verification_view_model.dart';
+import 'package:book_story/presentation/view_models/sign_up_view_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/use_cases/auth/check_exist_username_use_case_impl.dart';

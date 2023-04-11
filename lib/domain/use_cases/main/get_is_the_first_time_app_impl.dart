@@ -1,5 +1,5 @@
-import 'package:book_exchange/domain/repository/main_app_repo.dart';
-import 'package:book_exchange/domain/use_cases/main/get_is_first_time_app.dart';
+import 'package:book_story/domain/repository/main_app_repo.dart';
+import 'package:book_story/domain/use_cases/main/get_is_first_time_app.dart';
 
 class GetIsFirstTimeAppUseCaseImpl extends GetIsFirstTimeAppUseCase {
   final MainAppRepo _mainAppRepo;

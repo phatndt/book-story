@@ -1,5 +1,5 @@
-import 'package:book_exchange/data/repos/map_repo_impl.dart';
-import 'package:book_exchange/domain/entities/api_response.dart';
+import 'package:book_story/data/repos/map_repo_impl.dart';
+import 'package:book_story/domain/entities/api_response.dart';
 
 import '../../entities/user.dart';
 

@@ -1,6 +1,6 @@
-import 'package:book_exchange/core/route_paths.dart';
-import 'package:book_exchange/presentation/views/widgets/filled_button.dart';
-import 'package:book_exchange/presentation/views/widgets/outline_button.dart';
+import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/presentation/views/widgets/filled_button.dart';
+import 'package:book_story/presentation/views/widgets/outline_button.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/colors/colors.dart';
 

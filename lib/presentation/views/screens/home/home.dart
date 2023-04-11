@@ -1,5 +1,5 @@
-import 'package:book_exchange/presentation/views/screens/home/library/collection.dart';
-import 'package:book_exchange/presentation/views/screens/home/library/share.dart';
+import 'package:book_story/presentation/views/screens/home/library/collection.dart';
+import 'package:book_story/presentation/views/screens/home/library/share.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

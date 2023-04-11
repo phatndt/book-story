@@ -1,6 +1,6 @@
-import 'package:book_exchange/data/base/base_mapper.dart';
-import 'package:book_exchange/data/entities/user_dto.dart';
-import 'package:book_exchange/domain/entities/user.dart';
+import 'package:book_story/data/base/base_mapper.dart';
+import 'package:book_story/data/entities/user_dto.dart';
+import 'package:book_story/domain/entities/user.dart';
 
 class UserMapper extends BaseMapper<UserDTO, User> {
   @override

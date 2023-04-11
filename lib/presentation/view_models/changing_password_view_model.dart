@@ -1,6 +1,6 @@
-import 'package:book_exchange/core/extension/function_extension.dart';
-import 'package:book_exchange/core/route_paths.dart';
-import 'package:book_exchange/domain/use_cases/change_pasword_use_case.dart';
+import 'package:book_story/core/extension/function_extension.dart';
+import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/domain/use_cases/change_pasword_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';

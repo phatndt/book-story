@@ -1,5 +1,5 @@
-import 'package:book_exchange/domain/entities/api_response.dart';
-import 'package:book_exchange/domain/use_cases/change_information/change_username_use_case.dart';
+import 'package:book_story/domain/entities/api_response.dart';
+import 'package:book_story/domain/use_cases/change_information/change_username_use_case.dart';
 
 import '../../repository/profile_repo.dart';
 

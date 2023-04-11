@@ -1,11 +1,11 @@
-import 'package:book_exchange/data/repos/main_app_repo_impl.dart';
-import 'package:book_exchange/data/services/shared_preferences_service.dart';
-import 'package:book_exchange/domain/repository/main_app_repo.dart';
-import 'package:book_exchange/domain/use_cases/main/get_is_first_time_app.dart';
-import 'package:book_exchange/domain/use_cases/main/get_is_the_first_time_app_impl.dart';
-import 'package:book_exchange/domain/use_cases/main/save_is_first_time_app.dart';
-import 'package:book_exchange/domain/use_cases/main/save_is_first_time_app_impl.dart';
-import 'package:book_exchange/presentation/view_models/splash_view_model.dart';
+import 'package:book_story/data/repos/main_app_repo_impl.dart';
+import 'package:book_story/data/services/shared_preferences_service.dart';
+import 'package:book_story/domain/repository/main_app_repo.dart';
+import 'package:book_story/domain/use_cases/main/get_is_first_time_app.dart';
+import 'package:book_story/domain/use_cases/main/get_is_the_first_time_app_impl.dart';
+import 'package:book_story/domain/use_cases/main/save_is_first_time_app.dart';
+import 'package:book_story/domain/use_cases/main/save_is_first_time_app_impl.dart';
+import 'package:book_story/presentation/view_models/splash_view_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

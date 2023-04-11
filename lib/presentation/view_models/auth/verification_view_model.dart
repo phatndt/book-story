@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:book_exchange/core/route_paths.dart';
-import 'package:book_exchange/domain/use_cases/auth/set_verification_user_use_case.dart';
-import 'package:book_exchange/domain/use_cases/auth/verify_registration_user_use_case.dart';
-import 'package:book_exchange/presentation/models/book_app_model.dart';
+import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/domain/use_cases/auth/set_verification_user_use_case.dart';
+import 'package:book_story/domain/use_cases/auth/verify_registration_user_use_case.dart';
+import 'package:book_story/presentation/models/book_app_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';

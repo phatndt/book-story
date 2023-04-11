@@ -1,6 +1,6 @@
-import 'package:book_exchange/domain/entities/api_response.dart';
-import 'package:book_exchange/domain/repository/profile_repo.dart';
-import 'package:book_exchange/domain/use_cases/change_pasword_use_case.dart';
+import 'package:book_story/domain/entities/api_response.dart';
+import 'package:book_story/domain/repository/profile_repo.dart';
+import 'package:book_story/domain/use_cases/change_pasword_use_case.dart';
 
 class ChangePasswordUseCaseImpl extends ChangePasswordUseCase {
   final ProfileRepo profileRepo;
