@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/presentation/di/post_provider.dart';
 import 'package:book_story/presentation/views/widgets/post/post_item.dart';
 import 'package:flutter/material.dart';

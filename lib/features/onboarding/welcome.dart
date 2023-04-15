@@ -1,16 +1,20 @@
-import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/core/navigation/route_paths.dart';
+import 'package:book_story/core/widget/custom_elevated_button.dart';
 import 'package:book_story/presentation/views/widgets/filled_button.dart';
 import 'package:book_story/presentation/views/widgets/outline_button.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/colors/colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../core/colors/colors.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Center(
+        body: Padding(
+          padding: EdgeInsets.all(24.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,23 +39,33 @@ class WelcomeScreen extends StatelessWidget {
               ),
               Column(
                 children: [
-                  CustomOutlineButton(
-                    text: 'EXISTING USER',
-                    onPress: () {
+                  CustomElevatedButton(
+                    child: Center(
+                      child: Text(
+                        "Login now!",
+                        style: S.textStyles.button,
+                      ),
+                    ),
+                    onPressed: () {
                       Navigator.pushReplacementNamed(context, RoutePaths.logIn);
                     },
-                    width: S.size.length_280,
                   ),
                   SizedBox(
                     height: S.size.length_20Vertical,
                   ),
-                  CustomFilledButton(
-                    width: S.size.length_280,
-                    text: 'NEW USER',
-                    onPress: () {
+                  CustomElevatedButton(
+                    onPressed: () {
                       Navigator.pushReplacementNamed(
                           context, RoutePaths.signUp);
                     },
+                    backgroundColor: S.colors.white,
+                    child: Center(
+                      child: Text(
+                        "Register now!",
+                        style: S.textStyles.button
+                            .copyWith(color: S.colors.primary_3),
+                      ),
+                    ),
                   ),
                 ],
               ),

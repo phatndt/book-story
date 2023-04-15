@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'colors/colors.dart';
+import '../colors/colors.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -22,6 +22,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onTap,
     this.readOnly = false,
     this.maxLength,
+    this.textInputAction,
   }) : super(key: key);
 
   final FocusNode? focusNode;
@@ -41,6 +42,7 @@ class CustomTextFormField extends StatelessWidget {
   final VoidCallback? onTap;
   final bool readOnly;
   final int? maxLength;
+  final TextInputAction? textInputAction;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +61,7 @@ class CustomTextFormField extends StatelessWidget {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           onFieldSubmitted: onFieldSubmitted,
           keyboardType: inputType,
+          textInputAction: textInputAction,
           onChanged: onChanged,
           validator: validator,
           obscureText: obscureText,

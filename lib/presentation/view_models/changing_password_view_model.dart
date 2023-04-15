@@ -1,5 +1,5 @@
 import 'package:book_story/core/extension/function_extension.dart';
-import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/domain/use_cases/change_pasword_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

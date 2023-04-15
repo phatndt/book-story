@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/presentation/di/app_provider.dart';
 import 'package:book_story/presentation/di/map_component.dart';
 import 'package:book_story/presentation/view_models/map/chat_view_model.dart';

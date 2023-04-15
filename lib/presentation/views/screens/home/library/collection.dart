@@ -1,4 +1,4 @@
-import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/presentation/views/screens/home/library/book_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

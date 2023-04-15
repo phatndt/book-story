@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../../../../../core/colors/colors.dart';
-import '../../../../../core/custom_text_form_fill.dart';
+import '../../../../../core/widget/custom_text_form_fill.dart';
 
 class AddContributionBookScreen extends ConsumerWidget {
   const AddContributionBookScreen(

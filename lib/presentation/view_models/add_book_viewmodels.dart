@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:book_story/core/core.dart';
-import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/domain/use_cases/book/upload_book_use_case.dart';
 import 'package:book_story/domain/use_cases/book_contribution/get_contribution_book_by_isbn_barcode_use_case.dart';
 import 'package:book_story/domain/use_cases/book_contribution/get_contribution_book_by_normal_barcode_use_case.dart';

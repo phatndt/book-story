@@ -1,4 +1,4 @@
-import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/presentation/main_screen.dart';
 import 'package:book_story/presentation/views/screens/home/library/add_book.dart';
 import 'package:book_story/presentation/views/screens/home/library/collection.dart';
@@ -7,18 +7,18 @@ import 'package:book_story/presentation/views/screens/map/chat_message_screen.da
 import 'package:book_story/presentation/views/screens/post/add_post_screen.dart';
 import 'package:book_story/presentation/views/screens/post/main_post_screen.dart';
 import 'package:book_story/presentation/views/screens/post/post_detail.dart';
-import 'package:book_story/presentation/views/screens/pre_home/forgot_password.dart';
-import 'package:book_story/presentation/views/screens/pre_home/login.dart';
-import 'package:book_story/presentation/views/screens/pre_home/signup.dart';
-import 'package:book_story/presentation/views/screens/pre_home/splash_screen.dart';
-import 'package:book_story/presentation/views/screens/pre_home/verification_screen.dart';
-import 'package:book_story/presentation/views/screens/pre_home/welcome.dart';
+import 'package:book_story/features/authentication/presentation/login.dart';
+import 'package:book_story/features/authentication/presentation/signup.dart';
+import 'package:book_story/features/onboarding/splash_screen.dart';
+import 'package:book_story/features/onboarding/welcome.dart';
 import 'package:book_story/presentation/views/screens/profile/change_information.dart';
 import 'package:book_story/presentation/views/screens/profile/change_password_screen.dart';
 import 'package:book_story/presentation/views/screens/profile/edit_post_screen.dart';
 import 'package:book_story/presentation/views/screens/profile/my_post.dart';
 import 'package:book_story/presentation/views/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../../features/authentication/presentation/forgot_password.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -41,11 +41,6 @@ class AppRouter {
       case RoutePaths.signUp:
         return MaterialPageRoute(
           builder: (_) => const SignUpScreen(),
-          settings: settings,
-        );
-      case RoutePaths.verifyEmail:
-        return MaterialPageRoute(
-          builder: (_) => const VerificationScreen(),
           settings: settings,
         );
       case RoutePaths.forgot:

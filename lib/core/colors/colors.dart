@@ -8,13 +8,37 @@ class S {
 }
 
 class _Colors {
+  final primary_1 = const Color(0xFFE9F1f1);
+  final primary_2 = const Color(0xFFBCD5D4);
+  final primary_3 = const Color(0xFF6BA19F);
+  final primary_4 = const Color(0xFF4E7B97);
+  final primary_5 = const Color(0xFF345251);
+
+  final neutral_1 = const Color(0xFFE2E8F0);
+  final neutral_2 = const Color(0xFFCBD5E1);
+  final neutral_3 = const Color(0xFF94A3B8);
+  final neutral_4 = const Color(0xFF64748B);
+  final neutral_5 = const Color(0xFF475569);
+
+  final secondary_1 = const Color(0xFFFDF3E6);
+  final secondary_2 = const Color(0xFFFBE8CE);
+  final secondary_3 = const Color(0xFFF3B15A);
+  final secondary_4 = const Color(0xFFE98C11);
+
+  final accent_1 = const Color(0xFFFFD2D5);
+  final accent_2 = const Color(0xFFE4989D);
+  final accent_3 = const Color(0xFFB0DAEF);
+  final accent_4 = const Color(0xFF648FE9);
+
+  final white = const Color(0xFFFFFFFF);
+  final red = const Color(0xFFFF0000);
   final background = const Color(0xFF41444B);
   final orange = const Color.fromARGB(255, 241, 101, 75);
   final urlEx =
       'https://img.freepik.com/free-vector/abstract-elegant-winter-book-cover_23-2148798745.jpg?w=740&t=st=1664957292~exp=1664957892~hmac=64aa003f02ff1c7147d9908a482088831324212c51d143b30f76a995964697fa';
   final black = const Color.fromARGB(255, 53, 53, 53);
   final grey = const Color.fromARGB(255, 105, 105, 105);
-  final white = const Color.fromARGB(255, 253, 253, 253);
+  // final white = const Color.fromARGB(255, 253, 253, 253);
   final orangeDesigned = const Color.fromARGB(255, 228, 49, 49);
   final navyBlue = const Color.fromARGB(255, 46, 98, 182);
   final mainColor = const MaterialColor(
@@ -33,10 +57,10 @@ class _Colors {
     },
   );
   //Accent
-  final accent_1 = const Color(0xFFFF6263); // Bitter sweet
-  final accent_2 = const Color(0xFFFF936B); // Atomic Tangerine
-  final accent_3 = const Color(0xFFFFB3B3); // Meion
-  final accent_4 = const Color(0xFFFFDD66); // Dandelion
+  // final accent_1 = const Color(0xFFFF6263); // Bitter sweet
+  // final accent_2 = const Color(0xFFFF936B); // Atomic Tangerine
+  // final accent_3 = const Color(0xFFFFB3B3); // Meion
+  // final accent_4 = const Color(0xFFFFDD66); // Dandelion
   final accent_5 = const Color(0xFFF9DBD0);
   final accent_6 = const Color(0xFF6455AB);
   final accent_7 = const Color(0xFFB3C0FF);
@@ -197,6 +221,43 @@ class _TextStyles {
     fontFamily: 'Lato',
     color: S.colors.grey,
     fontSize: 18,
+    fontWeight: FontWeight.w500,
+  );
+
+  final heading1 = TextStyle(
+    fontFamily: 'Lato',
+    color: S.colors.black,
+    fontSize: 24,
+    decoration: TextDecoration.none,
+  );
+  final heading2 = TextStyle(
+    fontFamily: 'Lato',
+    color: S.colors.black,
+    fontSize: 20.sp,
+    decoration: TextDecoration.none,
+  );
+  final heading3 = TextStyle(
+    fontFamily: 'Lato',
+    color: S.colors.black,
+    fontSize: 16,
+    decoration: TextDecoration.none,
+  );
+  final paragraph = TextStyle(
+    fontFamily: 'Lato',
+    color: S.colors.black,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+  );
+  final subtitle = TextStyle(
+    fontFamily: 'Lato',
+    color: S.colors.black,
+    fontSize: 8,
+    decoration: TextDecoration.none,
+  );
+  final button = TextStyle(
+    fontFamily: 'Lato',
+    color: S.colors.white,
+    fontSize: 14,
     fontWeight: FontWeight.w500,
   );
   final alertdialog = _AlertDialog();

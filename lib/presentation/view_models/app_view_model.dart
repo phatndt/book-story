@@ -1,4 +1,4 @@
-import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/presentation/views/screens/home/library/share.dart';
 import 'package:book_story/presentation/views/screens/post/main_post_screen.dart';
 import 'package:book_story/presentation/views/screens/profile/profile_screen.dart';

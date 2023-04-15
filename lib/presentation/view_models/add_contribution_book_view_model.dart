@@ -10,7 +10,7 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../core/extension/function_extension.dart';
-import '../../core/route_paths.dart';
+import '../../core/navigation/route_paths.dart';
 import '../models/book_app_model.dart';
 
 class AddContributionBookSetting {

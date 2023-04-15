@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:book_story/core/route_paths.dart';
+import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/domain/entities/combination_post.dart';
 import 'package:book_story/domain/entities/user_post.dart';
 import 'package:book_story/presentation/di/app_provider.dart';
