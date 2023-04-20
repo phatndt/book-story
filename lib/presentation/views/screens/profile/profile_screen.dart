@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/presentation/di/app_provider.dart';
 import 'package:book_story/presentation/di/profile_component.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -127,7 +128,7 @@ class ProfileScreen extends ConsumerWidget {
                           RoutePaths.logIn,
                           (route) => false,
                         );
-                        ref.refresh(mainAppNotifierProvider);
+                        FirebaseAuth.instance.signOut();
                       },
                     ),
                   ],

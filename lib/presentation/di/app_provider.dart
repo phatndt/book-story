@@ -5,6 +5,7 @@ import 'package:book_story/domain/use_cases/main/get_is_first_time_app.dart';
 import 'package:book_story/domain/use_cases/main/get_is_the_first_time_app_impl.dart';
 import 'package:book_story/domain/use_cases/main/save_is_first_time_app.dart';
 import 'package:book_story/domain/use_cases/main/save_is_first_time_app_impl.dart';
+import 'package:book_story/features/authentication/di/authentication_module.dart';
 import 'package:book_story/features/onboarding/splash_view_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,8 +31,8 @@ final splashProvider = Provider<SplashProvider>((ref) => SplashProvider(
       ref,
       ref.watch(getIsFirstTimeAppUseCase),
       ref.watch(saveIsFirstTimeAppUseCase),
+      ref.watch(authRepoProvider),
     ));
 
-final mainAppNotifierProvider =
-    StateNotifierProvider<MainAppNotifier, MainApp>(
-        ((ref) => MainAppNotifier(ref)));
+final mainAppNotifierProvider = StateNotifierProvider<MainAppNotifier, MainApp>(
+    ((ref) => MainAppNotifier(ref)));

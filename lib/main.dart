@@ -34,7 +34,7 @@ class MyApp extends ConsumerWidget {
               scaffoldBackgroundColor: S.colors.white,
             ),
             onGenerateRoute: AppRouter.generateRoute,
-            initialRoute: RoutePaths.logIn,
+            initialRoute: RoutePaths.splash,
           );
         }
     );

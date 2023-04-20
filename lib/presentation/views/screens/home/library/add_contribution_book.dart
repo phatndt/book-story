@@ -100,55 +100,55 @@ class AddContributionBookScreen extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  CustomTextFormField(
-                    controller: ref
-                        .watch(addContributionBookSettingNotifierProvider)
-                        .normalBarcode,
-                    suffixIconData: IconButton(
-                      onPressed: ref
-                          .watch(addContributionBookSettingNotifierProvider)
-                          .normalBarcode
-                          .clear,
-                      icon: const Icon(FontAwesomeIcons.eraser),
-                    ),
-                    obscureText: false,
-                    maxLength: 13,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'ISBN Barcode',
-                        style: S.textStyles.titleText,
-                      ),
-                      CustomFilledIconButton(
-                        iconData: FontAwesomeIcons.barcode,
-                        width: S.size.length_40,
-                        height: S.size.length_40Vertical,
-                        size: S.size.length_20,
-                        onPress: () {
-                          ref
-                              .watch(addContributionBookSettingNotifierProvider
-                                  .notifier)
-                              .scanIsbnBarcode(context);
-                        },
-                      ),
-                    ],
-                  ),
-                  CustomTextFormField(
-                    controller: ref
-                        .watch(addContributionBookSettingNotifierProvider)
-                        .isbnBarcode,
-                    obscureText: false,
-                    suffixIconData: IconButton(
-                      onPressed: ref
-                          .watch(addContributionBookSettingNotifierProvider)
-                          .isbnBarcode
-                          .clear,
-                      icon: const Icon(FontAwesomeIcons.eraser),
-                    ),
-                    maxLength: 13,
-                  ),
+                  // CustomTextFormField(
+                  //   controller: ref
+                  //       .watch(addContributionBookSettingNotifierProvider)
+                  //       .normalBarcode,
+                  //   suffixIconData: IconButton(
+                  //     onPressed: ref
+                  //         .watch(addContributionBookSettingNotifierProvider)
+                  //         .normalBarcode
+                  //         .clear,
+                  //     icon: const Icon(FontAwesomeIcons.eraser),
+                  //   ),
+                  //   obscureText: false,
+                  //   maxLength: 13,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text(
+                  //       'ISBN Barcode',
+                  //       style: S.textStyles.titleText,
+                  //     ),
+                  //     CustomFilledIconButton(
+                  //       iconData: FontAwesomeIcons.barcode,
+                  //       width: S.size.length_40,
+                  //       height: S.size.length_40Vertical,
+                  //       size: S.size.length_20,
+                  //       onPress: () {
+                  //         ref
+                  //             .watch(addContributionBookSettingNotifierProvider
+                  //                 .notifier)
+                  //             .scanIsbnBarcode(context);
+                  //       },
+                  //     ),
+                  //   ],
+                  // ),
+                  // CustomTextFormField(
+                  //   controller: ref
+                  //       .watch(addContributionBookSettingNotifierProvider)
+                  //       .isbnBarcode,
+                  //   obscureText: false,
+                  //   suffixIconData: IconButton(
+                  //     onPressed: ref
+                  //         .watch(addContributionBookSettingNotifierProvider)
+                  //         .isbnBarcode
+                  //         .clear,
+                  //     icon: const Icon(FontAwesomeIcons.eraser),
+                  //   ),
+                  //   maxLength: 13,
+                  // ),
                   Center(
                     child: CustomFilledButton(
                       width: MediaQuery.of(context).size.width,

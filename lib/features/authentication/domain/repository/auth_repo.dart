@@ -16,4 +16,5 @@ abstract class AuthRepo {
   );
 
   Future<Either<Exception, bool>> resetPassword(String email);
+  Future<Either<Exception, bool>> checkLogged();
 }

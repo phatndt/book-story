@@ -20,7 +20,7 @@ class MainScreen extends ConsumerWidget {
           onTap: (index) {
             ref.watch(mainAppNotifierProvider.notifier).setCurrentIndext(index);
           },
-          selectedItemColor: S.colors.orange,
+          selectedItemColor: S.colors.primary_3,
           unselectedItemColor: S.colors.grey,
           items: const [
             BottomNavigationBarItem(

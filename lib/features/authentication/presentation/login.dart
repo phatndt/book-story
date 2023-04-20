@@ -54,8 +54,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         setState(() {
           isLoading = false;
         });
-        Navigator.pushNamedAndRemoveUntil(
-            context, RoutePaths.main, (route) => false);
+        if (next.data is bool) {
+          if (next.data) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, RoutePaths.main, (route) => false);
+          }
+        } else {
+          Navigator.pushNamedAndRemoveUntil(
+              context, RoutePaths.main, (route) => false);
+        }
       } else if (next is UIStateError) {
         setState(() {
           isLoading = false;

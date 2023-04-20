@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/entities/user.dart';
-import '../views/screens/home/library/collection.dart';
+import '../../features/my _book/presentation/collection.dart';
 
 class MainApp {
   String route;
@@ -44,13 +44,13 @@ class MainAppNotifier extends StateNotifier<MainApp> {
           MainApp(
               route: RoutePaths.home,
               currentIndex: 0,
-              navigation: const CollectionScreen(),
+              navigation: const MyBookScreen(),
               user: User("", "", "", "", "", "", false, false)),
         );
 
   final Ref ref;
   final navigationList = const [
-    CollectionScreen(),
+    MyBookScreen(),
     ShareScreen(),
     MainPostScreen(),
     ProfileScreen()
@@ -76,7 +76,7 @@ class MainAppNotifier extends StateNotifier<MainApp> {
 
   void resetState() {
     state.currentIndex = 0;
-    state.navigation = const CollectionScreen();
+    state.navigation = const MyBookScreen();
     state.route = RoutePaths.home;
   }
 }

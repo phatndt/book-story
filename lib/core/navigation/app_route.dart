@@ -1,7 +1,8 @@
 import 'package:book_story/core/navigation/route_paths.dart';
+import 'package:book_story/features/my%20_book/presentation/book_detail.dart';
 import 'package:book_story/presentation/main_screen.dart';
-import 'package:book_story/presentation/views/screens/home/library/add_book.dart';
-import 'package:book_story/presentation/views/screens/home/library/collection.dart';
+import 'package:book_story/features/my%20_book/presentation/add_book.dart';
+import 'package:book_story/features/my%20_book/presentation/collection.dart';
 import 'package:book_story/presentation/views/screens/home/library/share.dart';
 import 'package:book_story/presentation/views/screens/map/chat_message_screen.dart';
 import 'package:book_story/presentation/views/screens/post/add_post_screen.dart';
@@ -68,16 +69,8 @@ class AppRouter {
           builder: (_) => const ChangeInformationScreen(),
           settings: settings,
         );
-      // case RoutePaths.contribueBook:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const AddContributionBookScreen(
-      //         bookId: 'bookId',
-      //         bookName: 'bookName',
-      //         bookAuthor: 'bookAuthor',
-      //         bookDescription: 'bookDescription',
-      //         imageUrl: 'imageUrl'),
-      //     settings: settings,
-      //   );
+      case RoutePaths.bookDetail:
+        return MaterialPageRoute(builder: (_) => const BookDetailScreen(), settings: settings,);
       case RoutePaths.profile:
         return MaterialPageRoute(
           builder: (_) => const ProfileScreen(),
@@ -85,7 +78,7 @@ class AppRouter {
         );
       case RoutePaths.home:
         return MaterialPageRoute(
-          builder: (_) => const CollectionScreen(),
+          builder: (_) => const MyBookScreen(),
           settings: settings,
         );
       case RoutePaths.share:

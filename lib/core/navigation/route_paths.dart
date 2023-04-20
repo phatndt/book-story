@@ -12,6 +12,7 @@ class RoutePaths {
 
   static const home = '/home';
   static const addBook = '$home/add_book';
+  static const bookDetail = '$home/bookDetail';
   static const previewBook = '$home/preview_book';
   static const contributeBook = '/contributeBook';
 

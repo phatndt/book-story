@@ -67,4 +67,18 @@ class AuthRepoImpl extends AuthRepo {
     }
   }
 
+  @override
+  Future<Either<Exception, bool>> checkLogged() async {
+    try {
+      if (FirebaseAuth.instance.currentUser != null) {
+        return right(true);
+      } else {
+        return right(false);
+      }
+    } on FirebaseAuthException catch (e) {
+      return left(Exception(e.message));
+    } catch (e) {
+      return left(Exception(e.toString()));
+    }
+  }
 }

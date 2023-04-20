@@ -1,4 +1,4 @@
-import 'package:book_story/presentation/views/screens/home/library/collection.dart';
+import 'package:book_story/features/my%20_book/presentation/collection.dart';
 import 'package:book_story/presentation/views/screens/home/library/share.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
   final tabs = [
-    const CollectionScreen(),
+    const MyBookScreen(),
     const ShareScreen(),
     const Center(
       child: Text('Adu2'),
