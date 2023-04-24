@@ -1,4 +1,3 @@
-import 'package:book_story/features/my%20_book/domain/entity/book.dart';
 import 'package:book_story/features/my%20_book/domain/repository/book_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,11 +15,12 @@ class AddBookStateNotifier extends StateNotifier<UIState> {
     String author,
     String description,
     String language,
+    String releaseDate,
     String category,
     String? image,
   ) {
     if (image == null) {
-      state = UIStateError(Exception("Image is null"));
+      state = UIStateError(Exception("Image is empty"));
       return;
     }
     state = const UIStateLoading(true);
@@ -31,6 +31,7 @@ class AddBookStateNotifier extends StateNotifier<UIState> {
       description,
       image,
       language,
+      releaseDate,
       category,
       DateTime.now().toString(),
       FirebaseAuth.instance.currentUser?.uid ?? "",

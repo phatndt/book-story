@@ -8,7 +8,10 @@ class Book {
   final String image;
   final String category;
   final String language;
-  final String? userId;
+  final String releaseDate;
+  final String userId;
+  final String readFile;
+  final int readFilePage;
   final String createDate;
   final bool isDeleted;
 
@@ -20,7 +23,10 @@ class Book {
     this.image,
     this.category,
     this.language,
+    this.releaseDate,
     this.userId,
+    this.readFile,
+    this.readFilePage,
     this.createDate,
     this.isDeleted,
   );
@@ -34,7 +40,10 @@ class Book {
         bookModel.image,
         bookModel.category,
         bookModel.language,
+        bookModel.releaseDate,
         bookModel.userId,
+        bookModel.readFile,
+        bookModel.readFilePage,
         bookModel.createDate,
         bookModel.isDeleted);
   }

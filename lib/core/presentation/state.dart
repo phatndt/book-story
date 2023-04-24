@@ -45,23 +45,3 @@ abstract class NetworkResponse extends Equatable {
   @override
   List<Object?> get props => [];
 }
-
-class NetworkResponseLoading extends NetworkResponse {}
-
-class NetworkResponseSuccess extends NetworkResponse {
-  final bool loading;
-
-  const NetworkResponseSuccess(this.loading);
-
-  @override
-  List<Object?> get props => [loading];
-}
-
-class NetworkResponseError<T> extends NetworkResponse {
-  final T data;
-
-  const NetworkResponseError(this.data);
-
-  @override
-  List<Object?> get props => [data];
-}

@@ -7,7 +7,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/presentation/state.dart';
 import '../presentation/state/add_book_state.dart';
+import '../presentation/state/book_detail_state.dart';
 import '../presentation/state/my_book_state.dart';
+import '../presentation/state/read_book_file_state.dart';
 
 final bookRepoProvider = Provider<BookRepo>((ref) {
   return BookRepoImpl();
@@ -23,6 +25,12 @@ final myBookStateNotifierProvider =
   return MyBookStateNotifier(ref, ref.read(bookRepoProvider));
 });
 
-final getBooksFutureProvider = FutureProvider.family<Either<Exception, List<BookModel>>, String>((ref, userId) async {
-  return await ref.read(bookRepoProvider).getBooksByUser(userId);
+final getBookDetailStateNotifierProvider =
+    StateNotifierProvider<GetBookDetailStateNotifier, UIState>((ref) {
+  return GetBookDetailStateNotifier(ref, ref.read(bookRepoProvider));
+});
+
+final readBookFileStateNotifierProvider =
+    StateNotifierProvider<ReadBookFileStateNotifier, UIState>((ref) {
+  return ReadBookFileStateNotifier(ref, ref.read(bookRepoProvider));
 });

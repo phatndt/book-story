@@ -1,4 +1,4 @@
-class BookModel {
+class  BookModel {
   final String id;
   final String name;
   final String author;
@@ -6,7 +6,10 @@ class BookModel {
   final String image;
   final String category;
   final String language;
+  final String releaseDate;
   final String userId;
+  final String readFile;
+  final int readFilePage;
   final String createDate;
   final bool isDeleted;
 
@@ -18,7 +21,10 @@ class BookModel {
       this.image,
       this.category,
       this.language,
+      this.releaseDate,
       this.userId,
+      this.readFile,
+      this.readFilePage,
       this.createDate,
       this.isDeleted,
       );
@@ -31,7 +37,9 @@ class BookModel {
       'image': image,
       'category': category,
       'language': language,
+      'release_date': releaseDate,
       'user_id': userId,
+      'read_file_path': readFile,
       'create_date': createDate,
       'is_deleted': isDeleted,
     };
@@ -45,7 +53,10 @@ class BookModel {
       json['image'],
       json['category'],
       json['language'],
+      json['release_date'],
       json['user_id'],
+      json['read_file_path'],
+      json['read_file_page'],
       json['create_date'],
       json['is_deleted'],
     );
@@ -60,7 +71,10 @@ class BookModel {
       json['image'],
       json['category'],
       json['language'],
+      json['release_date'],
       json['user_id'],
+      json['read_file_path'],
+      json['read_file_page'],
       json['create_date'],
       json['is_deleted'],
     );

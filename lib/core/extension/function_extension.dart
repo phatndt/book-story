@@ -59,10 +59,10 @@ void catchOnError(context, dynamic onError) {
 
 extension ColorNullSafety on Object? {
   void isNotNull(
-      Function() action,
-      Function() empty,
-      Function() notVerify,
-      ) {
+    Function() action,
+    Function() empty,
+    Function() notVerify,
+  ) {
     if (this == "notVerify") {
       notVerify();
     } else if (this != "") {
@@ -73,3 +73,11 @@ extension ColorNullSafety on Object? {
   }
 }
 
+extension NullSafety on Object? {
+  bool isNull() {
+    if (this == null) {
+      return true;
+    }
+    return false;
+  }
+}

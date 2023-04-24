@@ -1,10 +1,15 @@
+import 'dart:developer';
+
 import 'package:book_story/core/navigation/route_paths.dart';
+import 'package:book_story/core/widget/custom_text_form_fill.dart';
 import 'package:book_story/features/my%20_book/di/my_book_module.dart';
 import 'package:book_story/features/my%20_book/domain/entity/book.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
+import 'package:skeletons/skeletons.dart';
 
 import '../../../core/colors/colors.dart';
 import '../../../core/presentation/state.dart';
@@ -20,15 +25,22 @@ class MyBookScreen extends ConsumerStatefulWidget {
 
 class _MyBookScreenState extends ConsumerState<MyBookScreen> {
   late List<Book>? books;
+  late List<Book>? temp;
   late bool isShowLoading;
   late bool isShowError;
-
+  late bool isExpanded;
+  late FocusNode focusNode;
+  late TextEditingController searchController;
   @override
   void initState() {
     super.initState();
     books = null;
+    temp = null;
     isShowLoading = false;
     isShowError = false;
+    isExpanded = false;
+    focusNode = FocusNode();
+    searchController = TextEditingController();
     Future.delayed(Duration.zero, () {
       ref.watch(myBookStateNotifierProvider.notifier).getBook();
     });
@@ -44,8 +56,10 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
       } else if (next is UIStateSuccess) {
         setState(() {
           books = next.data;
+          temp = next.data;
         });
       } else if (next is UIStateError) {
+        log(next.error.toString());
         setState(() {
           isShowError = true;
         });
@@ -54,12 +68,33 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'My collection',
-            style: S.textStyles.heading3,
-          ),
           backgroundColor: S.colors.white,
           elevation: 0.5,
+          title: Text(
+            'Shelfie',
+            style: S.textStyles.heading3,
+          ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  if (isExpanded) {
+                    setState(() {
+                      books = temp;
+                    });
+                    searchController.clear();
+                    focusNode.unfocus();
+                  } else {
+                    focusNode.requestFocus();
+                  }
+                  setState(() {
+                    isExpanded = !isExpanded;
+                  });
+                },
+                icon: Icon(
+                  Icons.search,
+                  color: S.colors.primary_3,
+                ))
+          ],
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -73,6 +108,37 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
         backgroundColor: S.colors.white,
         body: Column(
           children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 320),
+              height: isExpanded ? 80.h : 0.h,
+              child: Container(
+                color: S.colors.red,
+                padding: EdgeInsets.symmetric(horizontal: 12.w),
+                child: Center(
+                  child: CustomTextFormField(
+                    focusNode: focusNode,
+                    controller: searchController,
+                    height: 50,
+                    hintText: "Search",
+                    obscureText: false,
+                    onChanged: (value) {
+                      if (value.isEmpty) {
+                        setState(() {
+                          books = temp;
+                        });
+                      } else {
+                        setState(() {
+                          books = temp!
+                              .where((element) =>
+                                  element.name.toLowerCase().contains(value))
+                              .toList();
+                        });
+                      }
+                    },
+                  ),
+                ),
+              ),
+            ),
             Expanded(
               child: RefreshIndicator(
                 onRefresh: () async =>
@@ -111,7 +177,7 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
     return SizedBox(
       width: double.infinity,
       child: ListView.separated(
-        padding: EdgeInsets.symmetric(horizontal: 8.w),
+        padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
         shrinkWrap: true,
         itemCount: books!.length,
         scrollDirection: Axis.vertical,
@@ -119,72 +185,97 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
           height: 8.h,
         ),
         itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: S.size.length_4,
-            ),
-            child: InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, RoutePaths.bookDetail,
-                    arguments: books![index]);
-              },
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              child: SizedBox(
-                height: 160.h,
-                width: 200,
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  elevation: 0.5,
-                  child: Row(
-                    children: [
-                      if (books![index].image.contains("https"))
-                        ClipRRect(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(12),
-                            bottomLeft: Radius.circular(12),
-                          ),
-                          child: Image.network(
-                            books![index].image,
-                            fit: BoxFit.fitHeight,
-                          ),
-                        ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.w),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                books![index].name,
-                                overflow: TextOverflow.fade,
-                                maxLines: 1,
-                                softWrap: false,
-                                style: S.textStyles.heading2
-                                    .copyWith(fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                height: 4.h,
-                              ),
-                              Text(
-                                books![index].author,
-                                overflow: TextOverflow.fade,
-                                maxLines: 1,
-                                softWrap: false,
-                                style: S.textStyles.heading3,
-                              ),
-                              SizedBox(
-                                height: 48.h,
-                              ),
-                            ],
+          return InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, RoutePaths.bookDetail,
+                  arguments: books![index]);
+            },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            child: SizedBox(
+              height: 160.h,
+              width: double.infinity,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 0.5,
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        bottomLeft: Radius.circular(12),
+                      ),
+                      child: SizedBox(
+                        width: 120.w,
+                        height: 160.h,
+                        child: Image.network(
+                          books![index].image,
+                          fit: BoxFit.fill,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return const SkeletonAvatar();
+                          },
+                          errorBuilder: (context, url, error) => Container(
+                            color: Colors.grey[200],
+                            child: Icon(
+                              Icons.camera_alt,
+                              color: Colors.grey,
+                              size: 36.w,
+                            ),
                           ),
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                      // child: CachedNetworkImage(
+                      //   width: 120.w,
+                      //   height: 160.h,
+                      //   fit: BoxFit.fill,
+                      //   imageUrl: books![index].image,
+                      //   placeholder: (context, url) => const SkeletonAvatar(),
+                      //   errorWidget: (context, url, error) => Container(
+                      //     color: Colors.grey[200],
+                      //     child: Icon(
+                      //       Icons.camera_alt,
+                      //       color: Colors.grey,
+                      //       size: 36.w,
+                      //     ),
+                      //   ),
+                      // ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.w),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              books![index].name,
+                              overflow: TextOverflow.fade,
+                              maxLines: 1,
+                              softWrap: false,
+                              style: S.textStyles.heading2
+                                  .copyWith(fontWeight: FontWeight.w700),
+                            ),
+                            SizedBox(
+                              height: 4.h,
+                            ),
+                            Text(
+                              books![index].author,
+                              overflow: TextOverflow.fade,
+                              maxLines: 1,
+                              softWrap: false,
+                              style: S.textStyles.heading3,
+                            ),
+                            SizedBox(
+                              height: 48.h,
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),

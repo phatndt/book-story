@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:book_story/core/presentation/state.dart';
@@ -12,7 +13,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../../../core/colors/colors.dart';
-import '../../../presentation/di/book_component.dart';
 import '../../../presentation/views/widgets/text_field.dart';
 import '../di/my_book_module.dart';
 
@@ -31,6 +31,7 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
   late TextEditingController languageController;
   late TextEditingController categoryController;
   late TextEditingController descriptionController;
+  late TextEditingController releaseYearController;
   late bool isShowClearIconNameController;
   late bool isShowClearIconAuthorController;
   late bool isShowClearIconLanguageController;
@@ -42,6 +43,7 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
   late bool isShowLoading;
   List<String> list = <String>['Vietnamese', 'English', 'Other'];
   List<String> categories = <String>['Novel', 'Comic', 'Other'];
+  DateTime selectedDate = DateTime.now();
 
   @override
   void initState() {
@@ -55,6 +57,7 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
     languageController = TextEditingController();
     categoryController = TextEditingController();
     descriptionController = TextEditingController();
+    releaseYearController = TextEditingController();
     isShowClearIconNameController = false;
     isShowClearIconAuthorController = false;
     isShowClearIconLanguageController = false;
@@ -361,7 +364,7 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                       obscureText: false,
                       readOnly: true,
                       controller: categoryController,
-                      textInputAction: TextInputAction.done,
+                      textInputAction: TextInputAction.next,
                       inputType: TextInputType.text,
                       suffixIconData: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -391,7 +394,36 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: S.size.length_20Vertical,
+                      height: 24.h,
+                    ),
+                    CustomTextFormField(
+                      onTap: () {
+                        showYearPicker(context);
+                      },
+                      validator: (value) {
+                        if (value != null) {
+                          if (value.isEmpty) {
+                            return "Please enter book's release year!";
+                          }
+                        }
+                        return null;
+                      },
+                      hintText: "Release year",
+                      obscureText: false,
+                      readOnly: true,
+                      controller: releaseYearController,
+                      textInputAction: TextInputAction.done,
+                      inputType: TextInputType.text,
+                      suffixIconData: IconButton(
+                          padding: const EdgeInsets.only(),
+                          splashColor: Colors.transparent,
+                          icon: const Icon(Icons.arrow_drop_down),
+                          onPressed: () {
+                            showYearPicker(context);
+                          }),
+                    ),
+                    SizedBox(
+                      height: 24.h,
                     ),
                     CustomElevatedButton(
                       child: const Center(child: Text("Add book")),
@@ -404,10 +436,14 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                                   authorController.text,
                                   descriptionController.text,
                                   languageController.text,
+                                  releaseYearController.text,
                                   categoryController.text,
                                   imagePath);
                         }
                       },
+                    ),
+                    SizedBox(
+                      height: 24.h,
                     ),
                   ],
                 ),
@@ -463,6 +499,37 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
       ),
     );
     showDialog(context: context, builder: (BuildContext context) => category);
+  }
+
+  showYearPicker(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Pick release year"),
+          content: SizedBox(
+            height: 200.h,
+            width: 300.w,
+            child: YearPicker(
+              firstDate: DateTime(1500),
+              lastDate: DateTime.now(),
+              selectedDate: selectedDate,
+              onChanged: (value) {
+                setState(() {
+                  selectedDate = value;
+                });
+                releaseYearController.text = value.year.toString();
+                Navigator.pop(context);
+              },
+            ),
+          ),
+        );
+      },
+    ).then((value) {
+      if(releaseYearController.text.isEmpty) {
+        releaseYearController.text = selectedDate.year.toString();
+      }
+    });
   }
 
   void showImageSourceActionSheet(BuildContext context) {
