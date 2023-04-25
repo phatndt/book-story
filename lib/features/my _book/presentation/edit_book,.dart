@@ -1,9 +1,11 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:book_story/core/extension/function_extension.dart';
 import 'package:book_story/core/presentation/state.dart';
 import 'package:book_story/core/widget/custom_elevated_button.dart';
 import 'package:book_story/core/widget/snack_bar.dart';
+import 'package:book_story/features/my%20_book/domain/entity/book.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,16 +18,16 @@ import '../../../core/colors/colors.dart';
 import '../../../presentation/views/widgets/text_field.dart';
 import '../di/my_book_module.dart';
 
-class AddBookScreen extends ConsumerStatefulWidget {
-  const AddBookScreen({
+class EditBookScreen extends ConsumerStatefulWidget {
+  const EditBookScreen({
     Key? key,
   }) : super(key: key);
 
   @override
-  ConsumerState createState() => _AddBookScreenState();
+  ConsumerState createState() => _EditBookScreenState();
 }
 
-class _AddBookScreenState extends ConsumerState<AddBookScreen> {
+class _EditBookScreenState extends ConsumerState<EditBookScreen> {
   late TextEditingController nameController;
   late TextEditingController authorController;
   late TextEditingController languageController;
@@ -44,11 +46,17 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
   List<String> list = <String>['Vietnamese', 'English', 'Other'];
   List<String> categories = <String>['Novel', 'Comic', 'Other'];
   DateTime selectedDate = DateTime.now();
+  late Book? book;
 
   @override
   void initState() {
     super.initState();
     _init();
+    Future.delayed(Duration.zero, () {
+      ref
+          .watch(editBookStateNotifierProvider.notifier)
+          .getBookDetail(ModalRoute.of(context)!.settings.arguments as String);
+    });
   }
 
   _init() {
@@ -66,24 +74,38 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
     decorationImage = null;
     imagePath = null;
     isShowLoading = false;
+    book = null;
     _formKey = GlobalKey<FormState>();
   }
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(addBookStateNotifierProvider, (previous, next) {
+    ref.listen(editBookStateNotifierProvider, (previous, next) {
       if (next is UIStateLoading) {
         setState(() {
           isShowLoading = next.loading;
         });
       } else if (next is UIStateSuccess) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SuccessSnackBar(message: "Add book successfully!"));
-        Navigator.pop(context);
-        ref.watch(myBookStateNotifierProvider.notifier).getBook();
+        log("bookId");
+        final book = next.data as Book;
+        setState(() {
+          decorationImage = DecorationImage(
+              image: NetworkImage(book.image), fit: BoxFit.fill);
+          imagePath = book.image;
+          nameController.text = book.name;
+          authorController.text = book.author;
+          languageController.text = book.language;
+          categoryController.text = book.category;
+          descriptionController.text = book.description;
+          releaseYearController.text = book.releaseDate;
+        });
       } else if (next is UIStateError) {
         ScaffoldMessenger.of(context)
             .showSnackBar(ErrorSnackBar(message: next.error.toString()));
+        Navigator.pop(context);
+      } else if (next is UIStateWarning) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(WarningSnackBar(message: next.message));
       }
     });
     return Form(
@@ -93,8 +115,10 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
           inAsyncCall: isShowLoading,
           child: Scaffold(
             appBar: AppBar(
+              backgroundColor: S.colors.white,
+              elevation: 0.5,
               title: Text(
-                "Create a new book",
+                "Edit a new book",
                 style: S.textStyles.heading3,
               ),
               leading: BackButton(
@@ -103,24 +127,6 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                 },
                 color: S.colors.primary_3,
               ),
-              backgroundColor: S.colors.white,
-              elevation: 0.5,
-              actions: [
-                IconButton(
-                  color: S.colors.primary_3,
-                  icon: const Icon(
-                    FontAwesomeIcons.barcode,
-                  ),
-                  onPressed: () {
-                    // ref
-                    //     .watch(addBookSettingNotifierProvider.notifier)
-                    //     .updateImagePath(File(''));
-                    // ref
-                    //     .watch(addBookSettingNotifierProvider.notifier)
-                    //     .scanBarcode(context);
-                  },
-                ),
-              ],
             ),
             body: SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -431,8 +437,8 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           ref
-                              .watch(addBookStateNotifierProvider.notifier)
-                              .addBook(
+                              .watch(editBookStateNotifierProvider.notifier)
+                              .editBook(
                                   nameController.text,
                                   authorController.text,
                                   descriptionController.text,
@@ -527,7 +533,7 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
         );
       },
     ).then((value) {
-      if(releaseYearController.text.isEmpty) {
+      if (releaseYearController.text.isEmpty) {
         releaseYearController.text = selectedDate.year.toString();
       }
     });

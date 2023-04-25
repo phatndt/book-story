@@ -2,6 +2,7 @@ import 'package:book_story/features/my%20_book/data/model/book_model.dart';
 import 'package:book_story/features/my%20_book/data/repository/book_repo_impl.dart';
 import 'package:book_story/features/my%20_book/domain/entity/book.dart';
 import 'package:book_story/features/my%20_book/domain/repository/book_repo.dart';
+import 'package:book_story/features/my%20_book/presentation/state/edit_book_state.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -33,4 +34,9 @@ final getBookDetailStateNotifierProvider =
 final readBookFileStateNotifierProvider =
     StateNotifierProvider<ReadBookFileStateNotifier, UIState>((ref) {
   return ReadBookFileStateNotifier(ref, ref.read(bookRepoProvider));
+});
+
+final editBookStateNotifierProvider =
+    StateNotifierProvider<EditBookStateNotifier, UIState>((ref) {
+  return EditBookStateNotifier(ref, ref.read(bookRepoProvider));
 });

@@ -1,21 +1,17 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:book_story/core/extension/function_extension.dart';
 import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/core/presentation/state.dart';
 import 'package:book_story/core/widget/custom_elevated_button.dart';
-import 'package:book_story/core/widget/dia_log.dart';
 import 'package:book_story/features/my%20_book/di/my_book_module.dart';
 import 'package:book_story/features/my%20_book/domain/entity/book.dart';
-import 'package:book_story/features/my%20_book/presentation/read_book_%20file.dart';
 import 'package:book_story/features/my%20_book/presentation/state/book_detail_state.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:skeletons/skeletons.dart';
@@ -50,7 +46,7 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
     Future.delayed(Duration.zero, () {
       ref.watch(getBookDetailStateNotifierProvider.notifier).getBookDetail(
             book.isNull()
-                ? (ModalRoute.of(context)!.settings.arguments as Book).id
+                ? ModalRoute.of(context)!.settings.arguments as String
                 : book!.id,
           );
     });
@@ -83,16 +79,9 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         ref.watch(getBookDetailStateNotifierProvider.notifier).getBookDetail(
               book.isNull()
-                  ? (ModalRoute.of(context)!.settings.arguments as Book).id
+                  ? ModalRoute.of(context)!.settings.arguments as String
                   : book!.id,
             );
-      } else if (next is DeleteBookSuccess) {
-        final snackBar = SuccessSnackBar(
-          message: "Delete this book successfully!",
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        ref.watch(myBookStateNotifierProvider.notifier).getBook();
-        Navigator.pop(context);
       }
     });
     return ModalProgressHUD(
@@ -129,31 +118,35 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: S.colors.white,
+            elevation: 0.2,
             leading: BackButton(
               onPressed: () {
                 Navigator.pop(context);
               },
               color: S.colors.primary_3,
             ),
-            backgroundColor: S.colors.white,
-            elevation: 0.2,
             actions: [
               IconButton(
-                color: S.colors.primary_3,
-                icon: const Icon(
-                  Icons.delete,
+                tooltip: "Update read file book",
+                icon: Icon(
+                  Icons.edit_note,
+                  color: S.colors.primary_3,
                 ),
-                onPressed: () {
-                  showConfirmDeleteBookDialog(context);
+                onPressed: () async {
+                  final path = await pickedFile(book!.id);
+                  if (path != null) {
+                    uploadFile(path, book!.id);
+                  } else {
+                    final errorSnackbar = ErrorSnackBar(
+                      message: "Something wrong! Please try again",
+                    );
+                    if (!mounted) return;
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(errorSnackbar);
+                  }
                 },
-              ),
-              IconButton(
-                color: S.colors.primary_3,
-                icon: const Icon(
-                  Icons.edit,
-                ),
-                onPressed: () {},
-              ),
+              )
             ],
           ),
           backgroundColor: S.colors.white,
@@ -163,11 +156,10 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
     );
   }
 
-  void pickedFile(String bookId) async {
+  Future<String?> pickedFile(String bookId) async {
     var status = await Permission.storage.status;
-    log(status.toString());
     if (status.isDenied || status.isPermanentlyDenied) {
-      showDialog(
+      await showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
@@ -195,32 +187,39 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
         allowedExtensions: ['jpg', 'pdf', 'doc'],
       );
       if (result != null && result.files.single.path != null) {
-        File file = File(result.files.single.path!);
-        showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: const Text("Add file"),
-                content: const Text("You want to link this file to the book"),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text("Cancel")),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        ref
-                            .watch(getBookDetailStateNotifierProvider.notifier)
-                            .addReadFileOfBook(bookId, file);
-                      },
-                      child: const Text("Ok"))
-                ],
-              );
-            });
+       return result.files.single.path;
+      } else {
+        return null;
       }
     }
+    return null;
+  }
+
+  void uploadFile(String path, String bookId) {
+    File file = File(path);
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Add file"),
+            content: const Text("You want to link this file to the book"),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Cancel")),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    ref
+                        .watch(getBookDetailStateNotifierProvider.notifier)
+                        .addReadFileOfBook(bookId, file);
+                  },
+                  child: const Text("Ok"))
+            ],
+          );
+        });
   }
 
   Widget _bodyUI() {
@@ -324,29 +323,22 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
                     Navigator.pushNamed(context, RoutePaths.readBookFile,
                         arguments: book!.id);
                   }
-                : () {
-                    pickedFile(book!.id);
+                : () async {
+                    final path = await pickedFile(book!.id);
+                    if (path != null) {
+                      uploadFile(path, book!.id);
+                    } else {
+                      final errorSnackbar = ErrorSnackBar(
+                       message: "Something wrong! Please try again",
+                      );
+                      if (!mounted) return;
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(errorSnackbar);
+                    }
                   },
             child: Text(book!.readFile.isNotEmpty ? "Read" : "Add file"),
           )
         ],
-      ),
-    );
-  }
-
-  showConfirmDeleteBookDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => BasicAlertDialog(
-        title: "Delete this book?",
-        content: "You want to delete this book",
-        negativeButton: () {
-          Navigator.pop(context);
-        },
-        positiveButton: () {
-          Navigator.pop(context);
-          ref.watch(getBookDetailStateNotifierProvider.notifier).deleteBook(book!.id);
-        },
       ),
     );
   }

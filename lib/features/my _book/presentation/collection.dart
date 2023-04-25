@@ -4,6 +4,7 @@ import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/core/widget/custom_text_form_fill.dart';
 import 'package:book_story/features/my%20_book/di/my_book_module.dart';
 import 'package:book_story/features/my%20_book/domain/entity/book.dart';
+import 'package:book_story/features/my%20_book/presentation/state/my_book_state.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +14,8 @@ import 'package:skeletons/skeletons.dart';
 
 import '../../../core/colors/colors.dart';
 import '../../../core/presentation/state.dart';
+import '../../../core/widget/dia_log.dart';
+import '../../../core/widget/snack_bar.dart';
 
 class MyBookScreen extends ConsumerStatefulWidget {
   const MyBookScreen({
@@ -31,6 +34,7 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
   late bool isExpanded;
   late FocusNode focusNode;
   late TextEditingController searchController;
+
   @override
   void initState() {
     super.initState();
@@ -63,6 +67,12 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
         setState(() {
           isShowError = true;
         });
+      } else if (next is DeleteBookSuccess) {
+        final snackBar = SuccessSnackBar(
+          message: "Delete this book successfully!",
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        ref.watch(myBookStateNotifierProvider.notifier).getBook();
       }
     });
     return SafeArea(
@@ -159,9 +169,7 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
       );
     }
     if (isShowLoading) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
+      return SkeletonListView();
     }
     if (books == null) {
       return const SizedBox();
@@ -185,101 +193,165 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
           height: 8.h,
         ),
         itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, RoutePaths.bookDetail,
-                  arguments: books![index]);
-            },
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            child: SizedBox(
-              height: 160.h,
-              width: double.infinity,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+          return BookWidget(book: books![index]);
+        },
+      ),
+    );
+  }
+}
+
+class BookWidget extends ConsumerStatefulWidget {
+  const BookWidget({
+    Key? key,
+    required this.book,
+  }) : super(key: key);
+
+  final Book book;
+
+  @override
+  ConsumerState createState() => _BookWidgetState();
+}
+
+class _BookWidgetState extends ConsumerState<BookWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, RoutePaths.bookDetail,
+            arguments: widget.book.id);
+      },
+      onLongPress: () {
+        showBottomSheet(context, widget.book.id);
+      },
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      child: SizedBox(
+        height: 160.h,
+        width: double.infinity,
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          elevation: 0.5,
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(12),
+                  bottomLeft: Radius.circular(12),
                 ),
-                elevation: 0.5,
-                child: Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        bottomLeft: Radius.circular(12),
+                child: SizedBox(
+                  width: 120.w,
+                  height: 160.h,
+                  child: Image.network(
+                    widget.book.image,
+                    fit: BoxFit.fill,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return const SkeletonAvatar();
+                    },
+                    errorBuilder: (context, url, error) => Container(
+                      color: Colors.grey[200],
+                      child: Icon(
+                        Icons.camera_alt,
+                        color: Colors.grey,
+                        size: 36.w,
                       ),
-                      child: SizedBox(
-                        width: 120.w,
-                        height: 160.h,
-                        child: Image.network(
-                          books![index].image,
-                          fit: BoxFit.fill,
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return const SkeletonAvatar();
-                          },
-                          errorBuilder: (context, url, error) => Container(
-                            color: Colors.grey[200],
-                            child: Icon(
-                              Icons.camera_alt,
-                              color: Colors.grey,
-                              size: 36.w,
-                            ),
-                          ),
-                        ),
-                      ),
-                      // child: CachedNetworkImage(
-                      //   width: 120.w,
-                      //   height: 160.h,
-                      //   fit: BoxFit.fill,
-                      //   imageUrl: books![index].image,
-                      //   placeholder: (context, url) => const SkeletonAvatar(),
-                      //   errorWidget: (context, url, error) => Container(
-                      //     color: Colors.grey[200],
-                      //     child: Icon(
-                      //       Icons.camera_alt,
-                      //       color: Colors.grey,
-                      //       size: 36.w,
-                      //     ),
-                      //   ),
-                      // ),
                     ),
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              books![index].name,
-                              overflow: TextOverflow.fade,
-                              maxLines: 1,
-                              softWrap: false,
-                              style: S.textStyles.heading2
-                                  .copyWith(fontWeight: FontWeight.w700),
-                            ),
-                            SizedBox(
-                              height: 4.h,
-                            ),
-                            Text(
-                              books![index].author,
-                              overflow: TextOverflow.fade,
-                              maxLines: 1,
-                              softWrap: false,
-                              style: S.textStyles.heading3,
-                            ),
-                            SizedBox(
-                              height: 48.h,
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
+                  ),
                 ),
+                // child: CachedNetworkImage(
+                //   width: 120.w,
+                //   height: 160.h,
+                //   fit: BoxFit.fill,
+                //   imageUrl: books![index].image,
+                //   placeholder: (context, url) => const SkeletonAvatar(),
+                //   errorWidget: (context, url, error) => Container(
+                //     color: Colors.grey[200],
+                //     child: Icon(
+                //       Icons.camera_alt,
+                //       color: Colors.grey,
+                //       size: 36.w,
+                //     ),
+                //   ),
+                // ),
               ),
-            ),
-          );
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.book.name,
+                        overflow: TextOverflow.fade,
+                        maxLines: 1,
+                        softWrap: false,
+                        style: S.textStyles.heading2
+                            .copyWith(fontWeight: FontWeight.w700),
+                      ),
+                      SizedBox(
+                        height: 4.h,
+                      ),
+                      Text(
+                        widget.book.author,
+                        overflow: TextOverflow.fade,
+                        maxLines: 1,
+                        softWrap: false,
+                        style: S.textStyles.heading3,
+                      ),
+                      SizedBox(
+                        height: 48.h,
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  showBottomSheet(BuildContext context, String bookId) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => Wrap(children: [
+        ListTile(
+          leading: const Icon(Icons.edit),
+          title: const Text('Edit this book'),
+          onTap: () {
+            Navigator.pushNamed(context, RoutePaths.editBook, arguments: bookId);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.delete),
+          title: const Text('Delete this book'),
+          onTap: () {
+            Navigator.pop(context);
+            showConfirmDeleteBookDialog(context);
+          },
+        ),
+      ]),
+    );
+  }
+
+  showConfirmDeleteBookDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => BasicAlertDialog(
+        title: "Delete this book?",
+        content: "You want to delete this book",
+        negativeButton: () {
+          Navigator.pop(context);
+        },
+        positiveButton: () {
+          Navigator.pop(context);
+          ref
+              .watch(myBookStateNotifierProvider.notifier)
+              .deleteBook(widget.book.id);
         },
       ),
     );

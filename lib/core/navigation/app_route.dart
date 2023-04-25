@@ -1,5 +1,6 @@
 import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/features/my%20_book/presentation/book_detail.dart';
+import 'package:book_story/features/my%20_book/presentation/edit_book,.dart';
 import 'package:book_story/features/my%20_book/presentation/read_book_%20file.dart';
 import 'package:book_story/presentation/main_screen.dart';
 import 'package:book_story/features/my%20_book/presentation/add_book.dart';
@@ -78,6 +79,11 @@ class AppRouter {
       case RoutePaths.readBookFile :
         return MaterialPageRoute(
           builder: (_) => const ReadBookFile(),
+          settings: settings,
+        );
+      case RoutePaths.editBook :
+        return MaterialPageRoute(
+          builder: (_) => const EditBookScreen(),
           settings: settings,
         );
       case RoutePaths.profile:

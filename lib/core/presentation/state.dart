@@ -38,6 +38,15 @@ class UIStateError extends UIState {
   List<Object?> get props => [error];
 }
 
+class UIStateWarning extends UIState {
+  final String message;
+
+  const UIStateWarning(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
 @immutable
 abstract class NetworkResponse extends Equatable {
   const NetworkResponse();

@@ -16,6 +16,7 @@ class RoutePaths {
   static const previewBook = '$home/preview_book';
   static const contributeBook = '/contributeBook';
   static const readBookFile = '$bookDetail/readBookFile';
+  static const editBook = '$home/editBook';
 
   static const changeInformation = '/change_information';
 

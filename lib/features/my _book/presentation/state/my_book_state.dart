@@ -31,4 +31,25 @@ class MyBookStateNotifier extends StateNotifier<UIState> {
       },
     );
   }
+
+  deleteBook(String bookId) {
+    if (FirebaseAuth.instance.currentUser == null) {
+      state = UIStateError(Exception("User is null. Please login again!"));
+      return;
+    }
+    state = const UIStateLoading(true);
+    _bookRepo
+        .deleteBook(FirebaseAuth.instance.currentUser!.uid, bookId)
+        .then((value) {
+      state = const UIStateLoading(false);
+      value.fold(
+        (l) => state = UIStateError(l),
+        (r) => state = const DeleteBookSuccess(),
+      );
+    });
+  }
+}
+
+class DeleteBookSuccess extends UIState {
+  const DeleteBookSuccess() : super();
 }
