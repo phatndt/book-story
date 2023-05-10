@@ -7,6 +7,7 @@ import 'package:book_story/features/my%20_book/domain/entity/book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -97,49 +98,55 @@ class _ReadBookFileState extends ConsumerState<ReadBookFile> {
                 ),
                 tooltip: "Reset to first page",
               ),
-              IconButton(
+              TextButton(
                 onPressed: () {
                   ref
                       .watch(readBookFileStateNotifierProvider.notifier)
                       .updateReadFilePageBook(book!.id, currentPage);
                 },
-                icon: Icon(
-                  Icons.save,
-                  color: S.colors.primary_3,
-                ),
-                tooltip: "Save current page",
+                child: const Text("Save current page"),
               ),
             ],
-            title: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  onPressed: () async {
-                    final pdfViewController = await _pdfViewController.future;
-                    pdfViewController.setPage(currentPage - 1);
-                  },
-                  icon: Icon(
-                    Icons.arrow_left,
-                    color: S.colors.primary_3,
+          ),
+          bottomNavigationBar: BottomAppBar(
+            child: SizedBox(
+              height: 56.h,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () async {
+                      final pdfViewController = await _pdfViewController.future;
+                      pdfViewController.setPage(currentPage - 1);
+                    },
+                    icon: Icon(
+                      Icons.chevron_left,
+                      color: S.colors.primary_3,
+                      size: 32,
+                    ),
+                    tooltip: "Reset to first page",
                   ),
-                  tooltip: "Reset to first page",
-                ),
-                Text(
-                  "$currentPage/$totalPage",
-                  style: S.textStyles.paragraph,
-                ),
-                IconButton(
-                  onPressed: () async {
-                    final pdfViewController = await _pdfViewController.future;
-                    pdfViewController.setPage(currentPage + 1);
-                  },
-                  icon: Icon(
-                    Icons.arrow_right,
-                    color: S.colors.primary_3,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.w),
+                    child: Text(
+                      "Page: $currentPage/$totalPage",
+                      style: S.textStyles.paragraph,
+                    ),
                   ),
-                  tooltip: "Reset to first page",
-                ),
-              ],
+                  IconButton(
+                    onPressed: () async {
+                      final pdfViewController = await _pdfViewController.future;
+                      pdfViewController.setPage(currentPage + 1);
+                    },
+                    icon: Icon(
+                      Icons.chevron_right,
+                      color: S.colors.primary_3,
+                      size: 32,
+                    ),
+                    tooltip: "Reset to first page",
+                  ),
+                ],
+              ),
             ),
           ),
           backgroundColor: S.colors.white,
@@ -174,8 +181,10 @@ class _ReadBookFileState extends ConsumerState<ReadBookFile> {
         },
       ).cachedFromUrl(
         book!.readFile,
-        placeholder: (double progress) => Center(child: Text('$progress %')),
-        errorWidget: (dynamic error) => const Center(child: Text('Error!')),
+        placeholder: (double progress) =>
+            Center(child: Text('Loading file: $progress %')),
+        errorWidget: (dynamic error) =>
+            const Center(child: Text('Something wrong! Please try later')),
       ),
     );
   }

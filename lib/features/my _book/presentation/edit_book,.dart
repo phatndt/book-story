@@ -6,6 +6,7 @@ import 'package:book_story/core/presentation/state.dart';
 import 'package:book_story/core/widget/custom_elevated_button.dart';
 import 'package:book_story/core/widget/snack_bar.dart';
 import 'package:book_story/features/my%20_book/domain/entity/book.dart';
+import 'package:book_story/features/my%20_book/presentation/state/edit_book_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -106,6 +107,14 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
       } else if (next is UIStateWarning) {
         ScaffoldMessenger.of(context)
             .showSnackBar(WarningSnackBar(message: next.message));
+      } else if (next is EditBookError) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(ErrorSnackBar(message: "Something wrong! Please try later!"));
+      } else if (next is EditBookSuccess) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SuccessSnackBar(message: "Edit successfully!"));
+        Navigator.pop(context);
+        ref.watch(myBookStateNotifierProvider.notifier).getBook();
       }
     });
     return Form(
@@ -433,7 +442,7 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
                       height: 24.h,
                     ),
                     CustomElevatedButton(
-                      child: const Center(child: Text("Add book")),
+                      child: const Center(child: Text("Edit book")),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           ref

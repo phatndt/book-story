@@ -79,8 +79,12 @@ class BookRepoImpl extends BookRepo {
     }
   }
 
+  @override
   Future<Either<Exception, String>> uploadImage(
-      String userId, String bookId, File image) async {
+    String userId,
+    String bookId,
+    File image,
+  ) async {
     try {
       final String fileName = image.path.split('/').last;
       final result = await FirebaseStorage.instance
@@ -181,6 +185,39 @@ class BookRepoImpl extends BookRepo {
           .collection('books')
           .doc(bookId)
           .update({"is_deleted": true});
+      return right(true);
+    } catch (e) {
+      return left(Exception(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Exception, bool>> editBook(
+    String bookId,
+    String name,
+    String author,
+    String description,
+    String image,
+    String language,
+    String releaseDate,
+    String category,
+    String userId,
+  ) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .collection('books')
+          .doc(bookId)
+          .update({
+        "name": name,
+        "author": author,
+        "description": description,
+        "image": image,
+        "language": language,
+        "release_date": releaseDate,
+        "category": category,
+      });
       return right(true);
     } catch (e) {
       return left(Exception(e.toString()));

@@ -35,4 +35,19 @@ abstract class BookRepo {
 
   Future<Either<Exception, bool>> deleteBook(
       String userId, String bookId);
+
+  Future<Either<Exception, String>> uploadImage(
+      String userId, String bookId, File image);
+
+  Future<Either<Exception, bool>> editBook(
+      String bookId,
+      String name,
+      String author,
+      String description,
+      String image,
+      String language,
+      String releaseDate,
+      String category,
+      String userId,
+      );
 }

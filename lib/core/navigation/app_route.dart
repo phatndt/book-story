@@ -2,6 +2,7 @@ import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/features/my%20_book/presentation/book_detail.dart';
 import 'package:book_story/features/my%20_book/presentation/edit_book,.dart';
 import 'package:book_story/features/my%20_book/presentation/read_book_%20file.dart';
+import 'package:book_story/features/profile/presentation/profile_screen.dart';
 import 'package:book_story/presentation/main_screen.dart';
 import 'package:book_story/features/my%20_book/presentation/add_book.dart';
 import 'package:book_story/features/my%20_book/presentation/collection.dart';
@@ -18,7 +19,6 @@ import 'package:book_story/presentation/views/screens/profile/change_information
 import 'package:book_story/presentation/views/screens/profile/change_password_screen.dart';
 import 'package:book_story/presentation/views/screens/profile/edit_post_screen.dart';
 import 'package:book_story/presentation/views/screens/profile/my_post.dart';
-import 'package:book_story/presentation/views/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/authentication/presentation/forgot_password.dart';

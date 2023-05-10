@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:book_story/features/my%20_book/domain/entity/book.dart';
 import 'package:book_story/features/my%20_book/domain/repository/book_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -60,30 +62,64 @@ class EditBookStateNotifier extends StateNotifier<UIState> {
       return;
     }
     state = const UIStateLoading(true);
-    _bookRepo
-        .addBook(
-      name,
-      author,
-      description,
-      image,
-      language,
-      releaseDate,
-      category,
-      DateTime.now().toString(),
-      FirebaseAuth.instance.currentUser?.uid ?? "",
-    )
-        .then(
-      (value) {
-        state = const UIStateLoading(false);
-        value.fold(
-          (l) {
-            state = UIStateError(l);
-          },
-          (r) {
-            state = UIStateSuccess(r);
-          },
-        );
-      },
-    );
+    if (FirebaseAuth.instance.currentUser == null) {
+      state = UIStateError(Exception("User is null. Please login again!"));
+      return;
+    }
+    if (image != book!.image) {
+      _bookRepo
+          .uploadImage(
+              FirebaseAuth.instance.currentUser!.uid, book!.id, File(image))
+          .then(
+            (value) => value.fold(
+              (l) => state = EditBookError(l),
+              (r) => _bookRepo
+                  .editBook(
+                      book!.id,
+                      name,
+                      author,
+                      description,
+                      r,
+                      language,
+                      releaseDate,
+                      category,
+                      FirebaseAuth.instance.currentUser!.uid)
+                  .then(
+                    (value) => value.fold(
+                      (l) => state = EditBookError(l),
+                      (r) => state = const EditBookSuccess(),
+                    ),
+                  ),
+            ),
+          );
+    } else  {
+      _bookRepo
+          .editBook(
+          book!.id,
+          name,
+          author,
+          description,
+          image,
+          language,
+          releaseDate,
+          category,
+          FirebaseAuth.instance.currentUser!.uid)
+          .then(
+            (value) => value.fold(
+              (l) => state = EditBookError(l),
+              (r) => state = const EditBookSuccess(),
+        ),
+      );
+    }
   }
+}
+
+class EditBookError extends UIState {
+  final Exception e;
+
+  const EditBookError(this.e) : super();
+}
+
+class EditBookSuccess extends UIState {
+  const EditBookSuccess() : super();
 }

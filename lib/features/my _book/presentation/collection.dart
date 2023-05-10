@@ -323,7 +323,9 @@ class _BookWidgetState extends ConsumerState<BookWidget> {
           leading: const Icon(Icons.edit),
           title: const Text('Edit this book'),
           onTap: () {
-            Navigator.pushNamed(context, RoutePaths.editBook, arguments: bookId);
+            Navigator.pop(context);
+            Navigator.pushNamed(context, RoutePaths.editBook,
+                arguments: bookId);
           },
         ),
         ListTile(
