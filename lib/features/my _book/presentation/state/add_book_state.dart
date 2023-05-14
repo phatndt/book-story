@@ -20,10 +20,10 @@ class AddBookStateNotifier extends StateNotifier<UIState> {
     String? image,
   ) {
     if (image == null) {
-      state = UIStateError(Exception("Image is empty"));
+      state = UIErrorState(Exception("Image is empty"));
       return;
     }
-    state = const UIStateLoading(true);
+    state = const UILoadingState(true);
     _bookRepo
         .addBook(
       name,
@@ -38,13 +38,13 @@ class AddBookStateNotifier extends StateNotifier<UIState> {
     )
         .then(
       (value) {
-        state = const UIStateLoading(false);
+        state = const UILoadingState(false);
         value.fold(
           (l) {
-            state = UIStateError(l);
+            state = UIErrorState(l);
           },
           (r) {
-            state = UIStateSuccess(r);
+            state = UISuccessState(r);
           },
         );
       },

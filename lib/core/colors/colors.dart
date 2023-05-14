@@ -28,7 +28,7 @@ class _Colors {
   final accent_1 = const Color(0xFFFFD2D5);
   final accent_2 = const Color(0xFFE4989D);
   final accent_3 = const Color(0xFFB0DAEF);
-  final accent_4 = const Color(0xFF648FE9);
+    final accent_4 = const Color(0xFF648FE9);
 
   final white = const Color(0xFFFFFFFF);
   final red = const Color(0xFFFF0000);

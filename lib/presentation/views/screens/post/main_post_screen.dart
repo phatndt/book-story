@@ -19,90 +19,91 @@ class MainPostScreen extends ConsumerWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: S.colors.white,
-        body: Padding(
-          padding: EdgeInsets.only(
-            top: S.size.length_20Vertical,
-            left: S.size.length_10,
-            right: S.size.length_10,
-          ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Image.asset(
-                    'assets/logo/logo.png',
-                    scale: 2,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, RoutePaths.addPost);
-                    },
-                    child: Icon(
-                      FontAwesomeIcons.plus,
-                      color: Colors.white,
-                      size: S.size.length_20,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      shape: const CircleBorder(),
-                      primary: S.colors.mainColor,
-                      padding: EdgeInsets.all(S.size.length_8),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: S.size.length_10,
-              ),
-              Expanded(
-                child: RefreshIndicator(
-                  onRefresh: () async => ref.refresh(getAllPostFutureProvider(
-                      ref.watch(getAllPostPostUseCase))),
-                  child: ref
-                      .watch(getAllPostFutureProvider(
-                          ref.watch(getAllPostPostUseCase)))
-                      .when(
-                        data: (data) {
-                          return ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: data.length,
-                              scrollDirection: Axis.vertical,
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              itemBuilder: (buildContext, index) {
-                                return PostItemWidget(
-                                  combinationPost: data[index],
-                                  onTap: () {
-                                    ref
-                                        .watch(
-                                            postDetailNotifierProvider.notifier)
-                                        .setCombinationPost(
-                                          data[index],
-                                        );
-                                    Navigator.pushNamed(
-                                      context,
-                                      RoutePaths.postDetail,
-                                    );
-                                  },
-                                );
-                              });
-                        },
-                        error: (error, stack) {
-                          log(error.toString());
-                          return Center(
-                              child: Lottie.asset('assets/images/error.json'));
-                        },
-                        loading: () =>
-                            const Center(child: CircularProgressIndicator()),
-                      ),
-                  // onRefresh: () async {
-                  //   log("1");
-                  // },
-                  // child: Text("dsdsd"),
-                ),
-              ),
-            ],
-          ),
-        ),
+        body: Center(child: Text("The feature is under development")),
+        // body: Padding(
+        //   padding: EdgeInsets.only(
+        //     top: S.size.length_20Vertical,
+        //     left: S.size.length_10,
+        //     right: S.size.length_10,
+        //   ),
+        //   child: Column(
+        //     children: [
+        //       Row(
+        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //         children: [
+        //           Image.asset(
+        //             'assets/logo/logo.png',
+        //             scale: 2,
+        //           ),
+        //           ElevatedButton(
+        //             onPressed: () {
+        //               Navigator.pushNamed(context, RoutePaths.addPost);
+        //             },
+        //             child: Icon(
+        //               FontAwesomeIcons.plus,
+        //               color: Colors.white,
+        //               size: S.size.length_20,
+        //             ),
+        //             style: ElevatedButton.styleFrom(
+        //               shape: const CircleBorder(),
+        //               primary: S.colors.mainColor,
+        //               padding: EdgeInsets.all(S.size.length_8),
+        //             ),
+        //           ),
+        //         ],
+        //       ),
+        //       SizedBox(
+        //         height: S.size.length_10,
+        //       ),
+        //       Expanded(
+        //         child: RefreshIndicator(
+        //           onRefresh: () async => ref.refresh(getAllPostFutureProvider(
+        //               ref.watch(getAllPostPostUseCase))),
+        //           child: ref
+        //               .watch(getAllPostFutureProvider(
+        //                   ref.watch(getAllPostPostUseCase)))
+        //               .when(
+        //                 data: (data) {
+        //                   return ListView.builder(
+        //                       shrinkWrap: true,
+        //                       itemCount: data.length,
+        //                       scrollDirection: Axis.vertical,
+        //                       physics: const AlwaysScrollableScrollPhysics(),
+        //                       itemBuilder: (buildContext, index) {
+        //                         return PostItemWidget(
+        //                           combinationPost: data[index],
+        //                           onTap: () {
+        //                             ref
+        //                                 .watch(
+        //                                     postDetailNotifierProvider.notifier)
+        //                                 .setCombinationPost(
+        //                                   data[index],
+        //                                 );
+        //                             Navigator.pushNamed(
+        //                               context,
+        //                               RoutePaths.postDetail,
+        //                             );
+        //                           },
+        //                         );
+        //                       });
+        //                 },
+        //                 error: (error, stack) {
+        //                   log(error.toString());
+        //                   return Center(
+        //                       child: Lottie.asset('assets/images/error.json'));
+        //                 },
+        //                 loading: () =>
+        //                     const Center(child: CircularProgressIndicator()),
+        //               ),
+        //           // onRefresh: () async {
+        //           //   log("1");
+        //           // },
+        //           // child: Text("dsdsd"),
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ),
     );
   }

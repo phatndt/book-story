@@ -17,14 +17,14 @@ class ForgotPasswordStateNotifier extends StateNotifier<UIState> {
       final result = await _authRepo.resetPassword(email);
       result.fold(
             (l) {
-          state = UIStateError(l);
+          state = UIErrorState(l);
         },
             (r) {
-          state = UIStateSuccess(r);
+          state = UISuccessState(r);
         },
       );
     } else {
-      state = UIStateError(Exception('Please enter your email!'));
+      state = UIErrorState(Exception('Please enter your email!'));
     }
   }
 

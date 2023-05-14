@@ -16,22 +16,22 @@ class GetBookDetailStateNotifier extends StateNotifier<UIState> {
   final BookRepo _bookRepo;
 
   getBookDetail(String bookId) {
-    state = const UIStateLoading(true);
+    state = const UILoadingState(true);
     if (FirebaseAuth.instance.currentUser == null) {
-      state = UIStateError(Exception("User is null. Please login again!"));
+      state = UIErrorState(Exception("User is null. Please login again!"));
       return;
     }
     _bookRepo
         .getBookDetail(FirebaseAuth.instance.currentUser!.uid, bookId)
         .then(
       (value) {
-        state = const UIStateLoading(false);
+        state = const UILoadingState(false);
         value.fold(
           (l) {
-            state = UIStateError(l);
+            state = UIErrorState(l);
           },
           (r) {
-            state = UIStateSuccess(Book.fromModel(r));
+            state = UISuccessState(Book.fromModel(r));
           },
         );
       },
@@ -40,17 +40,17 @@ class GetBookDetailStateNotifier extends StateNotifier<UIState> {
 
   addReadFileOfBook(String bookId, File readFile) {
     if (FirebaseAuth.instance.currentUser == null) {
-      state = UIStateError(Exception("User is null. Please login again!"));
+      state = UIErrorState(Exception("User is null. Please login again!"));
       return;
     }
-    state = const UIStateLoading(true);
+    state = const UILoadingState(true);
     _bookRepo
         .uploadReadFileBookToFirebaseStorageStream(
             FirebaseAuth.instance.currentUser!.uid, bookId, readFile)
         .listen((event) {
       event.fold((l) {
-        state = const UIStateLoading(false);
-        state = UIStateError(l);
+        state = const UILoadingState(false);
+        state = UIErrorState(l);
       }, (r) async {
         if (r.state == TaskState.running) {
           state = UpdateReadFileOfBookLoading(
@@ -60,8 +60,8 @@ class GetBookDetailStateNotifier extends StateNotifier<UIState> {
           updateReadFileAttributeOfBook(
               FirebaseAuth.instance.currentUser!.uid, bookId, path);
         } else if (r.state == TaskState.error) {
-          state = const UIStateLoading(false);
-          state = UIStateError(Exception("Upload file error!"));
+          state = const UILoadingState(false);
+          state = UIErrorState(Exception("Upload file error!"));
         }
       });
     });
@@ -79,9 +79,9 @@ class GetBookDetailStateNotifier extends StateNotifier<UIState> {
       readFilePath,
     )
         .then((value) {
-      state = const UIStateLoading(false);
+      state = const UILoadingState(false);
       value.fold(
-        (l) => state = UIStateError(Exception("Upload file error!")),
+        (l) => state = UIErrorState(Exception("Upload file error!")),
         (r) => state = const UpdateReadFileOfBookSuccess(),
       );
     });

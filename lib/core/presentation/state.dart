@@ -11,37 +11,37 @@ abstract class UIState extends Equatable {
 
 class UIInitialState extends UIState {}
 
-class UIStateLoading extends UIState {
+class UILoadingState extends UIState {
   final bool loading;
 
-  const UIStateLoading(this.loading);
+  const UILoadingState(this.loading);
 
   @override
   List<Object?> get props => [loading];
 }
 
-class UIStateSuccess<T> extends UIState {
+class UISuccessState<T> extends UIState {
   final T data;
 
-  const UIStateSuccess(this.data);
+  const UISuccessState(this.data);
 
   @override
   List<Object?> get props => [data];
 }
 
-class UIStateError extends UIState {
+class UIErrorState extends UIState {
   final Exception error;
 
-  const UIStateError(this.error);
+  const UIErrorState(this.error);
 
   @override
   List<Object?> get props => [error];
 }
 
-class UIStateWarning extends UIState {
+class UIWarningState extends UIState {
   final String message;
 
-  const UIStateWarning(this.message);
+  const UIWarningState(this.message);
 
   @override
   List<Object?> get props => [message];

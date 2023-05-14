@@ -72,16 +72,16 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
   @override
   Widget build(BuildContext context) {
     ref.listen(addBookStateNotifierProvider, (previous, next) {
-      if (next is UIStateLoading) {
+      if (next is UILoadingState) {
         setState(() {
           isShowLoading = next.loading;
         });
-      } else if (next is UIStateSuccess) {
+      } else if (next is UISuccessState) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SuccessSnackBar(message: "Add book successfully!"));
         Navigator.pop(context);
         ref.watch(myBookStateNotifierProvider.notifier).getBook();
-      } else if (next is UIStateError) {
+      } else if (next is UIErrorState) {
         ScaffoldMessenger.of(context)
             .showSnackBar(ErrorSnackBar(message: next.error.toString()));
       }

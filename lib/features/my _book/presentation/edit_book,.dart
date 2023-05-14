@@ -82,11 +82,11 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
   @override
   Widget build(BuildContext context) {
     ref.listen(editBookStateNotifierProvider, (previous, next) {
-      if (next is UIStateLoading) {
+      if (next is UILoadingState) {
         setState(() {
           isShowLoading = next.loading;
         });
-      } else if (next is UIStateSuccess) {
+      } else if (next is UISuccessState) {
         log("bookId");
         final book = next.data as Book;
         setState(() {
@@ -100,11 +100,11 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
           descriptionController.text = book.description;
           releaseYearController.text = book.releaseDate;
         });
-      } else if (next is UIStateError) {
+      } else if (next is UIErrorState) {
         ScaffoldMessenger.of(context)
             .showSnackBar(ErrorSnackBar(message: next.error.toString()));
         Navigator.pop(context);
-      } else if (next is UIStateWarning) {
+      } else if (next is UIWarningState) {
         ScaffoldMessenger.of(context)
             .showSnackBar(WarningSnackBar(message: next.message));
       } else if (next is EditBookError) {

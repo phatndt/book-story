@@ -28,22 +28,7 @@ class  BookModel {
       this.createDate,
       this.isDeleted,
       );
-  toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'author': author,
-      'description': description,
-      'image': image,
-      'category': category,
-      'language': language,
-      'release_date': releaseDate,
-      'user_id': userId,
-      'read_file_path': readFile,
-      'create_date': createDate,
-      'is_deleted': isDeleted,
-    };
-  }
+
   factory BookModel.fromJson(Map<String, dynamic> json) {
     return BookModel(
       json['id'],
@@ -62,9 +47,9 @@ class  BookModel {
     );
   }
 
-  factory BookModel.fromJsonIncludeId(Map<String, dynamic> json, String userId) {
+  factory BookModel.fromJsonIncludeId(Map<String, dynamic> json, String id) {
     return BookModel(
-      userId,
+      id,
       json['name'],
       json['author'],
       json['description'],

@@ -1,12 +1,11 @@
 import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/features/profile/presentation/profile_screen.dart';
-import 'package:book_story/presentation/views/screens/home/library/share.dart';
-import 'package:book_story/presentation/views/screens/post/main_post_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../domain/entities/user.dart';
 import '../../features/my _book/presentation/collection.dart';
+import '../../features/my_book_shelf/presentation/my_book_shelf.dart';
 
 class MainApp {
   String route;
@@ -51,12 +50,11 @@ class MainAppNotifier extends StateNotifier<MainApp> {
   final Ref ref;
   final navigationList = const [
     MyBookScreen(),
-    ShareScreen(),
-    MainPostScreen(),
+    BookShelfScreen(),
     ProfileScreen()
   ];
 
-  setCurrentIndext(int index) {
+  setCurrentIndex(int index) {
     final newState = state.copy(
       navigation: navigationList[index],
       currentIndex: index,

@@ -15,23 +15,23 @@ class EditBookStateNotifier extends StateNotifier<UIState> {
   late Book? book;
 
   getBookDetail(String bookId) {
-    state = const UIStateLoading(true);
+    state = const UILoadingState(true);
     if (FirebaseAuth.instance.currentUser == null) {
-      state = UIStateError(Exception("User is null. Please login again!"));
+      state = UIErrorState(Exception("User is null. Please login again!"));
       return;
     }
     _bookRepo
         .getBookDetail(FirebaseAuth.instance.currentUser!.uid, bookId)
         .then(
       (value) {
-        state = const UIStateLoading(false);
+        state = const UILoadingState(false);
         value.fold(
           (l) {
-            state = UIStateError(l);
+            state = UIErrorState(l);
           },
           (r) {
             book = Book.fromModel(r);
-            state = UIStateSuccess(Book.fromModel(r));
+            state = UISuccessState(Book.fromModel(r));
           },
         );
       },
@@ -48,7 +48,7 @@ class EditBookStateNotifier extends StateNotifier<UIState> {
     String? image,
   ) {
     if (image == null) {
-      state = UIStateError(Exception("Image is empty"));
+      state = UIErrorState(Exception("Image is empty"));
       return;
     }
     if (book!.name == name &&
@@ -58,12 +58,12 @@ class EditBookStateNotifier extends StateNotifier<UIState> {
         book!.category == category &&
         book!.language == language &&
         book!.image == image) {
-      state = const UIStateWarning("Nothing to update");
+      state = const UIWarningState("Nothing to update");
       return;
     }
-    state = const UIStateLoading(true);
+    state = const UILoadingState(true);
     if (FirebaseAuth.instance.currentUser == null) {
-      state = UIStateError(Exception("User is null. Please login again!"));
+      state = UIErrorState(Exception("User is null. Please login again!"));
       return;
     }
     if (image != book!.image) {

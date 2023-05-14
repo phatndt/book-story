@@ -19,129 +19,130 @@ class ShareScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.amberAccent,
-      body: ref.watch(getAllUserProvider(ref.watch(getAllUserUseCase))).when(
-            data: (data) {
-              data.data.removeWhere((element) => element.address.isEmpty);
-              log(data.data.length.toString());
-              // ref
-              //     .watch(mapNotifierProvider.notifier)
-              //     .setUserList(data.data);
-              return Stack(
-                children: [
-                  FlutterMap(
-                    options: MapOptions(
-                      center: ref
-                              .watch(mainAppNotifierProvider)
-                              .user
-                              .address
-                              .isNotEmpty
-                          ? latlng.LatLng(
-                              double.parse(ref
-                                  .watch(mainAppNotifierProvider)
-                                  .user
-                                  .address
-                                  .split("|")
-                                  .first),
-                              double.parse(
-                                ref
-                                    .watch(mainAppNotifierProvider)
-                                    .user
-                                    .address
-                                    .split("|")
-                                    .last,
-                              ),
-                            )
-                          : null,
-                      zoom: 9.2,
-                    ),
-                    layers: [
-                      TileLayerOptions(
-                        urlTemplate:
-                            'https://api.mapbox.com/styles/v1/thanhphat219/clckablis001415mu2b4wsjp6/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidGhhbmhwaGF0MjE5IiwiYSI6ImNsY2swNHJsMTA0NzAzbm14N25pNnRnbG0ifQ.bZx2lOjIMGPRhuaG_yMP_w',
-                        additionalOptions: {
-                          'accessToken': AppConstants.mapBoxAccessToken,
-                          'id': AppConstants.mapBoxStyleId,
-                        },
-                      ),
-                      MarkerLayerOptions(
-                        markers: [
-                          for (int i = 0; i < data.data.length; i++)
-                            Marker(
-                              height: 40,
-                              width: 40,
-                              point: latlng.LatLng(
-                                  double.parse(
-                                      data.data[i].address.split("|").first),
-                                  double.parse(
-                                    data.data[i].address.split("|").last,
-                                  )),
-                              builder: (_) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    ref
-                                        .watch(mapNotifierProvider)
-                                        .pageController
-                                        .animateToPage(
-                                          i,
-                                          duration:
-                                              const Duration(milliseconds: 500),
-                                          curve: Curves.easeInOut,
-                                        );
-                                  },
-                                  child: Icon(
-                                    FontAwesomeIcons.locationDot,
-                                    size: 36,
-                                    color: S.colors.orange,
-                                  ),
-                                );
-                              },
-                            ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 2,
-                    height: MediaQuery.of(context).size.height * 0.15,
-                    child: PageView.builder(
-                      controller: ref.watch(mapNotifierProvider).pageController,
-                      onPageChanged: (value) {},
-                      itemCount: data.data.length,
-                      itemBuilder: (_, index) {
-                        final item = data.data[index];
-                        return Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Card(
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            color: S.colors.white,
-                            child: MarkerWidget(
-                                imagePath: item.image,
-                                username: item.username,
-                                appUser:
-                                    ref.watch(mainAppNotifierProvider).user.id,
-                                guestUser: item.id),
-                          ),
-                        );
-                      },
-                    ),
-                  )
-                ],
-              );
-            },
-            error: (error, stack) {
-              log(error.toString());
-              return const Center(
-                  child: Text("Something wrong! Please try other."));
-            },
-            loading: () => const Center(child: CircularProgressIndicator()),
-          ),
+      body: Center(child: Text("The feature is under development")),
+      // body: ref.watch(getAllUserProvider(ref.watch(getAllUserUseCase))).when(
+      //       data: (data) {
+      //         data.data.removeWhere((element) => element.address.isEmpty);
+      //         log(data.data.length.toString());
+      //         // ref
+      //         //     .watch(mapNotifierProvider.notifier)
+      //         //     .setUserList(data.data);
+      //         return Stack(
+      //           children: [
+      //             FlutterMap(
+      //               options: MapOptions(
+      //                 center: ref
+      //                         .watch(mainAppNotifierProvider)
+      //                         .user
+      //                         .address
+      //                         .isNotEmpty
+      //                     ? latlng.LatLng(
+      //                         double.parse(ref
+      //                             .watch(mainAppNotifierProvider)
+      //                             .user
+      //                             .address
+      //                             .split("|")
+      //                             .first),
+      //                         double.parse(
+      //                           ref
+      //                               .watch(mainAppNotifierProvider)
+      //                               .user
+      //                               .address
+      //                               .split("|")
+      //                               .last,
+      //                         ),
+      //                       )
+      //                     : null,
+      //                 zoom: 9.2,
+      //               ),
+      //               layers: [
+      //                 TileLayerOptions(
+      //                   urlTemplate:
+      //                       'https://api.mapbox.com/styles/v1/thanhphat219/clckablis001415mu2b4wsjp6/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidGhhbmhwaGF0MjE5IiwiYSI6ImNsY2swNHJsMTA0NzAzbm14N25pNnRnbG0ifQ.bZx2lOjIMGPRhuaG_yMP_w',
+      //                   additionalOptions: {
+      //                     'accessToken': AppConstants.mapBoxAccessToken,
+      //                     'id': AppConstants.mapBoxStyleId,
+      //                   },
+      //                 ),
+      //                 MarkerLayerOptions(
+      //                   markers: [
+      //                     for (int i = 0; i < data.data.length; i++)
+      //                       Marker(
+      //                         height: 40,
+      //                         width: 40,
+      //                         point: latlng.LatLng(
+      //                             double.parse(
+      //                                 data.data[i].address.split("|").first),
+      //                             double.parse(
+      //                               data.data[i].address.split("|").last,
+      //                             )),
+      //                         builder: (_) {
+      //                           return GestureDetector(
+      //                             onTap: () {
+      //                               ref
+      //                                   .watch(mapNotifierProvider)
+      //                                   .pageController
+      //                                   .animateToPage(
+      //                                     i,
+      //                                     duration:
+      //                                         const Duration(milliseconds: 500),
+      //                                     curve: Curves.easeInOut,
+      //                                   );
+      //                             },
+      //                             child: Icon(
+      //                               FontAwesomeIcons.locationDot,
+      //                               size: 36,
+      //                               color: S.colors.orange,
+      //                             ),
+      //                           );
+      //                         },
+      //                       ),
+      //                   ],
+      //                 ),
+      //               ],
+      //             ),
+      //             Positioned(
+      //               left: 0,
+      //               right: 0,
+      //               bottom: 2,
+      //               height: MediaQuery.of(context).size.height * 0.15,
+      //               child: PageView.builder(
+      //                 controller: ref.watch(mapNotifierProvider).pageController,
+      //                 onPageChanged: (value) {},
+      //                 itemCount: data.data.length,
+      //                 itemBuilder: (_, index) {
+      //                   final item = data.data[index];
+      //                   return Padding(
+      //                     padding: const EdgeInsets.all(15.0),
+      //                     child: Card(
+      //                       elevation: 5,
+      //                       shape: RoundedRectangleBorder(
+      //                         borderRadius: BorderRadius.circular(10),
+      //                       ),
+      //                       color: S.colors.white,
+      //                       child: MarkerWidget(
+      //                           imagePath: item.image,
+      //                           username: item.username,
+      //                           appUser:
+      //                               ref.watch(mainAppNotifierProvider).user.id,
+      //                           guestUser: item.id),
+      //                     ),
+      //                   );
+      //                 },
+      //               ),
+      //             )
+      //           ],
+      //         );
+      //       },
+      //       error: (error, stack) {
+      //         log(error.toString());
+      //         return const Center(
+      //             child: Text("Something wrong! Please try other."));
+      //       },
+      //       loading: () => const Center(child: CircularProgressIndicator()),
+      //     ),
     );
   }
 }

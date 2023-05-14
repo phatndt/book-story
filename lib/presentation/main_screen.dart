@@ -18,7 +18,7 @@ class MainScreen extends ConsumerWidget {
           type: BottomNavigationBarType.shifting,
           currentIndex: ref.watch(mainAppNotifierProvider).currentIndex,
           onTap: (index) {
-            ref.watch(mainAppNotifierProvider.notifier).setCurrentIndext(index);
+            ref.watch(mainAppNotifierProvider.notifier).setCurrentIndex(index);
           },
           selectedItemColor: S.colors.primary_3,
           unselectedItemColor: S.colors.grey,
@@ -28,12 +28,8 @@ class MainScreen extends ConsumerWidget {
               label: 'Collection',
             ),
             BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.binoculars),
+              icon: Icon(FontAwesomeIcons.linesLeaning),
               label: 'Share',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.peopleGroup),
-              label: 'Clubs',
             ),
             BottomNavigationBarItem(
               icon: Icon(FontAwesomeIcons.ellipsis),

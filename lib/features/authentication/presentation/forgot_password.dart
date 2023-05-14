@@ -41,7 +41,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     ref.listen(forgotPasswordStateNotifierProvider, (previous, next) {
-      if (next is UIStateSuccess) {
+      if (next is UISuccessState) {
         setState(() {
           isLoading = false;
         });
@@ -50,7 +50,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         Navigator.pop(context);
-      } else if (next is UIStateError) {
+      } else if (next is UIErrorState) {
         setState(() {
           isLoading = false;
         });

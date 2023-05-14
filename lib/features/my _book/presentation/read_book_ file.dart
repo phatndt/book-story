@@ -50,15 +50,15 @@ class _ReadBookFileState extends ConsumerState<ReadBookFile> {
   @override
   Widget build(BuildContext context) {
     ref.listen(getBookDetailStateNotifierProvider, (previous, next) {
-      if (next is UIStateLoading) {
+      if (next is UILoadingState) {
         setState(() {
           isShowLoading = next.loading;
         });
-      } else if (next is UIStateSuccess) {
+      } else if (next is UISuccessState) {
         setState(() {
           book = next.data;
         });
-      } else if (next is UIStateError) {
+      } else if (next is UIErrorState) {
         final snackBar = ErrorSnackBar(
           message: next.error.toString(),
         );

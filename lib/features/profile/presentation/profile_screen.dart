@@ -29,22 +29,22 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         appBar: AppBar(
           backgroundColor: S.colors.white,
           elevation: 0.2,
-          actions: [
-            IconButton(
-              tooltip: "Update read file book",
-              icon: Icon(
-                Icons.edit_note,
-                color: S.colors.primary_3,
-              ),
-              onPressed: () async {
-                // Navigator.pushNamedAndRemoveUntil(
-                //     context, RoutePaths.logIn, (route) => false);
-                // FirebaseAuth.instance.signOut();
-                FirebaseAuth.instance.currentUser?.updatePhotoURL(
-                    "https://scontent-sin6-4.xx.fbcdn.net/v/t39.30808-6/326785493_710556047338421_6151358611972506992_n.jpg?stp=cp6_dst-jpg&_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=uunbDH4W-F8AX9KCq6y&_nc_ht=scontent-sin6-4.xx&oh=00_AfBXNVE9VGEimE0kIMpA783JibGes2QR7OV1hNR57JCgzQ&oe=645ED569");
-              },
-            )
-          ],
+          // actions: [
+          //   IconButton(
+          //     tooltip: "Update read file book",
+          //     icon: Icon(
+          //       Icons.edit_note,
+          //       color: S.colors.primary_3,
+          //     ),
+          //     onPressed: () async {
+          //       // Navigator.pushNamedAndRemoveUntil(
+          //       //     context, RoutePaths.logIn, (route) => false);
+          //       // FirebaseAuth.instance.signOut();
+          //       FirebaseAuth.instance.currentUser?.updatePhotoURL(
+          //           "https://scontent-sin6-4.xx.fbcdn.net/v/t39.30808-6/326785493_710556047338421_6151358611972506992_n.jpg?stp=cp6_dst-jpg&_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=uunbDH4W-F8AX9KCq6y&_nc_ht=scontent-sin6-4.xx&oh=00_AfBXNVE9VGEimE0kIMpA783JibGes2QR7OV1hNR57JCgzQ&oe=645ED569");
+          //     },
+          //   )
+          // ],
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),

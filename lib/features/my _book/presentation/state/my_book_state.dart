@@ -12,20 +12,20 @@ class MyBookStateNotifier extends StateNotifier<UIState> {
   final BookRepo _bookRepo;
 
   getBook() {
-    state = const UIStateLoading(true);
+    state = const UILoadingState(true);
     if (FirebaseAuth.instance.currentUser == null) {
-      state = UIStateError(Exception("User is null. Please login again!"));
+      state = UIErrorState(Exception("User is null. Please login again!"));
       return;
     }
     _bookRepo.getBooksByUser(FirebaseAuth.instance.currentUser!.uid).then(
       (value) {
-        state = const UIStateLoading(false);
+        state = const UILoadingState(false);
         value.fold(
           (l) {
-            state = UIStateError(l);
+            state = UIErrorState(l);
           },
           (r) {
-            state = UIStateSuccess(r.map((e) => Book.fromModel(e)).toList());
+            state = UISuccessState(r.map((e) => Book.fromModel(e)).toList());
           },
         );
       },
@@ -34,16 +34,16 @@ class MyBookStateNotifier extends StateNotifier<UIState> {
 
   deleteBook(String bookId) {
     if (FirebaseAuth.instance.currentUser == null) {
-      state = UIStateError(Exception("User is null. Please login again!"));
+      state = UIErrorState(Exception("User is null. Please login again!"));
       return;
     }
-    state = const UIStateLoading(true);
+    state = const UILoadingState(true);
     _bookRepo
         .deleteBook(FirebaseAuth.instance.currentUser!.uid, bookId)
         .then((value) {
-      state = const UIStateLoading(false);
+      state = const UILoadingState(false);
       value.fold(
-        (l) => state = UIStateError(l),
+        (l) => state = UIErrorState(l),
         (r) => state = const DeleteBookSuccess(),
       );
     });

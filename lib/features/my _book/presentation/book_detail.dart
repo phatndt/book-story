@@ -55,11 +55,11 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
   @override
   Widget build(BuildContext context) {
     ref.listen(getBookDetailStateNotifierProvider, (previous, next) {
-      if (next is UIStateSuccess) {
+      if (next is UISuccessState) {
         setState(() {
           book = next.data;
         });
-      } else if (next is UIStateError) {
+      } else if (next is UIErrorState) {
         final snackBar = ErrorSnackBar(
           message: next.error.toString(),
         );

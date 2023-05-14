@@ -12,22 +12,22 @@ class ReadBookFileStateNotifier extends StateNotifier<UIState> {
   final BookRepo _bookRepo;
 
   getBookDetail(String bookId) {
-    state = const UIStateLoading(true);
+    state = const UILoadingState(true);
     if (FirebaseAuth.instance.currentUser == null) {
-      state = UIStateError(Exception("User is null. Please login again!"));
+      state = UIErrorState(Exception("User is null. Please login again!"));
       return;
     }
     _bookRepo
         .getBookDetail(FirebaseAuth.instance.currentUser!.uid, bookId)
         .then(
           (value) {
-        state = const UIStateLoading(false);
+        state = const UILoadingState(false);
         value.fold(
               (l) {
-            state = UIStateError(l);
+            state = UIErrorState(l);
           },
               (r) {
-            state = UIStateSuccess(Book.fromModel(r));
+            state = UISuccessState(Book.fromModel(r));
           },
         );
       },
@@ -36,7 +36,7 @@ class ReadBookFileStateNotifier extends StateNotifier<UIState> {
 
   updateReadFilePageBook(String bookId, int currentPage) async {
     if (FirebaseAuth.instance.currentUser == null) {
-      state = UIStateError(Exception("User is null. Please login again!"));
+      state = UIErrorState(Exception("User is null. Please login again!"));
       return;
     }
     await _bookRepo.updateReadFilePageBook(FirebaseAuth.instance.currentUser!.uid, bookId, currentPage);

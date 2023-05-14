@@ -58,14 +58,14 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     ref.listen(registerStateNotifierProvider, (previous, next) {
-      if (next is UIStateSuccess) {
+      if (next is UISuccessState) {
         setState(() {
           isLoading = false;
         });
         final snackBar = SuccessSnackBar(message: "Register successfully!",);
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         Navigator.pop(context);
-      } else if (next is UIStateError) {
+      } else if (next is UIErrorState) {
         setState(() {
           isLoading = false;
         });

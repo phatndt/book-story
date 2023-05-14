@@ -14,10 +14,10 @@ class RegisterStateNotifier extends StateNotifier<UIState> {
     final result = await _authRepo.register(username, password, email);
     result.fold(
       (l) {
-        state = UIStateError(l);
+        state = UIErrorState(l);
       },
       (r) {
-        state = UIStateSuccess(r);
+        state = UISuccessState(r);
       },
     );
   }

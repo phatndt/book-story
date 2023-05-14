@@ -19,14 +19,14 @@ class LoginStateNotifier extends StateNotifier<UIState> {
       final result = await _authRepo.login(email, password);
       result.fold(
         (l) {
-          state = UIStateError(l);
+          state = UIErrorState(l);
         },
         (r) {
-          state = UIStateSuccess(r);
+          state = UISuccessState(r);
         },
       );
     } else {
-      state = UIStateError(Exception('Please enter your email and password!'));
+      state = UIErrorState(Exception('Please enter your email and password!'));
     }
   }
 }

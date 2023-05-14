@@ -50,7 +50,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     ref.listen(loginStateNotifierProvider, (previous, next) {
-      if (next is UIStateSuccess) {
+      if (next is UISuccessState) {
         setState(() {
           isLoading = false;
         });
@@ -63,7 +63,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           Navigator.pushNamedAndRemoveUntil(
               context, RoutePaths.main, (route) => false);
         }
-      } else if (next is UIStateError) {
+      } else if (next is UIErrorState) {
         setState(() {
           isLoading = false;
         });

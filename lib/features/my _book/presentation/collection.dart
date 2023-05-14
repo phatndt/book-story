@@ -53,16 +53,16 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
   @override
   Widget build(BuildContext context) {
     ref.listen(myBookStateNotifierProvider, (previous, next) {
-      if (next is UIStateLoading) {
+      if (next is UILoadingState) {
         setState(() {
           isShowLoading = next.loading;
         });
-      } else if (next is UIStateSuccess) {
+      } else if (next is UISuccessState) {
         setState(() {
           books = next.data;
           temp = next.data;
         });
-      } else if (next is UIStateError) {
+      } else if (next is UIErrorState) {
         log(next.error.toString());
         setState(() {
           isShowError = true;
