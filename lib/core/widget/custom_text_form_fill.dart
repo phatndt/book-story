@@ -24,6 +24,7 @@ class CustomTextFormField extends StatelessWidget {
     this.readOnly = false,
     this.maxLength,
     this.textInputAction,
+    this.enabled = true,
   }) : super(key: key);
 
   final FocusNode? focusNode;
@@ -44,6 +45,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool readOnly;
   final int? maxLength;
   final TextInputAction? textInputAction;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +53,7 @@ class CustomTextFormField extends StatelessWidget {
       width: width,
       height: height,
       child: TextFormField(
+        enabled: enabled,
         onTap: onTap,
         readOnly: readOnly,
         autofocus: autofocus,

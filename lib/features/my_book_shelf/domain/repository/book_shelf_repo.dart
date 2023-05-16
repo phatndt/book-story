@@ -4,4 +4,6 @@ import 'package:dartz/dartz.dart';
 
 abstract class BookShelfRepo {
   Future<Either<Exception, List<BookShelfModel>>> getBookShelfList(String userId);
+  Future<Either<Exception, String>> addBookShelf(BookShelfModel bookShelfModel, String userId);
+  Future<Either<Exception, List<BookShelfModel>>> getBookShelfListFromLocal();
 }

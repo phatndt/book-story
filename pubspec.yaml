@@ -95,11 +95,18 @@ dependencies:
   pinput: '2.2.16'
   drop_down_list: ^0.0.4
   awesome_select: '5.2.0'
-
+  flutter_material_color_picker: ^1.1.0+2
   #map
   location: '4.4.0'
   flutter_map: '2.2.0'
   latlng: '0.2.0'
+
+  #language
+  easy_localization: '3.0.1'
+
+  #database
+  hive: '2.2.3'
+  hive_flutter: '1.1.0'
 
   #firebase
   firebase_core: ^2.4.1
@@ -141,7 +148,7 @@ flutter:
     - assets/images/
     - assets/logo/
     - assets/feature/shelf/
-
+    - assets/translations/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

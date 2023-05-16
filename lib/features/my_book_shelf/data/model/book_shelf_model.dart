@@ -1,7 +1,9 @@
+import '../../domain/entity/book_shelf.dart';
+
 class BookShelfModel {
   final String id;
   final String name;
-  final String booksList;
+  final List<String> booksList;
   final String color;
   final String createDate;
   final bool isDelete;
@@ -16,13 +18,14 @@ class BookShelfModel {
   );
 
   factory BookShelfModel.fromJson(Map<String, dynamic> json, String id) {
+    final list = json['books_list'] as List;
     return BookShelfModel(
       id,
       json['name'],
-      json['books_list'],
+      list.map((e) => e.toString()).toList(),
       json['color'],
       json['create_date'],
-      json['is_delete'],
+      json['is_deleted'],
     );
   }
 
@@ -33,7 +36,7 @@ class BookShelfModel {
       'books_list': booksList,
       'color': color,
       'create_date': createDate,
-      'is_delete': isDelete,
+      'is_deleted': isDelete,
     };
   }
 
@@ -43,7 +46,18 @@ class BookShelfModel {
       'books_list': booksList,
       'color': color,
       'create_date': createDate,
-      'is_delete': isDelete,
+      'is_deleted': isDelete,
     };
+  }
+
+  BookShelf toEntity() {
+    return BookShelf(
+      id,
+      name,
+      booksList,
+      color,
+      createDate,
+      isDelete,
+    );
   }
 }

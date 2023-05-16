@@ -18,6 +18,10 @@ class RoutePaths {
   static const readBookFile = '$bookDetail/readBookFile';
   static const editBook = '$home/editBook';
 
+  static const bookShelf = '/bookShelf';
+  static const addBookShelf = '$bookShelf/addBookShelf';
+  static const searchBookShelf = '$bookShelf/searchBookShelf';
+
   static const changeInformation = '/change_information';
 
   static const share = '/share';

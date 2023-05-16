@@ -21,7 +21,7 @@ class BookShelfState extends StateNotifier<UIState> {
     result.fold((l) {
       state = UIErrorState(l);
     }, (r) {
-      state = UISuccessState(r);
+      state = UISuccessState(r.map((e) => e.toEntity()).toList());
     });
   }
 }

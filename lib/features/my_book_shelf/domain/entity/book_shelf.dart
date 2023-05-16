@@ -3,7 +3,7 @@ import '../../data/model/book_shelf_model.dart';
 class BookShelf {
   final String id;
   final String name;
-  final String booksList;
+  final List<String> booksList;
   final String color;
   final String createDate;
   final bool isDelete;
