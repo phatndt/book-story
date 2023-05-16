@@ -29,72 +29,72 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         appBar: AppBar(
           backgroundColor: S.colors.white,
           elevation: 0.2,
-          // actions: [
-          //   IconButton(
-          //     tooltip: "Update read file book",
-          //     icon: Icon(
-          //       Icons.edit_note,
-          //       color: S.colors.primary_3,
-          //     ),
-          //     onPressed: () async {
-          //       // Navigator.pushNamedAndRemoveUntil(
-          //       //     context, RoutePaths.logIn, (route) => false);
-          //       // FirebaseAuth.instance.signOut();
-          //       FirebaseAuth.instance.currentUser?.updatePhotoURL(
-          //           "https://scontent-sin6-4.xx.fbcdn.net/v/t39.30808-6/326785493_710556047338421_6151358611972506992_n.jpg?stp=cp6_dst-jpg&_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=uunbDH4W-F8AX9KCq6y&_nc_ht=scontent-sin6-4.xx&oh=00_AfBXNVE9VGEimE0kIMpA783JibGes2QR7OV1hNR57JCgzQ&oe=645ED569");
-          //     },
-          //   )
-          // ],
+          actions: [
+            IconButton(
+              tooltip: "Update read file book",
+              icon: Icon(
+                Icons.logout,
+                color: S.colors.primary_3,
+              ),
+              onPressed: () async {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, RoutePaths.logIn, (route) => false);
+                FirebaseAuth.instance.signOut();
+              },
+            )
+          ],
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(width: double.infinity),
-              CachedNetworkImage(
-                height: 164.w,
-                width: 164.w,
-                fit: BoxFit.fill,
-                imageUrl: setImageAvatar(),
-                imageBuilder: (context, imageProvider) => Container(
-                  height: 164.w,
-                  width: 164.w,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: imageProvider,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                placeholder: (context, url) => Container(
-                  height: 164.w,
-                  width: 164.w,
-                  child: const SkeletonAvatar(
-                    style: SkeletonAvatarStyle(shape: BoxShape.circle),
-                  ),
-                ),
-                errorWidget: (context, url, error) => Container(
-                  height: 164.w,
-                  width: 164.w,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage("assets/images/local_profile_avatar.png"),
-                    ),
-                  ),
-                ),
-              ),
-              if (FirebaseAuth.instance.currentUser?.displayName != null)
-                Text(
-                  FirebaseAuth.instance.currentUser!.displayName!,
-                  style: TextStyle(
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w600,
-                    color: S.colors.primary_3,
-                  ),
-                ),
+              Center(child: Text('The feature is being developed'),)
+              // const SizedBox(width: double.infinity),
+              // CachedNetworkImage(
+              //   height: 164.w,
+              //   width: 164.w,
+              //   fit: BoxFit.fill,
+              //   imageUrl: setImageAvatar(),
+              //   imageBuilder: (context, imageProvider) => Container(
+              //     height: 164.w,
+              //     width: 164.w,
+              //     decoration: BoxDecoration(
+              //       shape: BoxShape.circle,
+              //       image: DecorationImage(
+              //         image: imageProvider,
+              //         fit: BoxFit.cover,
+              //       ),
+              //     ),
+              //   ),
+              //   placeholder: (context, url) => Container(
+              //     height: 164.w,
+              //     width: 164.w,
+              //     child: const SkeletonAvatar(
+              //       style: SkeletonAvatarStyle(shape: BoxShape.circle),
+              //     ),
+              //   ),
+              //   errorWidget: (context, url, error) => Container(
+              //     height: 164.w,
+              //     width: 164.w,
+              //     decoration: const BoxDecoration(
+              //       shape: BoxShape.circle,
+              //       image: DecorationImage(
+              //         fit: BoxFit.fill,
+              //         image: AssetImage("assets/images/local_profile_avatar.png"),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // if (FirebaseAuth.instance.currentUser?.displayName != null)
+              //   Text(
+              //     FirebaseAuth.instance.currentUser!.displayName!,
+              //     style: TextStyle(
+              //       fontSize: 24.sp,
+              //       fontWeight: FontWeight.w600,
+              //       color: S.colors.primary_3,
+              //     ),
+              //   ),
             ],
           ),
         ),

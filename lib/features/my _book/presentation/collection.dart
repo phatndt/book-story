@@ -175,10 +175,14 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
       return const SizedBox();
     }
     if (books!.isEmpty) {
-      return Center(
-        child: Text(
-          'Add some books to your collection now!',
-          style: S.textStyles.bigTitle,
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12.h),
+        child: Center(
+          child: Text(
+            'Add some books to your \ncollection now!',
+            style: S.textStyles.bigTitle,
+            textAlign: TextAlign.center,
+          ),
         ),
       );
     }

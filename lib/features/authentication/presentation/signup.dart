@@ -91,9 +91,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       height: S.size.length_40Vertical,
                     ),
                     Image.asset(
-                      'assets/logo/logo_other.png',
-                      width: S.size.length_100,
-                      height: S.size.length_100Vertical,
+                      'assets/logo/logo.png',
+                      width: 100.w,
+                      height: 100.h,
                     ),
                     SizedBox(
                       height: S.size.length_40Vertical,
