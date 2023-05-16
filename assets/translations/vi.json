@@ -1,5 +1,7 @@
 {
   "add_book_shelf_successfully": "Thêm kệ sách thành công",
   "search_book_shelf_title": "Tìm kiếm kệ sách",
-  "search": "Tìm kiếm"
+  "search": "Tìm kiếm",
+  "book_shelf_detail": "Chi tiết kệ sách",
+  "book_shelf_not_found": "Không tìm thấy kệ sách"
 }

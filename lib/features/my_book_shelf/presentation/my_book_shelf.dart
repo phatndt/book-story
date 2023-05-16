@@ -202,8 +202,12 @@ class _BookShelfScreenState extends ConsumerState<BookShelfScreen> {
               itemBuilder: (context, index) {
                 return BookShelfWidget(
                   name: bookShelfList[index].name,
-                  numberOfBooks: bookShelfList[index].booksList.length.toString(),
+                  numberOfBooks:
+                      bookShelfList[index].booksList.length.toString(),
                   color: bookShelfList[index].color,
+                  onTap: () {
+                    Navigator.pushNamed(context, RoutePaths.bookShelfDetail, arguments: bookShelfList[index].id);
+                  },
                 );
               },
             ),

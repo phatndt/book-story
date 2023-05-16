@@ -224,4 +224,22 @@ class BookRepoImpl extends BookRepo {
       return left(Exception(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Exception, List<BookModel>>> getBookListByBookShelf(
+      String userId, String bookShelfId, List<String> booksId) async {
+    try {
+      final result = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .collection('books')
+          .where(FieldPath.documentId, whereIn: booksId).get();
+      final books = result.docs
+          .map((e) => BookModel.fromJsonIncludeId(e.data(), e.id))
+          .toList();
+      return right(books);
+    } catch (e) {
+      return left(Exception(e.toString()));
+    }
+  }
 }

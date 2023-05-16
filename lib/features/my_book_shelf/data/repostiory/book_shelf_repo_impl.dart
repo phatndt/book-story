@@ -2,7 +2,9 @@ import 'package:book_story/features/my_book_shelf/data/datasource/local/book_she
 import 'package:book_story/features/my_book_shelf/domain/repository/book_shelf_repo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 
+import '../../../../domain/entities/book.dart';
 import '../model/book_shelf_model.dart';
 
 class BookShelfRepoImpl extends BookShelfRepo {
@@ -50,10 +52,32 @@ class BookShelfRepoImpl extends BookShelfRepo {
   }
 
   @override
-  Future<Either<Exception, List<BookShelfModel>>> getBookShelfListFromLocal() async {
+  Future<Either<Exception, List<BookShelfModel>>>
+      getBookShelfListFromLocal() async {
     try {
       final result = await bookShelfDao.getBookShelfList();
       return right(result);
+    } catch (e) {
+      return left(Exception(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Exception, BookShelfModel>> getBookShelfById(
+      String userId, String bookShelfId) async {
+    try {
+      final result = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .collection('book_shelf')
+          .doc(bookShelfId)
+          .get();
+      if (result.exists && result.data() != null) {
+        final bookShelf = BookShelfModel.fromJson(result.data()!, result.id);
+        return right(bookShelf);
+      } else {
+        return left(Exception('book_shelf_not_found'.tr()));
+      }
     } catch (e) {
       return left(Exception(e.toString()));
     }

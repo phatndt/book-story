@@ -1,5 +1,7 @@
 {
   "add_book_shelf_successfully": "Add book shelf successfully",
   "search_book_shelf_title": "Search the book shelf",
-  "search": "Search"
+  "search": "Search",
+  "book_shelf_detail": "Book shelf detail",
+  "book_shelf_not_found": "Book shelf not found"
 }

@@ -8,6 +8,7 @@ import 'package:lottie/lottie.dart';
 import 'package:skeletons/skeletons.dart';
 
 import '../../../core/colors/colors.dart';
+import '../../../core/navigation/route_paths.dart';
 import '../../../core/presentation/state.dart';
 import '../../../core/widget/app_bar.dart';
 import '../../../core/widget/custom_text_form_fill.dart';
@@ -154,6 +155,9 @@ class _SearchBookShelfScreenState extends ConsumerState<SearchBookShelfScreen> {
               name: bookShelfList[index].name,
               numberOfBooks: bookShelfList[index].booksList.length.toString(),
               color: bookShelfList[index].color,
+              onTap:() {
+                Navigator.pushNamed(context, RoutePaths.bookShelfDetail);
+              },
             );
           },
         ),

@@ -50,4 +50,6 @@ abstract class BookRepo {
       String category,
       String userId,
       );
+  Future<Either<Exception, List<BookModel>>> getBookListByBookShelf(
+      String userId, String bookShelfId, List<String> booksId);
 }
