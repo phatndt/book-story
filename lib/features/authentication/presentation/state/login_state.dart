@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/presentation/state.dart';
-import '../../../../domain/use_cases/auth/login_use_case.dart';
 
 class LoginStateNotifier extends StateNotifier<UIState> {
   LoginStateNotifier(this.ref, this._authRepo)

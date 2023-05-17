@@ -1,5 +1,4 @@
 import 'package:book_story/features/authentication/di/authentication_module.dart';
-import 'package:book_story/presentation/views/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -8,6 +7,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../core/presentation/state.dart';
 import '../../../core/widget/custom_elevated_button.dart';
+import '../../../core/widget/custom_text_form_fill.dart';
 import '../../../core/widget/snack_bar.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {

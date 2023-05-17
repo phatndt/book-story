@@ -1,4 +1,4 @@
-import 'package:book_story/presentation/main_screen.dart';
+import 'package:book_story/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-import '../../../../domain/entities/book.dart';
 import '../model/book_shelf_model.dart';
 
 class BookShelfRepoImpl extends BookShelfRepo {

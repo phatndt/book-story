@@ -1,7 +1,6 @@
 import 'package:book_story/features/my_book_shelf/data/model/book_shelf_model.dart';
 import 'package:dartz/dartz.dart';
 
-import '../../../../domain/entities/book.dart';
 
 
 abstract class BookShelfRepo {

@@ -6,7 +6,7 @@ import 'package:book_story/features/my_book_shelf/presentation/add_book_shelf.da
 import 'package:book_story/features/my_book_shelf/presentation/book_shelf_detail.dart';
 import 'package:book_story/features/my_book_shelf/presentation/search_book_shelf.dart';
 import 'package:book_story/features/profile/presentation/profile_screen.dart';
-import 'package:book_story/presentation/main_screen.dart';
+import 'package:book_story/main_screen.dart';
 import 'package:book_story/features/my%20_book/presentation/add_book.dart';
 import 'package:book_story/features/my%20_book/presentation/collection.dart';
 import 'package:book_story/presentation/views/screens/home/library/share.dart';
