@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'core/app_module.dart';
 import 'core/navigation/app_route.dart';
 import 'core/colors/colors.dart';
 import 'core/navigation/route_paths.dart';
@@ -21,6 +23,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(BookShelfAdapter());
   await Hive.openBox<BookShelfModel>(bookShelf);
+  final prefs = await SharedPreferences.getInstance();
   runApp(
     EasyLocalization(
       supportedLocales: const [
@@ -28,7 +31,10 @@ void main() async {
         Locale.fromSubtags(languageCode: 'vi')
       ],
       path: 'assets/translations',
-      child: const ProviderScope(
+      child: ProviderScope(
+        overrides: [
+          sharePreferences.overrideWithValue(prefs),
+        ],
         child: MyApp(),
       ),
     ),
