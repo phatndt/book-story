@@ -1,7 +1,24 @@
 {
+  "cancel": "Cancel",
+  "ok": "Ok",
   "add_book_shelf_successfully": "Add book shelf successfully",
   "search_book_shelf_title": "Search the book shelf",
   "search": "Search",
   "book_shelf_detail": "Book shelf detail",
-  "book_shelf_not_found": "Book shelf not found"
+  "book_shelf_not_found": "Book shelf not found",
+  "delete_book_shelf_success": "Delete book shelf successfully",
+  "add_some_book_shelf_now": "Add some book shelf now",
+  "create_shelf": "Create shelf",
+  "shelf": " shelf",
+  "shelfs": " shelfs",
+  "no_data": "No data",
+  "please_enter_your_book_shelf_name": "Please enter your bookshelf's name",
+  "bookshelf_name_must_be_at_least_one_character": "Bookshelf's name must be at least one character",
+  "book_shelf_name": "Book shelf name",
+  "book": " book",
+  "books": " books",
+  "delete_this_book_shelf": "Delete this book shelf?",
+  "you_want_to_delete_this_book_shelf": "You want to delete this book shelf?",
+  "create_new_book_shelf": "Create a new book shelf",
+  "pick_color": "Pick the color"
 }

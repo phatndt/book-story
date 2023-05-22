@@ -1,7 +1,24 @@
 {
+  "cancel": "Huỷ",
+  "ok": "Xác nhận",
   "add_book_shelf_successfully": "Thêm kệ sách thành công",
   "search_book_shelf_title": "Tìm kiếm kệ sách",
   "search": "Tìm kiếm",
   "book_shelf_detail": "Chi tiết kệ sách",
-  "book_shelf_not_found": "Không tìm thấy kệ sách"
+  "book_shelf_not_found": "Không tìm thấy kệ sách",
+  "delete_book_shelf_success": "Xoá kệ sách thành công",
+  "add_some_book_shelf_now": "Thêm kệ sách ngay bây giờ!",
+  "create_shelf": "Tạo kệ sách",
+  "shelf": " kệ sách",
+  "shelfs": " kệ sách",
+  "no_data": "Không có dữ liệu",
+  "please_enter_your_book_shelf_name": "Vui lòng nhập tên kệ sách",
+  "bookshelf_name_must_be_at_least_one_character": "Tên kệ sách ít nhất một kí tự",
+  "delete_this_book_shelf": "Xoá kệ sách?",
+  "you_want_to_delete_this_book_shelf": "Bạn xác nhận xoá kệ sách này",
+  "book_shelf_name": "Tên kệ sách",
+  "book": " sách",
+  "books": " sách",
+  "create_new_book_shelf": "Tạo kệ sách mới",
+  "pick_color": "Chọn màu"
 }

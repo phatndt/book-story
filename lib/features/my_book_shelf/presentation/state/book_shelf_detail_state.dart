@@ -1,5 +1,6 @@
 import 'package:book_story/features/my%20_book/domain/entity/book.dart';
 import 'package:book_story/features/my%20_book/domain/repository/book_repo.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -47,9 +48,30 @@ class BookShelfDetailState extends StateNotifier<UIState> {
       state = UISuccessLoadBookList(r.map((e) => Book.fromModel(e)).toList());
     });
   }
+
+  void deleteBookShelf(String bookShelfId) async {
+    if (FirebaseAuth.instance.currentUser == null) {
+      state = UIErrorState(Exception("User is null. Please login again!"));
+      return;
+    }
+    state = const UILoadingState(true);
+    final result = await _bookShelfRepo.deleteBookShelf(
+        FirebaseAuth.instance.currentUser!.uid, bookShelfId);
+    result.fold((l) {
+      state = UIErrorState(l);
+    }, (r) {
+      state = UIDeleteBookShelfSuccessState('delete_book_shelf_success'.tr());
+    });
+  }
 }
 
 class UISuccessLoadBookList extends UIState {
   const UISuccessLoadBookList(this.bookList) : super();
   final List<Book> bookList;
 }
+
+class UIDeleteBookShelfSuccessState extends UIState {
+  const UIDeleteBookShelfSuccessState(this.message) : super(); final String message;
+}
+
+

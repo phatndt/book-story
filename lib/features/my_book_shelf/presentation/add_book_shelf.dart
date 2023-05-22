@@ -1,6 +1,7 @@
 import 'package:book_story/core/presentation/state.dart';
 import 'package:book_story/core/widget/app_bar.dart';
 import 'package:book_story/core/widget/custom_elevated_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,6 +27,8 @@ class _AddBookShelfScreenState extends ConsumerState<AddBookShelfScreen> {
   late bool isShowClearIconNameController;
   late Color? pickedColor;
   late bool isShowLoading;
+  late int pickerColorIndex;
+
   @override
   void initState() {
     super.initState();
@@ -33,6 +36,7 @@ class _AddBookShelfScreenState extends ConsumerState<AddBookShelfScreen> {
     isShowClearIconNameController = false;
     pickedColor = S.colors.primary_3;
     isShowLoading = false;
+    pickerColorIndex = 0;
   }
 
   @override
@@ -47,7 +51,7 @@ class _AddBookShelfScreenState extends ConsumerState<AddBookShelfScreen> {
             .showSnackBar(SuccessSnackBar(message: next.data.toString()));
         Navigator.pop(context);
         ref.watch(bookShelfStateNotifierProvider.notifier).getBookShelfList();
-      }else if (next is UIErrorState) {
+      } else if (next is UIErrorState) {
         ScaffoldMessenger.of(context)
             .showSnackBar(ErrorSnackBar(message: next.error.toString()));
       }
@@ -58,7 +62,7 @@ class _AddBookShelfScreenState extends ConsumerState<AddBookShelfScreen> {
         child: Scaffold(
           appBar: CustomAppBar(
             title: Text(
-              "Create a new book shelf",
+              'create_new_book_shelf'.tr(),
               style: S.textStyles.heading3,
             ),
             leading: BackButton(
@@ -90,14 +94,15 @@ class _AddBookShelfScreenState extends ConsumerState<AddBookShelfScreen> {
                   validator: (value) {
                     if (value != null) {
                       if (value.isEmpty) {
-                        return "Please enter your book's name";
+                        return 'please_enter_your_book_shelf_name'.tr();
                       } else if (value.length < 2) {
-                        return "Book's name must be at least 1 characters";
+                        return 'bookshelf_name_must_be_at_least_one_character'
+                            .tr();
                       }
                     }
                     return null;
                   },
-                  hintText: "Name",
+                  hintText: 'book_shelf_name'.tr(),
                   obscureText: false,
                   controller: nameController,
                   textInputAction: TextInputAction.next,
@@ -118,29 +123,39 @@ class _AddBookShelfScreenState extends ConsumerState<AddBookShelfScreen> {
                 SizedBox(
                   height: 24.h,
                 ),
-                CustomElevatedButton(
-                  width: ScreenUtil().screenWidth / 3,
-                  backgroundColor: pickedColor,
-                  borderRadius: 32,
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (buildContext) {
-                        return Dialog(
-                          child: MaterialColorPicker(
-                            colors: fullMaterialColors,
-                            selectedColor: pickedColor,
-                            onColorChange: (color) =>
-                                setState(() => pickedColor = color),
+                SizedBox(
+                  height: 56,
+                  child: ListView.separated(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: S.colors.listColorPicker.length,
+                    separatorBuilder: (context, index) => SizedBox(
+                      width: 8.w,
+                    ),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        borderRadius: BorderRadius.circular(28.r),
+                        onTap: () {
+                          setState(() {
+                            pickerColorIndex = index;
+                          });
+                        },
+                        child: Container(
+                          height: 56,
+                          width: 56,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: S.colors.listColorPicker[index],
                           ),
-                        );
-                      },
-                    );
-                  },
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 24.h,
-                    child: Center(child: pickedColor == S.colors.primary_3 ? const Text("Pick a color") : const Icon(Icons.check)),
+                          child: pickerColorIndex == index
+                              ? Icon(
+                                  Icons.check,
+                                  color: S.colors.white,
+                                )
+                              : null,
+                        ),
+                      );
+                    },
                   ),
                 ),
                 SizedBox(
@@ -148,9 +163,14 @@ class _AddBookShelfScreenState extends ConsumerState<AddBookShelfScreen> {
                 ),
                 CustomElevatedButton(
                   onPressed: () {
-                    ref.watch(addBookShelfNotifierProvider.notifier).addBookShelf(nameController.text.trim(), getHexColor(pickedColor!));
+                    ref
+                        .watch(addBookShelfNotifierProvider.notifier)
+                        .addBookShelf(
+                            nameController.text.trim(),
+                            getHexColor(
+                                S.colors.listColorPicker[pickerColorIndex]));
                   },
-                  child: const Text("Add the book shelf"),
+                  child: Text('create_new_book_shelf'.tr()),
                 ),
               ],
             ),

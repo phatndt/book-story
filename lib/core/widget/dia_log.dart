@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class BasicAlertDialog extends StatelessWidget {
@@ -21,11 +22,11 @@ class BasicAlertDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: negativeButton,
-          child: const Text('Cancel'),
+          child: Text('cancel'.tr()),
         ),
         TextButton(
           onPressed: positiveButton,
-          child: const Text('OK'),
+          child: Text('ok'.tr()),
         ),
       ],
     );

@@ -136,8 +136,8 @@ class _SearchBookShelfScreenState extends ConsumerState<SearchBookShelfScreen> {
       return SkeletonListView();
     }
     if (bookShelfList.isEmpty) {
-      return const Center(
-        child: Text("No data"),
+      return Center(
+        child: Text('no_data'.tr()),
       );
     } else {
       return SizedBox(
@@ -154,9 +154,13 @@ class _SearchBookShelfScreenState extends ConsumerState<SearchBookShelfScreen> {
             return BookShelfWidget(
               name: bookShelfList[index].name,
               numberOfBooks: bookShelfList[index].booksList.length.toString(),
-              color: bookShelfList[index].color,
-              onTap:() {
-                Navigator.pushNamed(context, RoutePaths.bookShelfDetail);
+              color: bookShelfList[index].color,index: index,
+              onTap: () {
+                Navigator.pushNamed(context, RoutePaths.bookShelfDetail,
+                    arguments: BookDetailArguments(
+                      bookShelfList[index].id,
+                      true,
+                    ));
               },
             );
           },
@@ -164,4 +168,14 @@ class _SearchBookShelfScreenState extends ConsumerState<SearchBookShelfScreen> {
       );
     }
   }
+}
+
+class BookDetailArguments {
+  final String id;
+  final bool isSearch;
+
+  BookDetailArguments(
+    this.id,
+    this.isSearch,
+  );
 }

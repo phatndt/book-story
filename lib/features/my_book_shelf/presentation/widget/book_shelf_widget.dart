@@ -12,11 +12,14 @@ class BookShelfWidget extends StatelessWidget {
     required this.numberOfBooks,
     required this.color,
     required this.onTap,
+    required this.index,
   }) : super(key: key);
   final String name;
   final String numberOfBooks;
   final String color;
+  final int index;
   final VoidCallback onTap;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -26,39 +29,28 @@ class BookShelfWidget extends StatelessWidget {
         elevation: 0.5,
         color: Color(int.parse("0x$color")),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.r),
+          borderRadius: BorderRadius.circular(24.r),
         ),
         child: SizedBox(
           height: 104.h,
-          child: Stack(
-            children: [
-              Positioned(
-                top: 16,
-                left: 16,
-                child: Text(
+          child: Padding(
+            padding: EdgeInsets.only(left: 24.w),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
                   name,
                   style: S.textStyles.heading2.copyWith(
                       fontWeight: FontWeight.w500, color: S.colors.white),
                 ),
-              ),
-              Positioned(
-                bottom: 16,
-                left: 16,
-                child: Text(
+                Text(
                   "$numberOfBooks books",
                   style: S.textStyles.heading3.copyWith(
                       fontWeight: FontWeight.w500, color: S.colors.white),
                 ),
-              ),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                child: Image.asset(
-                  'assets/feature/shelf/book_shelf_background.png',
-                  scale: 0.75,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -107,6 +107,7 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: S.colors.primary_3,
           onPressed: () {
             Navigator.pushNamed(
               context,
@@ -115,14 +116,14 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
           },
           child: const Icon(Icons.add),
         ),
-        backgroundColor: S.colors.white,
+        backgroundColor: const Color(0xffF2F6FA),
         body: Column(
           children: [
             AnimatedContainer(
               duration: const Duration(milliseconds: 320),
               height: isExpanded ? 80.h : 0.h,
               child: Container(
-                color: S.colors.red,
+                color : S.colors.white,
                 padding: EdgeInsets.symmetric(horizontal: 12.w),
                 child: Center(
                   child: CustomTextFormField(
@@ -264,25 +265,10 @@ class _BookWidgetState extends ConsumerState<BookWidget> {
                     ),
                   ),
                 ),
-                // child: CachedNetworkImage(
-                //   width: 120.w,
-                //   height: 160.h,
-                //   fit: BoxFit.fill,
-                //   imageUrl: books![index].image,
-                //   placeholder: (context, url) => const SkeletonAvatar(),
-                //   errorWidget: (context, url, error) => Container(
-                //     color: Colors.grey[200],
-                //     child: Icon(
-                //       Icons.camera_alt,
-                //       color: Colors.grey,
-                //       size: 36.w,
-                //     ),
-                //   ),
-                // ),
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,

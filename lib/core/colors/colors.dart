@@ -28,7 +28,7 @@ class _Colors {
   final accent_1 = const Color(0xFFFFD2D5);
   final accent_2 = const Color(0xFFE4989D);
   final accent_3 = const Color(0xFFB0DAEF);
-    final accent_4 = const Color(0xFF648FE9);
+  final accent_4 = const Color(0xFF648FE9);
 
   final white = const Color(0xFFFFFFFF);
   final red = const Color(0xFFFF0000);
@@ -38,6 +38,7 @@ class _Colors {
       'https://img.freepik.com/free-vector/abstract-elegant-winter-book-cover_23-2148798745.jpg?w=740&t=st=1664957292~exp=1664957892~hmac=64aa003f02ff1c7147d9908a482088831324212c51d143b30f76a995964697fa';
   final black = const Color.fromARGB(255, 53, 53, 53);
   final grey = const Color.fromARGB(255, 105, 105, 105);
+
   // final white = const Color.fromARGB(255, 253, 253, 253);
   final orangeDesigned = const Color.fromARGB(255, 228, 49, 49);
   final navyBlue = const Color.fromARGB(255, 46, 98, 182);
@@ -56,11 +57,6 @@ class _Colors {
       900: Color(0xFFF1654B),
     },
   );
-  //Accent
-  // final accent_1 = const Color(0xFFFF6263); // Bitter sweet
-  // final accent_2 = const Color(0xFFFF936B); // Atomic Tangerine
-  // final accent_3 = const Color(0xFFFFB3B3); // Meion
-  // final accent_4 = const Color(0xFFFFDD66); // Dandelion
   final accent_5 = const Color(0xFFF9DBD0);
   final accent_6 = const Color(0xFF6455AB);
   final accent_7 = const Color(0xFFB3C0FF);
@@ -82,10 +78,42 @@ class _Colors {
   final gray_5 = const Color(0xFFF5F6F8); // Cultured
   final gray_6 = const Color(0xFFEEEEEE);
 
-  //Text color
-  final textColor_1 = const Color(0xFF261F41);
-
-  final lavender = const Color(0xFFE0E4FF);
+  final scaffordBackgroundColor = const Color(0xffF2F6FA);
+  final listColorPicker = [ Colors.red,
+    Colors.redAccent,
+    Colors.pink,
+    Colors.pinkAccent,
+    Colors.purple,
+    Colors.purpleAccent,
+    Colors.deepPurple,
+    Colors.deepPurpleAccent,
+    Colors.indigo,
+    Colors.indigoAccent,
+    Colors.blue,
+    Colors.blueAccent,
+    Colors.lightBlue,
+    Colors.lightBlueAccent,
+    Colors.cyan,
+    Colors.cyanAccent,
+    Colors.teal,
+    Colors.tealAccent,
+    Colors.green,
+    Colors.greenAccent,
+    Colors.lightGreen,
+    Colors.lightGreenAccent,
+    Colors.lime,
+    Colors.limeAccent,
+    Colors.yellow,
+    Colors.yellowAccent,
+    Colors.amber,
+    Colors.amberAccent,
+    Colors.orange,
+    Colors.orangeAccent,
+    Colors.deepOrange,
+    Colors.deepOrangeAccent,
+    Colors.brown,
+    Colors.grey,
+    Colors.blueGrey];
 }
 
 class _Sized {

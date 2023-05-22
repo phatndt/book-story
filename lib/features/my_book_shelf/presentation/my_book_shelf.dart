@@ -1,7 +1,9 @@
 import 'package:book_story/core/widget/custom_elevated_button.dart';
 import 'package:book_story/features/my_book_shelf/di/book_shelf_module.dart';
 import 'package:book_story/features/my_book_shelf/domain/entity/book_shelf.dart';
+import 'package:book_story/features/my_book_shelf/presentation/search_book_shelf.dart';
 import 'package:book_story/features/my_book_shelf/presentation/widget/book_shelf_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -66,7 +68,7 @@ class _BookShelfScreenState extends ConsumerState<BookShelfScreen> {
       }
     });
     return Scaffold(
-      backgroundColor: S.colors.white,
+      backgroundColor: S.colors.scaffordBackgroundColor,
       appBar: AppBar(
         backgroundColor: S.colors.white,
         elevation: 0.5,
@@ -79,9 +81,11 @@ class _BookShelfScreenState extends ConsumerState<BookShelfScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, RoutePaths.searchBookShelf);
-            },
+            onPressed: bookShelfList.isNotEmpty
+                ? () {
+                    Navigator.pushNamed(context, RoutePaths.searchBookShelf);
+                  }
+                : null,
             icon: Icon(
               Icons.search,
               color: S.colors.primary_3,
@@ -125,14 +129,14 @@ class _BookShelfScreenState extends ConsumerState<BookShelfScreen> {
               height: 64.h,
             ),
             Text(
-              'Add some books to your collection now!',
+              'add_some_book_shelf_now'.tr(),
               style: S.textStyles.heading1,
             ),
             SizedBox(
               height: 12.h,
             ),
             CustomElevatedButton(
-              child: const Text("Create shelf"),
+              child: Text('create_shelf'.tr()),
               onPressed: () {
                 Navigator.pushNamed(context, RoutePaths.addBookShelf);
               },
@@ -153,7 +157,9 @@ class _BookShelfScreenState extends ConsumerState<BookShelfScreen> {
                     S.textStyles.heading3.copyWith(fontWeight: FontWeight.w600),
                 children: <TextSpan>[
                   TextSpan(
-                    text: bookShelfList.length == 1 ? ' shelf' : ' shelfs',
+                    text: bookShelfList.length == 1
+                        ? 'shelf'.tr()
+                        : 'shelfs'.tr(),
                     style: S.textStyles.heading3
                         .copyWith(fontWeight: FontWeight.normal),
                   ),
@@ -181,7 +187,7 @@ class _BookShelfScreenState extends ConsumerState<BookShelfScreen> {
                     SizedBox(
                       width: 4.w,
                     ),
-                    const Text("Add shelf")
+                    Text('create_shelf'.tr()),
                   ],
                 ),
               ),
@@ -191,25 +197,35 @@ class _BookShelfScreenState extends ConsumerState<BookShelfScreen> {
         Expanded(
           child: SizedBox(
             width: double.infinity,
-            child: ListView.separated(
+            child: GridView.builder(
               padding: EdgeInsets.symmetric(vertical: 12.h),
               shrinkWrap: true,
               itemCount: bookShelfList.length,
               scrollDirection: Axis.vertical,
-              separatorBuilder: (context, index) => SizedBox(
-                height: 8.h,
-              ),
+              // separatorBuilder: (context, index) => SizedBox(
+              //   height: 8.h,
+              // ),
               itemBuilder: (context, index) {
                 return BookShelfWidget(
                   name: bookShelfList[index].name,
                   numberOfBooks:
                       bookShelfList[index].booksList.length.toString(),
                   color: bookShelfList[index].color,
+                  index: index,
                   onTap: () {
-                    Navigator.pushNamed(context, RoutePaths.bookShelfDetail, arguments: bookShelfList[index].id);
+                    Navigator.pushNamed(
+                      context,
+                      RoutePaths.bookShelfDetail,
+                      arguments: BookDetailArguments(
+                        bookShelfList[index].id,
+                        false,
+                      ),
+                    );
                   },
                 );
               },
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2),
             ),
           ),
         ),

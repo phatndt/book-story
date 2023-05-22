@@ -8,4 +8,5 @@ abstract class BookShelfRepo {
   Future<Either<Exception, String>> addBookShelf(BookShelfModel bookShelfModel, String userId);
   Future<Either<Exception, List<BookShelfModel>>> getBookShelfListFromLocal();
   Future<Either<Exception, BookShelfModel>> getBookShelfById(String userId, String bookShelfId);
+  Future<Either<Exception, bool>> deleteBookShelf(String userId, String bookShelfId);
 }
