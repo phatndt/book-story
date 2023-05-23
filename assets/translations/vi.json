@@ -13,12 +13,15 @@
   "shelfs": " kệ sách",
   "no_data": "Không có dữ liệu",
   "please_enter_your_book_shelf_name": "Vui lòng nhập tên kệ sách",
-  "bookshelf_name_must_be_at_least_one_character": "Tên kệ sách ít nhất một kí tự",
+  "bookshelf_name_must_be_at_least_one_character": "Tên kệ sách ít nhất hai kí tự",
   "delete_this_book_shelf": "Xoá kệ sách?",
   "you_want_to_delete_this_book_shelf": "Bạn xác nhận xoá kệ sách này",
   "book_shelf_name": "Tên kệ sách",
   "book": " sách",
   "books": " sách",
   "create_new_book_shelf": "Tạo kệ sách mới",
-  "pick_color": "Chọn màu"
+  "pick_color": "Chọn màu",
+  "user_is_null_login_again": "Không tìm thấy người dùng. Vui lòng đăng nhập lại",
+  "update_book_shelf_success": "Cập nhập kệ sách thành công",
+  "update_book_shelf_button": "Cập nhập kệ sách"
 }

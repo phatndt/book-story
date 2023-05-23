@@ -28,6 +28,7 @@ class _AddBookShelfScreenState extends ConsumerState<AddBookShelfScreen> {
   late Color? pickedColor;
   late bool isShowLoading;
   late int pickerColorIndex;
+  late GlobalKey<FormState> _formKey;
 
   @override
   void initState() {
@@ -37,6 +38,7 @@ class _AddBookShelfScreenState extends ConsumerState<AddBookShelfScreen> {
     pickedColor = S.colors.primary_3;
     isShowLoading = false;
     pickerColorIndex = 0;
+    _formKey = GlobalKey<FormState>();
   }
 
   @override
@@ -72,107 +74,114 @@ class _AddBookShelfScreenState extends ConsumerState<AddBookShelfScreen> {
               color: S.colors.primary_3,
             ),
           ),
-          body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 24.h,
-                ),
-                CustomTextFormField(
-                  onChanged: (value) {
-                    if (value.isNotEmpty) {
-                      setState(() {
-                        isShowClearIconNameController = true;
-                      });
-                    } else {
-                      setState(() {
-                        isShowClearIconNameController = false;
-                      });
-                    }
-                  },
-                  validator: (value) {
-                    if (value != null) {
-                      if (value.isEmpty) {
-                        return 'please_enter_your_book_shelf_name'.tr();
-                      } else if (value.length < 2) {
-                        return 'bookshelf_name_must_be_at_least_one_character'
-                            .tr();
+          body: Form(
+            key: _formKey,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 24.h,
+                  ),
+                  CustomTextFormField(
+                    onChanged: (value) {
+                      if (value.isNotEmpty) {
+                        setState(() {
+                          isShowClearIconNameController = true;
+                        });
+                      } else {
+                        setState(() {
+                          isShowClearIconNameController = false;
+                        });
                       }
-                    }
-                    return null;
-                  },
-                  hintText: 'book_shelf_name'.tr(),
-                  obscureText: false,
-                  controller: nameController,
-                  textInputAction: TextInputAction.next,
-                  inputType: TextInputType.name,
-                  suffixIconData: isShowClearIconNameController
-                      ? IconButton(
-                          splashColor: Colors.transparent,
-                          icon: const Icon(Icons.clear),
-                          onPressed: () {
-                            nameController.clear();
+                    },
+                    validator: (value) {
+                      if (value != null) {
+                        if (value.isEmpty) {
+                          return 'please_enter_your_book_shelf_name'.tr();
+                        } else if (value.length < 2) {
+                          return 'bookshelf_name_must_be_at_least_one_character'
+                              .tr();
+                        }
+                      }
+                      return null;
+                    },
+                    hintText: 'book_shelf_name'.tr(),
+                    obscureText: false,
+                    controller: nameController,
+                    textInputAction: TextInputAction.next,
+                    inputType: TextInputType.name,
+                    suffixIconData: isShowClearIconNameController
+                        ? IconButton(
+                            splashColor: Colors.transparent,
+                            icon: const Icon(Icons.clear),
+                            onPressed: () {
+                              nameController.clear();
+                              setState(() {
+                                isShowClearIconNameController = false;
+                              });
+                            },
+                          )
+                        : null,
+                  ),
+                  SizedBox(
+                    height: 24.h,
+                  ),
+                  SizedBox(
+                    height: 56,
+                    child: ListView.separated(
+                      physics: const BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: S.colors.listColorPicker.length,
+                      separatorBuilder: (context, index) => SizedBox(
+                        width: 8.w,
+                      ),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          borderRadius: BorderRadius.circular(28.r),
+                          onTap: () {
                             setState(() {
-                              isShowClearIconNameController = false;
+                              pickerColorIndex = index;
                             });
                           },
-                        )
-                      : null,
-                ),
-                SizedBox(
-                  height: 24.h,
-                ),
-                SizedBox(
-                  height: 56,
-                  child: ListView.separated(
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: S.colors.listColorPicker.length,
-                    separatorBuilder: (context, index) => SizedBox(
-                      width: 8.w,
-                    ),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        borderRadius: BorderRadius.circular(28.r),
-                        onTap: () {
-                          setState(() {
-                            pickerColorIndex = index;
-                          });
-                        },
-                        child: Container(
-                          height: 56,
-                          width: 56,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: S.colors.listColorPicker[index],
+                          child: Container(
+                            height: 56,
+                            width: 56,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: S.colors.listColorPicker[index],
+                            ),
+                            child: pickerColorIndex == index
+                                ? Icon(
+                                    Icons.check,
+                                    color: S.colors.white,
+                                  )
+                                : null,
                           ),
-                          child: pickerColorIndex == index
-                              ? Icon(
-                                  Icons.check,
-                                  color: S.colors.white,
-                                )
-                              : null,
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 24.h,
-                ),
-                CustomElevatedButton(
-                  onPressed: () {
-                    ref
-                        .watch(addBookShelfNotifierProvider.notifier)
-                        .addBookShelf(
-                            nameController.text.trim(),
-                            getHexColor(
-                                S.colors.listColorPicker[pickerColorIndex]));
-                  },
-                  child: Text('create_new_book_shelf'.tr()),
-                ),
-              ],
+                  SizedBox(
+                    height: 24.h,
+                  ),
+                  CustomElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        ref
+                            .watch(addBookShelfNotifierProvider.notifier)
+                            .addBookShelf(
+                              nameController.text.trim(),
+                              getHexColor(
+                                S.colors.listColorPicker[pickerColorIndex],
+                              ),
+                            );
+                      }
+                    },
+                    child: Text('create_new_book_shelf'.tr()),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

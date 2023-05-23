@@ -57,10 +57,27 @@ class BookShelfDetailState extends StateNotifier<UIState> {
     state = const UILoadingState(true);
     final result = await _bookShelfRepo.deleteBookShelf(
         FirebaseAuth.instance.currentUser!.uid, bookShelfId);
+    state = const UILoadingState(false);
     result.fold((l) {
       state = UIErrorState(l);
     }, (r) {
       state = UIDeleteBookShelfSuccessState('delete_book_shelf_success'.tr());
+    });
+  }
+
+  void editBookShelf(String bookShelfId, String name, String color) async {
+    if (FirebaseAuth.instance.currentUser == null) {
+      state = UIErrorState(Exception('user_is_null_login_again'.tr()));
+      return;
+    }
+    state = const UILoadingState(true);
+    final result = await _bookShelfRepo.updateBookShelf(
+        FirebaseAuth.instance.currentUser!.uid, bookShelfId, name, color);
+    state = const UILoadingState(false);
+    result.fold((l) {
+      state = UIErrorState(l);
+    }, (r) {
+      state = UIUpdateBookShelfSuccessState('update_book_shelf_success'.tr());
     });
   }
 }
@@ -72,6 +89,10 @@ class UISuccessLoadBookList extends UIState {
 
 class UIDeleteBookShelfSuccessState extends UIState {
   const UIDeleteBookShelfSuccessState(this.message) : super(); final String message;
+}
+
+class UIUpdateBookShelfSuccessState extends UIState {
+  const UIUpdateBookShelfSuccessState(this.message) : super(); final String message;
 }
 
 
