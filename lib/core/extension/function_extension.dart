@@ -81,3 +81,15 @@ extension NullSafety on Object? {
     return false;
   }
 }
+
+extension ShowWidget on Widget {
+  Widget isShow(bool condition) {
+    if (condition) {
+      return this;
+    }
+    return const SizedBox(
+      width: 0,
+      height: 0,
+    );
+  }
+}

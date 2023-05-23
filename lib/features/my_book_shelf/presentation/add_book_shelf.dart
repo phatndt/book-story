@@ -77,12 +77,9 @@ class _AddBookShelfScreenState extends ConsumerState<AddBookShelfScreen> {
           body: Form(
             key: _formKey,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 24.h,
-                  ),
                   CustomTextFormField(
                     onChanged: (value) {
                       if (value.isNotEmpty) {

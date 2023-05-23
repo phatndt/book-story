@@ -173,9 +173,9 @@ class _BookShelfScreenState extends ConsumerState<BookShelfScreen> {
                 Navigator.pushNamed(context, RoutePaths.addBookShelf);
               },
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
                 decoration: BoxDecoration(
-                  color: S.colors.primary_1,
+                  color: S.colors.white,
                   borderRadius: BorderRadius.circular(24.r),
                 ),
                 child: Row(

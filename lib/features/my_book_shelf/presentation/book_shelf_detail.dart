@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:book_story/core/extension/function_extension.dart';
 import 'package:book_story/core/widget/app_bar.dart';
 import 'package:book_story/features/my%20_book/domain/entity/book.dart';
 import 'package:book_story/features/my_book_shelf/domain/entity/book_shelf.dart';
@@ -59,12 +60,9 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
     _focusNode = FocusNode();
     Future.delayed(Duration.zero, () {
       ref.watch(bookShelfDetailStateNotifierProvider.notifier).getBookShelfList(
-        (ModalRoute
-            .of(context)!
-            .settings
-            .arguments as BookDetailArguments)
-            .id,
-      );
+            (ModalRoute.of(context)!.settings.arguments as BookDetailArguments)
+                .id,
+          );
     });
   }
 
@@ -104,18 +102,20 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
         Navigator.pushNamedAndRemoveUntil(
             context, RoutePaths.main, (route) => false,
             arguments: true);
-      }else if (next is UIUpdateBookShelfSuccessState) {
+      } else if (next is UIUpdateBookShelfSuccessState) {
         ScaffoldMessenger.of(context).showSnackBar(SuccessSnackBar(
           message: next.message,
         ));
-        Navigator.pop(context);
-        ref.watch(bookShelfStateNotifierProvider.notifier).getBookShelfList();
+        Navigator.pushNamedAndRemoveUntil(
+            context, RoutePaths.main, (route) => false,
+            arguments: true);
       }
     });
     return SafeArea(
       child: ModalProgressHUD(
         inAsyncCall: isShowLoading,
         child: Scaffold(
+          backgroundColor: S.colors.scaffordBackgroundColor,
           appBar: CustomAppBar(
             title: Text(
               'book_shelf_detail'.tr(),
@@ -142,7 +142,7 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
           body: Form(
             key: _formKey,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -169,6 +169,7 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
                       }
                       return null;
                     },
+                    fillColor: S.colors.white,
                     focusNode: _focusNode,
                     hintText: 'book_shelf_name'.tr(),
                     obscureText: false,
@@ -180,20 +181,20 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
                       children: [
                         isShowClearIconNameController
                             ? InkWell(
-                          child: const Icon(Icons.clear),
-                          onTap: () {
-                            nameController.clear();
-                            setState(() {
-                              isShowClearIconNameController = false;
-                            });
-                          },
-                        )
+                                child: const Icon(Icons.clear),
+                                onTap: () {
+                                  nameController.clear();
+                                  setState(() {
+                                    isShowClearIconNameController = false;
+                                  });
+                                },
+                              )
                             : const SizedBox(
-                          height: 0,
-                          width: 0,
-                        ),
-                        const IconButton(onPressed: null, icon: Icon(Icons
-                            .edit)),
+                                height: 0,
+                                width: 0,
+                              ),
+                        const IconButton(
+                            onPressed: null, icon: Icon(Icons.edit)),
                       ],
                     ),
                   ),
@@ -206,10 +207,9 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemCount: S.colors.listColorPicker.length,
-                      separatorBuilder: (context, index) =>
-                          SizedBox(
-                            width: 8.w,
-                          ),
+                      separatorBuilder: (context, index) => SizedBox(
+                        width: 8.w,
+                      ),
                       itemBuilder: (context, index) {
                         return InkWell(
                           borderRadius: BorderRadius.circular(28.r),
@@ -227,9 +227,9 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
                             ),
                             child: pickerColorIndex == index
                                 ? Icon(
-                              Icons.check,
-                              color: S.colors.white,
-                            )
+                                    Icons.check,
+                                    color: S.colors.white,
+                                  )
                                 : null,
                           ),
                         );
@@ -237,8 +237,8 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
                     ),
                   ),
                   SizedBox(
-                    height: 16.h,
-                  ),
+                    height: 24.h,
+                  ).isShow(bookShelf?.booksList.isNotEmpty ?? false),
                   RichText(
                     text: TextSpan(
                       text: '${bookShelf?.booksList.length.toString()}',
@@ -254,16 +254,46 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
                         ),
                       ],
                     ),
-                  ),
+                  ).isShow(bookShelf?.booksList.isNotEmpty ?? false),
                   SizedBox(
-                    height: 16.h,
-                  ),
+                    height: 12.h,
+                  ).isShow(bookShelf?.booksList.isNotEmpty ?? false),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24.w),
                     child: Divider(
                       height: 2.h,
                       thickness: 1,
                       color: S.colors.primary_3,
+                    ),
+                  ).isShow(bookShelf?.booksList.isNotEmpty ?? false),
+                  SizedBox(
+                    height: 24.h,
+                  ),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(24.r),
+                    onTap: () {
+                      Navigator.pushNamed(context, RoutePaths.addBookShelf);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 12.w, vertical: 12.h),
+                      decoration: BoxDecoration(
+                        color: S.colors.white,
+                        borderRadius: BorderRadius.circular(24.r),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.add,
+                            color: S.colors.primary_3,
+                          ),
+                          SizedBox(
+                            width: 4.w,
+                          ),
+                          Text('add_book_to_book_shelf'.tr()),
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -272,19 +302,22 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
                   Expanded(child: _bodyBooks()),
                   CustomElevatedButton(
                     onPressed: (nameController.text.trim() != bookShelf?.name ||
-                        getHexColor(
-                            S.colors.listColorPicker[pickerColorIndex]) !=
-                            bookShelf?.color)
+                            getHexColor(S.colors
+                                    .listColorPicker[pickerColorIndex]) !=
+                                bookShelf?.color)
                         ? () {
-                      if (_formKey.currentState!.validate()) {
-                        _focusNode.unfocus();
-                        ref.watch(bookShelfDetailStateNotifierProvider.notifier)
-                            .editBookShelf(
-                            bookShelf!.id, nameController.text.trim(),
-                            getHexColor(
-                                S.colors.listColorPicker[pickerColorIndex]));
-                      }
-                    }
+                            if (_formKey.currentState!.validate()) {
+                              _focusNode.unfocus();
+                              ref
+                                  .watch(bookShelfDetailStateNotifierProvider
+                                      .notifier)
+                                  .editBookShelf(
+                                      bookShelf!.id,
+                                      nameController.text.trim(),
+                                      getHexColor(S.colors
+                                          .listColorPicker[pickerColorIndex]));
+                            }
+                          }
                         : null,
                     child: Text('update_book_shelf_button'.tr()),
                   ),
@@ -316,32 +349,31 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
     } else {
       return SizedBox(
           child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: books.length,
-            itemBuilder: (context, index) {
-              return BookWidget(book: books[index]);
-            },
-          ));
+        shrinkWrap: true,
+        itemCount: books.length,
+        itemBuilder: (context, index) {
+          return BookWidget(book: books[index]);
+        },
+      ));
     }
   }
 
   showConfirmDeleteBookDialog(BuildContext context, String bookShelfId) {
     showDialog(
       context: context,
-      builder: (context) =>
-          BasicAlertDialog(
-            title: 'delete_this_book_shelf'.tr(),
-            content: 'you_want_to_delete_this_book_shelf'.tr(),
-            negativeButton: () {
-              Navigator.pop(context);
-            },
-            positiveButton: () {
-              Navigator.pop(context);
-              ref
-                  .watch(bookShelfDetailStateNotifierProvider.notifier)
-                  .deleteBookShelf(bookShelfId);
-            },
-          ),
+      builder: (context) => BasicAlertDialog(
+        title: 'delete_this_book_shelf'.tr(),
+        content: 'you_want_to_delete_this_book_shelf'.tr(),
+        negativeButton: () {
+          Navigator.pop(context);
+        },
+        positiveButton: () {
+          Navigator.pop(context);
+          ref
+              .watch(bookShelfDetailStateNotifierProvider.notifier)
+              .deleteBookShelf(bookShelfId);
+        },
+      ),
     );
   }
 

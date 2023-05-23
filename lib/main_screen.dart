@@ -25,6 +25,19 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   int currentIndex = 0;
 
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      final check = ModalRoute.of(context)!.settings.arguments;
+      if (check != null && check is bool) {
+        setState(() {
+          currentIndex = 1;
+        });
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(

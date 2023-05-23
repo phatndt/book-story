@@ -25,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLength,
     this.textInputAction,
     this.enabled = true,
+    this.fillColor = const Color(0xFFE9F1f1),
   }) : super(key: key);
 
   final FocusNode? focusNode;
@@ -46,6 +47,7 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLength;
   final TextInputAction? textInputAction;
   final bool enabled;
+  final Color fillColor;
 
   @override
   Widget build(BuildContext context) {
@@ -77,9 +79,9 @@ class CustomTextFormField extends StatelessWidget {
         maxLength: maxLength,
         decoration: InputDecoration(
           filled: true,
-          fillColor: S.colors.primary_1,
+          fillColor: fillColor,
           contentPadding:
-          EdgeInsets.symmetric(vertical: 16.h, horizontal: 12.w),
+              EdgeInsets.symmetric(vertical: 16.h, horizontal: 12.w),
           counterText: "",
           isDense: true,
           hintStyle: const TextStyle(
