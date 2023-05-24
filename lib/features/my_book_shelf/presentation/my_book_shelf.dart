@@ -173,7 +173,7 @@ class _BookShelfScreenState extends ConsumerState<BookShelfScreen> {
                 Navigator.pushNamed(context, RoutePaths.addBookShelf);
               },
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
                 decoration: BoxDecoration(
                   color: S.colors.white,
                   borderRadius: BorderRadius.circular(24.r),
@@ -202,9 +202,6 @@ class _BookShelfScreenState extends ConsumerState<BookShelfScreen> {
               shrinkWrap: true,
               itemCount: bookShelfList.length,
               scrollDirection: Axis.vertical,
-              // separatorBuilder: (context, index) => SizedBox(
-              //   height: 8.h,
-              // ),
               itemBuilder: (context, index) {
                 return BookShelfWidget(
                   name: bookShelfList[index].name,
@@ -225,7 +222,8 @@ class _BookShelfScreenState extends ConsumerState<BookShelfScreen> {
                 );
               },
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2),
+                crossAxisCount: 2,
+              ),
             ),
           ),
         ),

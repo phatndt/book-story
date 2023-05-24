@@ -22,6 +22,7 @@ class RoutePaths {
   static const addBookShelf = '$bookShelf/addBookShelf';
   static const searchBookShelf = '$bookShelf/searchBookShelf';
   static const bookShelfDetail = '$bookShelf/bookShelfDetail';
+  static const addBookToShelf = '$bookShelfDetail/addBookToShelf';
 
   static const changeInformation = '/change_information';
 

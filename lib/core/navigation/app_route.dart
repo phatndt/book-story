@@ -3,6 +3,7 @@ import 'package:book_story/features/my%20_book/presentation/book_detail.dart';
 import 'package:book_story/features/my%20_book/presentation/edit_book,.dart';
 import 'package:book_story/features/my%20_book/presentation/read_book_%20file.dart';
 import 'package:book_story/features/my_book_shelf/presentation/add_book_shelf.dart';
+import 'package:book_story/features/my_book_shelf/presentation/add_book_to_shelf.dart';
 import 'package:book_story/features/my_book_shelf/presentation/book_shelf_detail.dart';
 import 'package:book_story/features/my_book_shelf/presentation/search_book_shelf.dart';
 import 'package:book_story/features/profile/presentation/profile_screen.dart';
@@ -85,7 +86,11 @@ class AppRouter {
           builder: (_) => const BookShelfDetail(),
           settings: settings,
         );
-
+      case RoutePaths.addBookToShelf :
+        return MaterialPageRoute(
+          builder: (_) => const AddBookToShelfScreen(),
+          settings: settings,
+        );
       case RoutePaths.profile:
         return MaterialPageRoute(
           builder: (_) => const ProfileScreen(),

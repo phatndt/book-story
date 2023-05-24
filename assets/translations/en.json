@@ -24,5 +24,6 @@
   "user_is_null_login_again": "User is null. Please login again!",
   "update_book_shelf_success": "Update book shelf successfully",
   "update_book_shelf_button": "Update the book shelf",
-  "add_book_to_book_shelf": "Add book on shelf"
+  "add_book_to_book_shelf": "Add book on shelf",
+  "add_book_to_book_shelf_success": "Add book on shelf successfully"
 }

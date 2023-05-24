@@ -10,4 +10,5 @@ abstract class BookShelfRepo {
   Future<Either<Exception, BookShelfModel>> getBookShelfById(String userId, String bookShelfId);
   Future<Either<Exception, bool>> deleteBookShelf(String userId, String bookShelfId);
   Future<Either<Exception, bool>> updateBookShelf(String userId, String bookShelfId, String name, String color);
+  Future<Either<Exception, bool>> updateBooks(String userId, String bookShelfId, List<String> bookIds);
 }

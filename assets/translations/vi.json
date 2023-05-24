@@ -24,5 +24,6 @@
   "user_is_null_login_again": "Không tìm thấy người dùng. Vui lòng đăng nhập lại",
   "update_book_shelf_success": "Cập nhập kệ sách thành công",
   "update_book_shelf_button": "Cập nhập kệ sách",
-  "add_book_to_book_shelf": "Thêm sách vào kệ"
+  "add_book_to_book_shelf": "Thêm sách vào kệ",
+  "add_book_to_book_shelf_success": "Thêm sách vào kệ thành công"
 }

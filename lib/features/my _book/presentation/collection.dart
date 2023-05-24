@@ -123,7 +123,7 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
               duration: const Duration(milliseconds: 320),
               height: isExpanded ? 80.h : 0.h,
               child: Container(
-                color : S.colors.white,
+                color: S.colors.white,
                 padding: EdgeInsets.symmetric(horizontal: 12.w),
                 child: Center(
                   child: CustomTextFormField(
@@ -198,7 +198,60 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
           height: 8.h,
         ),
         itemBuilder: (context, index) {
-          return BookWidget(book: books![index]);
+          return BookWidget(
+            book: books![index],
+            onTap: () {
+              Navigator.pushNamed(context, RoutePaths.bookDetail,
+                  arguments: books![index].id);
+            },
+            onLongPress: () {
+              showBookBottomSheet(context, books![index].id);
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  showBookBottomSheet(BuildContext context, String bookId) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => Wrap(children: [
+        ListTile(
+          leading: const Icon(Icons.edit),
+          title: const Text('Edit this book'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, RoutePaths.editBook,
+                arguments: bookId);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.delete),
+          title: const Text('Delete this book'),
+          onTap: () {
+            Navigator.pop(context);
+            showConfirmDeleteBookDialog(context, bookId);
+          },
+        ),
+      ]),
+    );
+  }
+
+  showConfirmDeleteBookDialog(BuildContext context, String bookId) {
+    showDialog(
+      context: context,
+      builder: (context) => BasicAlertDialog(
+        title: "Delete this book?",
+        content: "You want to delete this book",
+        negativeButton: () {
+          Navigator.pop(context);
+        },
+        positiveButton: () {
+          Navigator.pop(context);
+          ref
+              .watch(myBookStateNotifierProvider.notifier)
+              .deleteBook(bookId);
         },
       ),
     );
@@ -206,12 +259,12 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
 }
 
 class BookWidget extends ConsumerStatefulWidget {
-  const BookWidget({
-    Key? key,
-    required this.book,
-  }) : super(key: key);
+  const BookWidget({Key? key, required this.book, this.onTap, this.onLongPress})
+      : super(key: key);
 
   final Book book;
+  final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
 
   @override
   ConsumerState createState() => _BookWidgetState();
@@ -221,13 +274,8 @@ class _BookWidgetState extends ConsumerState<BookWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, RoutePaths.bookDetail,
-            arguments: widget.book.id);
-      },
-      onLongPress: () {
-        showBottomSheet(context, widget.book.id);
-      },
+      onTap: widget.onTap,
+      onLongPress: widget.onLongPress,
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       child: SizedBox(
@@ -301,50 +349,6 @@ class _BookWidgetState extends ConsumerState<BookWidget> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  showBottomSheet(BuildContext context, String bookId) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => Wrap(children: [
-        ListTile(
-          leading: const Icon(Icons.edit),
-          title: const Text('Edit this book'),
-          onTap: () {
-            Navigator.pop(context);
-            Navigator.pushNamed(context, RoutePaths.editBook,
-                arguments: bookId);
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.delete),
-          title: const Text('Delete this book'),
-          onTap: () {
-            Navigator.pop(context);
-            showConfirmDeleteBookDialog(context);
-          },
-        ),
-      ]),
-    );
-  }
-
-  showConfirmDeleteBookDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => BasicAlertDialog(
-        title: "Delete this book?",
-        content: "You want to delete this book",
-        negativeButton: () {
-          Navigator.pop(context);
-        },
-        positiveButton: () {
-          Navigator.pop(context);
-          ref
-              .watch(myBookStateNotifierProvider.notifier)
-              .deleteBook(widget.book.id);
-        },
       ),
     );
   }

@@ -23,6 +23,7 @@ import '../../../core/widget/dia_log.dart';
 import '../../../core/widget/snack_bar.dart';
 import '../../my _book/presentation/collection.dart';
 import '../di/book_shelf_module.dart';
+import 'add_book_to_shelf.dart';
 
 class BookShelfDetail extends ConsumerStatefulWidget {
   const BookShelfDetail({
@@ -272,11 +273,16 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
                   InkWell(
                     borderRadius: BorderRadius.circular(24.r),
                     onTap: () {
-                      Navigator.pushNamed(context, RoutePaths.addBookShelf);
+                      Navigator.pushNamed(
+                        context,
+                        RoutePaths.addBookToShelf,
+                        arguments: AddBookToShelfArgument(
+                            bookShelf!.booksList, bookShelf!.id),
+                      );
                     },
                     child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 12.w, vertical: 12.h),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
                       decoration: BoxDecoration(
                         color: S.colors.white,
                         borderRadius: BorderRadius.circular(24.r),
@@ -300,6 +306,9 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
                     height: 16.h,
                   ),
                   Expanded(child: _bodyBooks()),
+                  SizedBox(
+                    height: 16.h,
+                  ),
                   CustomElevatedButton(
                     onPressed: (nameController.text.trim() != bookShelf?.name ||
                             getHexColor(S.colors
@@ -379,5 +388,38 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
 
   String getHexColor(Color color) {
     return color.toString().split('(0x')[1].split(')')[0];
+  }
+
+  showPickBookBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => Consumer(
+        builder: (context, ref, widget) {
+          return ref.watch(getBooksByUserFutureProvider).when(
+                data: (data) {
+                  if (data.isEmpty) {
+                    return const Text("Không có dữ liệu");
+                  }
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      ref.invalidate(getBooksByUserFutureProvider);
+                    },
+                    child: ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          return CheckboxListTile(
+                            value: true,
+                            onChanged: (value) {},
+                            title: BookWidget(book: data[index]),
+                          );
+                        }),
+                  );
+                },
+                error: (error, stackTree) => Text(error.toString()),
+                loading: () => const CircularProgressIndicator(),
+              );
+        },
+      ),
+    );
   }
 }
