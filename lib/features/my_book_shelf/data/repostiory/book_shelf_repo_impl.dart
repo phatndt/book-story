@@ -137,4 +137,21 @@ class BookShelfRepoImpl extends BookShelfRepo {
       return left(Exception(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Exception, bool>> deleteBookFromShelf(String userId, String bookShelfId, List<String> bookIds) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .collection('book_shelf')
+          .doc(bookShelfId)
+          .update({
+        "books_list": bookIds,
+      });
+      return right(true);
+    } catch (e) {
+      return left(Exception(e.toString()));
+    }
+  }
 }

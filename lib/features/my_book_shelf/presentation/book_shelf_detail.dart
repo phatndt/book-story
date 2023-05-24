@@ -110,6 +110,13 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
         Navigator.pushNamedAndRemoveUntil(
             context, RoutePaths.main, (route) => false,
             arguments: true);
+      } else if (next is UIDeleteBookFromShelfSuccessState) {
+        ScaffoldMessenger.of(context).showSnackBar(SuccessSnackBar(
+          message: next.message,
+        ));
+        ref
+            .watch(bookShelfDetailStateNotifierProvider.notifier)
+            .getBookShelfList(bookShelf!.id);
       }
     });
     return SafeArea(
@@ -361,7 +368,20 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
         shrinkWrap: true,
         itemCount: books.length,
         itemBuilder: (context, index) {
-          return BookWidget(book: books[index]);
+          return BookWidget(
+              book: books[index],
+              onTap: () {
+                Navigator.pushNamed(context, RoutePaths.bookDetail,
+                    arguments: books[index].id);
+              },
+              onLongPress: () {
+                showConfirmDeleteBookFromBookShelfDialog(
+                  context,
+                  bookShelf!.id,
+                  bookShelf!.booksList,
+                  books[index].id,
+                );
+              });
         },
       ));
     }
@@ -386,40 +406,31 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
     );
   }
 
-  String getHexColor(Color color) {
-    return color.toString().split('(0x')[1].split(')')[0];
-  }
-
-  showPickBookBottomSheet(BuildContext context) {
-    showModalBottomSheet(
+  showConfirmDeleteBookFromBookShelfDialog(
+    BuildContext context,
+    String bookShelfId,
+    List<String> listBookId,
+    String bookId,
+  ) {
+    showDialog(
       context: context,
-      builder: (context) => Consumer(
-        builder: (context, ref, widget) {
-          return ref.watch(getBooksByUserFutureProvider).when(
-                data: (data) {
-                  if (data.isEmpty) {
-                    return const Text("Không có dữ liệu");
-                  }
-                  return RefreshIndicator(
-                    onRefresh: () async {
-                      ref.invalidate(getBooksByUserFutureProvider);
-                    },
-                    child: ListView.builder(
-                        itemCount: data.length,
-                        itemBuilder: (context, index) {
-                          return CheckboxListTile(
-                            value: true,
-                            onChanged: (value) {},
-                            title: BookWidget(book: data[index]),
-                          );
-                        }),
-                  );
-                },
-                error: (error, stackTree) => Text(error.toString()),
-                loading: () => const CircularProgressIndicator(),
-              );
+      builder: (context) => BasicAlertDialog(
+        title: 'delete_this_book_from_shelf_title'.tr(),
+        content: 'delete_this_book_from_shelf_description'.tr(),
+        negativeButton: () {
+          Navigator.pop(context);
+        },
+        positiveButton: () {
+          Navigator.pop(context);
+          ref
+              .watch(bookShelfDetailStateNotifierProvider.notifier)
+              .deleteBookFromShelf(bookShelfId, listBookId, bookId);
         },
       ),
     );
+  }
+
+  String getHexColor(Color color) {
+    return color.toString().split('(0x')[1].split(')')[0];
   }
 }

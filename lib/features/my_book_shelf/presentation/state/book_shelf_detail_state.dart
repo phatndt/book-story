@@ -80,6 +80,24 @@ class BookShelfDetailState extends StateNotifier<UIState> {
       state = UIUpdateBookShelfSuccessState('update_book_shelf_success'.tr());
     });
   }
+
+  deleteBookFromShelf(String bookShelfId, List<String> bookIds, String bookId) async {
+    if (FirebaseAuth.instance.currentUser == null) {
+      state = UIErrorState(Exception('user_is_null_login_again'.tr()));
+      return;
+    }
+    state = const UILoadingState(true);
+    final updatedListBookIds = bookIds;
+    updatedListBookIds.remove(bookId);
+    final result = await _bookShelfRepo.deleteBookFromShelf(
+        FirebaseAuth.instance.currentUser!.uid, bookShelfId, updatedListBookIds);
+    state = const UILoadingState(false);
+    result.fold((l) {
+      state = UIErrorState(l);
+    }, (r) {
+      state = UIDeleteBookFromShelfSuccessState('delete_this_book_from_shelf_successfully'.tr());
+    });
+  }
 }
 
 class UISuccessLoadBookList extends UIState {
@@ -94,5 +112,11 @@ class UIDeleteBookShelfSuccessState extends UIState {
 class UIUpdateBookShelfSuccessState extends UIState {
   const UIUpdateBookShelfSuccessState(this.message) : super(); final String message;
 }
+
+class UIDeleteBookFromShelfSuccessState extends UIState {
+  const UIDeleteBookFromShelfSuccessState(this.message) : super(); final String message;
+}
+
+
 
 

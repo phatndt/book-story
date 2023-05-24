@@ -25,5 +25,8 @@
   "update_book_shelf_success": "Update book shelf successfully",
   "update_book_shelf_button": "Update the book shelf",
   "add_book_to_book_shelf": "Add book on shelf",
-  "add_book_to_book_shelf_success": "Add book on shelf successfully"
+  "add_book_to_book_shelf_success": "Add book on shelf successfully",
+  "delete_this_book_from_shelf_title": "Delete this book from shelf?",
+  "delete_this_book_from_shelf_description": "You want to delete this book from shelf?",
+  "delete_this_book_from_shelf_successfully": "Delete this book from shelf successfully"
 }

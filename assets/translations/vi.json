@@ -25,5 +25,8 @@
   "update_book_shelf_success": "Cập nhập kệ sách thành công",
   "update_book_shelf_button": "Cập nhập kệ sách",
   "add_book_to_book_shelf": "Thêm sách vào kệ",
-  "add_book_to_book_shelf_success": "Thêm sách vào kệ thành công"
+  "add_book_to_book_shelf_success": "Thêm sách vào kệ thành công",
+  "delete_this_book_from_shelf_title": "Xoá sách khỏi kệ?",
+  "delete_this_book_from_shelf_description": "Bạn xác nhận xoá sách này khỏi kệ sách?",
+  "delete_this_book_from_shelf_successfully": "Xoá sách khỏi kệ thành công"
 }

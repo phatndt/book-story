@@ -233,7 +233,9 @@ class BookRepoImpl extends BookRepo {
           .collection('users')
           .doc(userId)
           .collection('books')
-          .where(FieldPath.documentId, whereIn: booksId).get();
+          .where(FieldPath.documentId, whereIn: booksId)
+          .where("is_deleted", isEqualTo: false)
+          .get();
       final books = result.docs
           .map((e) => BookModel.fromJsonIncludeId(e.data(), e.id))
           .toList();
