@@ -9,6 +9,7 @@ class RoutePaths {
 
   static const profile = '/profile';
   static const changePassword = '$profile/password';
+  static const editProfile = '$profile/editProfile';
 
   static const home = '/home';
   static const addBook = '$home/add_book';
@@ -23,6 +24,8 @@ class RoutePaths {
   static const searchBookShelf = '$bookShelf/searchBookShelf';
   static const bookShelfDetail = '$bookShelf/bookShelfDetail';
   static const addBookToShelf = '$bookShelfDetail/addBookToShelf';
+
+
 
   static const changeInformation = '/change_information';
 

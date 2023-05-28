@@ -28,5 +28,13 @@
   "add_book_to_book_shelf_success": "Add book on shelf successfully",
   "delete_this_book_from_shelf_title": "Delete this book from shelf?",
   "delete_this_book_from_shelf_description": "You want to delete this book from shelf?",
-  "delete_this_book_from_shelf_successfully": "Delete this book from shelf successfully"
+  "delete_this_book_from_shelf_successfully": "Delete this book from shelf successfully",
+  "update_profile_photo_url": "Update photo successfully",
+  "your_name": "Your name",
+  "your_name_not_empty": "Your name is not empty",
+  "you_name_at_least_one_character": "Your name is at least one character",
+  "update_profile_successfully": "Update profile successfully",
+  "same_display_name": "The new name cannot the same the old name",
+  "something_wrong": "Something wrong. Please try other!",
+  "update_profile_name_successfully": "Update display name successfully"
 }

@@ -6,6 +6,7 @@ import 'package:book_story/features/my_book_shelf/presentation/add_book_shelf.da
 import 'package:book_story/features/my_book_shelf/presentation/add_book_to_shelf.dart';
 import 'package:book_story/features/my_book_shelf/presentation/book_shelf_detail.dart';
 import 'package:book_story/features/my_book_shelf/presentation/search_book_shelf.dart';
+import 'package:book_story/features/profile/presentation/edit_profile_screen.dart';
 import 'package:book_story/features/profile/presentation/profile_screen.dart';
 import 'package:book_story/main_screen.dart';
 import 'package:book_story/features/my%20_book/presentation/add_book.dart';
@@ -94,6 +95,11 @@ class AppRouter {
       case RoutePaths.profile:
         return MaterialPageRoute(
           builder: (_) => const ProfileScreen(),
+          settings: settings,
+        );
+      case RoutePaths.editProfile:
+        return MaterialPageRoute(
+          builder: (_) => const EditProfileScreen(),
           settings: settings,
         );
       case RoutePaths.home:

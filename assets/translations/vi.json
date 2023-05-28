@@ -28,5 +28,13 @@
   "add_book_to_book_shelf_success": "Thêm sách vào kệ thành công",
   "delete_this_book_from_shelf_title": "Xoá sách khỏi kệ?",
   "delete_this_book_from_shelf_description": "Bạn xác nhận xoá sách này khỏi kệ sách?",
-  "delete_this_book_from_shelf_successfully": "Xoá sách khỏi kệ thành công"
+  "delete_this_book_from_shelf_successfully": "Xoá sách khỏi kệ thành công",
+  "update_profile_photo_url": "Cập nhập ảnh thành công",
+  "your_name": "Tên của bạn",
+  "your_name_not_empty": "Tên của bạn không được để trống",
+  "you_name_at_least_one_character": "Tên của bạn ít nhất một kí tự",
+  "update_profile_successfully": "Cập nhập hồ sơ thành công",
+  "same_display_name": "Tên mới không được trùng tên cũ",
+  "something_wrong": "Có lỗi xảy ra. Vui lòng thử lại sau",
+  "update_profile_name_successfully": "Cập nhập tên thành công"
 }
