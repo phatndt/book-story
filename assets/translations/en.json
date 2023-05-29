@@ -36,5 +36,6 @@
   "update_profile_successfully": "Update profile successfully",
   "same_display_name": "The new name cannot the same the old name",
   "something_wrong": "Something wrong. Please try other!",
-  "update_profile_name_successfully": "Update display name successfully"
+  "update_profile_name_successfully": "Update display name successfully",
+  "save_data": "Save data"
 }

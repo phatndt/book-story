@@ -188,18 +188,22 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   ),
                   SizedBox(height: 24.h),
                   CustomElevatedButton(
-                    onPressed: () {
-                      if (formState.currentState!.validate()) {
-                        ref
-                            .watch(editProfileStateNotifierProvider.notifier)
-                            .updateProfile(
-                              pickedImageUrl,
-                              displayName,
-                              nameController.text.trim(),
-                            );
-                      }
-                    },
-                    child: Text('create_new_book_shelf'.tr()),
+                    onPressed: (pickedImageUrl == null &&
+                            displayName == nameController.text.trim())
+                        ? null
+                        : () {
+                            if (formState.currentState!.validate()) {
+                              ref
+                                  .watch(
+                                      editProfileStateNotifierProvider.notifier)
+                                  .updateProfile(
+                                    pickedImageUrl,
+                                    displayName,
+                                    nameController.text.trim(),
+                                  );
+                            }
+                          },
+                    child: Text('save_data'.tr()),
                   ),
                 ],
               ),

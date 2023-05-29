@@ -36,5 +36,6 @@
   "update_profile_successfully": "Cập nhập hồ sơ thành công",
   "same_display_name": "Tên mới không được trùng tên cũ",
   "something_wrong": "Có lỗi xảy ra. Vui lòng thử lại sau",
-  "update_profile_name_successfully": "Cập nhập tên thành công"
+  "update_profile_name_successfully": "Cập nhập tên thành công",
+  "save_data": "Lưu thông tin"
 }
