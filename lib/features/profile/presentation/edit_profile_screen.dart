@@ -45,6 +45,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     isShowLoading = false;
     flagDisplayName = false;
     nameController = TextEditingController();
+    displayName = "";
     isShowClearIconNameController = false;
     formState = GlobalKey<FormState>();
     imageUrl =

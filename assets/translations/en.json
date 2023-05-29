@@ -37,5 +37,12 @@
   "same_display_name": "The new name cannot the same the old name",
   "something_wrong": "Something wrong. Please try other!",
   "update_profile_name_successfully": "Update display name successfully",
-  "save_data": "Save data"
+  "save_data": "Save data",
+  "edit_profile": "Edit profile",
+  "change_password": "Change password",
+  "log_out": "Log out",
+  "empty": "",
+  "books": "Books",
+  "shelfs": "Shelfs",
+  "pdfs": "PDFs"
 }

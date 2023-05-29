@@ -58,7 +58,7 @@ class EditProfileState extends StateNotifier<UIState> {
   }
 
   updateProfile(String? photoUrl, String oldName, String newName) async {
-    if (newName == oldName) {
+    if (newName == oldName && photoUrl == null) {
       state = UIErrorState(Exception('same_display_name'.tr()));
     } else if (newName == oldName && photoUrl != null) {
       updateProfilePhotoUrl(photoUrl);

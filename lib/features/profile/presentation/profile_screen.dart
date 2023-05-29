@@ -1,12 +1,16 @@
 import 'dart:developer';
 
+import 'package:book_story/core/const.dart';
 import 'package:book_story/core/extension/function_extension.dart';
 import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/core/widget/app_bar.dart';
+import 'package:book_story/core/widget/custom_elevated_button.dart';
 import 'package:book_story/core/widget/snack_bar.dart';
 import 'package:book_story/features/profile/di/profile_module.dart';
 import 'package:book_story/features/profile/presentation/state/profile_state.dart';
+import 'package:book_story/features/profile/presentation/widget/profile_information_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +37,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   late String imageUrl;
   late String displayName;
   late bool isShowLoading;
+
   @override
   void initState() {
     super.initState();
@@ -71,38 +76,24 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       child: ModalProgressHUD(
         inAsyncCall: isShowLoading,
         child: Scaffold(
-          backgroundColor: S.colors.white,
+          backgroundColor: S.colors.scaffordBackgroundColor,
           appBar: CustomAppBar(
-            leading: IconButton(
-              tooltip: "Update read file book",
-              icon: Icon(
-                Icons.logout,
-                color: S.colors.primary_3,
-              ),
-              onPressed: () async {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, RoutePaths.logIn, (route) => false);
-                FirebaseAuth.instance.signOut();
-              },
+            leading: Image.asset(
+              'assets/logo/logo.png',
             ),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, RoutePaths.editProfile, arguments: displayName);
-                },
-                icon: Icon(
-                  Icons.mode_edit,
-                  color: S.colors.primary_3,
-                ),
-              )
-            ],
+            title: Text(
+              'Shelfie',
+              style: S.textStyles.heading3,
+            ),
           ),
-          body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
-            child: Column(
-              children: [
-                const SizedBox(width: double.infinity),
-                InkWell(
+          body: Column(
+            children: [
+              SizedBox(
+                height: 16.h,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: InkWell(
                   onTap: () {},
                   child: CachedNetworkImage(
                     height: 164.w,
@@ -141,7 +132,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     ),
                   ),
                 ),
-                Text(
+              ),
+              SizedBox(
+                height: 8.h,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: Text(
                   displayName,
                   style: TextStyle(
                     fontSize: 24.sp,
@@ -149,8 +146,76 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     color: S.colors.primary_3,
                   ),
                 ).isShow(displayName.isNotEmpty),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ProfileInformationWidget(
+                        title: 'books'.tr(), value: "value"),
+                    const ProfileInformationDivider(),
+                    ProfileInformationWidget(
+                        title: 'shelfs'.tr(), value: "value"),
+                    const ProfileInformationDivider(),
+                    ProfileInformationWidget(
+                        title: 'pdfs'.tr(), value: "value"),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 32.h,
+              ),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(24.r),
+                      topRight: Radius.circular(24.r),
+                    ),
+                    color: S.colors.white,
+                  ),
+                  child: ListView.separated(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 32.h),
+                    itemCount: ProfileFeature.values.length,
+                    separatorBuilder: (context, index) => Divider(
+                      color: S.colors.primary_3,
+                    ),
+                    itemBuilder: (context, index) {
+                      return CustomElevatedButton(
+                        elevation: 0,
+                        backgroundColor: S.colors.primary_5,
+                        child: Text(
+                          ProfileFeature.values[index].name,
+                        ),
+                        onPressed: () {
+                          switch (ProfileFeature.values[index]) {
+                            case ProfileFeature.editProfile:
+                              Navigator.pushNamed(
+                                  context, RoutePaths.editProfile,
+                                  arguments: displayName);
+                              break;
+                            case ProfileFeature.changePassword:
+                              Navigator.pushNamed(
+                                  context, RoutePaths.changePassword);
+                              break;
+                            case ProfileFeature.logOut:
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context, RoutePaths.logIn, (route) => false);
+                              FirebaseAuth.instance.signOut();
+                              break;
+                          }
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

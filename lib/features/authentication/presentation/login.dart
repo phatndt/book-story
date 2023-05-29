@@ -134,6 +134,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         },
                         hintText: "Email",
                         obscureText: false,
+                        inputType: TextInputType.emailAddress,
                         controller: emailController,
                         textInputAction: TextInputAction.next,
                         suffixIconData: isShowClearIconEmailController
