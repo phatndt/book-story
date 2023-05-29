@@ -11,12 +11,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/app_module.dart';
+import 'core/enviroment/app_env.dart';
 import 'core/navigation/app_route.dart';
 import 'core/colors/colors.dart';
 import 'core/navigation/route_paths.dart';
 import 'features/my_book_shelf/data/datasource/local/book_shelf_adapter.dart';
 
 void main() async {
+  AppEnvironment.setupEnv(Environment.prod);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
