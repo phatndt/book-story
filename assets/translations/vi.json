@@ -44,5 +44,7 @@
   "empty": "",
   "books": "Sách",
   "shelfs": "Kệ sách",
-  "pdfs": "PDFs"
+  "pdfs": "PDFs",
+  "wrong_password": "Mật khẩu không đúng",
+  "change_password_successfully": "Đổi mật khẩu thành công"
 }

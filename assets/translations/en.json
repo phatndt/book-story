@@ -44,5 +44,7 @@
   "empty": "",
   "books": "Books",
   "shelfs": "Shelfs",
-  "pdfs": "PDFs"
+  "pdfs": "PDFs",
+  "wrong_password": "Wrong password",
+  "change_password_successfully": "Change password successfully"
 }

@@ -16,9 +16,8 @@ class EditProfileState extends StateNotifier<UIState> {
     final result = await _profileRepo.updateProfilePhotoUrl(File(url));
     state = const UILoadingState(false);
     result.fold(
-          (l) => state = UIErrorState(l),
-          (r) =>
-      state = UIUpdateProfilePhotoUrlSuccessState(
+      (l) => state = UIErrorState(l),
+      (r) => state = UIUpdateProfilePhotoUrlSuccessState(
         'update_profile_photo_url'.tr(),
       ),
     );
@@ -29,8 +28,8 @@ class EditProfileState extends StateNotifier<UIState> {
     final result = await _profileRepo.getProfilePhotoUrl();
     state = const UILoadingState(false);
     result.fold(
-          (l) => state = UIErrorState(l),
-          (r) => state = UIGetProfilePhotoUrlSuccessState(r),
+      (l) => state = UIErrorState(l),
+      (r) => state = UIGetProfilePhotoUrlSuccessState(r),
     );
   }
 
@@ -39,8 +38,8 @@ class EditProfileState extends StateNotifier<UIState> {
     final result = await _profileRepo.getProfileName();
     state = const UILoadingState(false);
     result.fold(
-          (l) => state = UIErrorState(l),
-          (r) => state = UIGetProfileNameSuccessState(r),
+      (l) => state = UIErrorState(l),
+      (r) => state = UIGetProfileNameSuccessState(r),
     );
   }
 
@@ -49,9 +48,8 @@ class EditProfileState extends StateNotifier<UIState> {
     final result = await _profileRepo.updateProfileName(name);
     state = const UILoadingState(false);
     result.fold(
-          (l) => state = UIErrorState(l),
-          (r) =>
-      state = UIUpdateProfileNameSuccessState(
+      (l) => state = UIErrorState(l),
+      (r) => state = UIUpdateProfileNameSuccessState(
         'update_profile_name_successfully'.tr(),
       ),
     );
@@ -77,11 +75,11 @@ class EditProfileState extends StateNotifier<UIState> {
       bool isSuccess = false;
       for (var element in result) {
         element.fold(
-              (l) {
+          (l) {
             state = UIErrorState(l);
             isSuccess = false;
           },
-              (r) => isSuccess = true,
+          (r) => isSuccess = true,
         );
       }
       if (isSuccess) {

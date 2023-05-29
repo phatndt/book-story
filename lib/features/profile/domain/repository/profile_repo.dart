@@ -7,5 +7,6 @@ Future<Either<Exception, String>> getProfileName();
   Future<Either<Exception, String>> getProfilePhotoUrl();
   Future<Either<Exception, bool>> updateProfileName(String name);
   Future<Either<Exception, bool>> updateProfilePhotoUrl(File photo);
-  Future<void> updateProfilePassword(String password);
+  Future<Either<Exception, bool>> updateProfilePassword(String oldPassword, String newPassword);
+  Future<void> logOut();
 }

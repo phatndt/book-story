@@ -29,6 +29,10 @@ class ProfileState extends StateNotifier<UIState> {
           (r) => state = UIGetProfileNameSuccessState(r),
     );
   }
+
+  signOut() {
+    _profileRepo.logOut();
+  }
 }
 
 class UIGetProfilePhotoUrlSuccessState extends UIState {

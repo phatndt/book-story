@@ -206,7 +206,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             case ProfileFeature.logOut:
                               Navigator.pushNamedAndRemoveUntil(
                                   context, RoutePaths.logIn, (route) => false);
-                              FirebaseAuth.instance.signOut();
+                              ref.watch(profileStateNotifierProvider.notifier).signOut();
                               break;
                           }
                         },
