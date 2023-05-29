@@ -152,7 +152,7 @@ class _BookShelfScreenState extends ConsumerState<BookShelfScreen> {
           children: [
             RichText(
               text: TextSpan(
-                text: '${bookShelfList.length}',
+                text: '${bookShelfList.length} ',
                 style:
                     S.textStyles.heading3.copyWith(fontWeight: FontWeight.w600),
                 children: <TextSpan>[

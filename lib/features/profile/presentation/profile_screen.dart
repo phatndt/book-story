@@ -37,6 +37,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   late String imageUrl;
   late String displayName;
   late bool isShowLoading;
+  late String bookListLength;
+  late String bookShelfLength;
+  late String pdfs;
 
   @override
   void initState() {
@@ -45,9 +48,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     imageUrl =
         "https://firebasestorage.googleapis.com/v0/b/book-story-d79dd.appspot.com/o/local_profile_avatar.png?alt=media&token=e0224436-ab20-4c73-afa5-06784e090fae";
     displayName = '';
+    bookListLength = "0";
+    bookShelfLength = "0";
+    pdfs = "0";
     Future.delayed(Duration.zero, () {
       ref.watch(profileStateNotifierProvider.notifier).getProfilePhoto();
       ref.watch(profileStateNotifierProvider.notifier).getProfileName();
+      ref.watch(profileStateNotifierProvider.notifier).getProfileInformation();
     });
   }
 
@@ -69,9 +76,20 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         setState(() {
           displayName = next.name;
         });
+      } else if (next is UIBookShelfSuccessState) {
+        setState(() {
+          bookShelfLength = next.length.toString();
+        });
+      } else if (next is UIBookListSuccessState) {
+        setState(() {
+          bookListLength = next.length.toString();
+        });
+      } else if (next is UIPDFSuccessState) {
+        setState(() {
+          pdfs = next.length.toString();
+        });
       }
     });
-
     return SafeArea(
       child: ModalProgressHUD(
         inAsyncCall: isShowLoading,
@@ -156,13 +174,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ProfileInformationWidget(
-                        title: 'books'.tr(), value: "value"),
+                        title: 'books'.tr(), value: bookListLength),
                     const ProfileInformationDivider(),
                     ProfileInformationWidget(
-                        title: 'shelfs'.tr(), value: "value"),
+                        title: 'shelfs'.tr(), value: bookShelfLength),
                     const ProfileInformationDivider(),
                     ProfileInformationWidget(
-                        title: 'pdfs'.tr(), value: "value"),
+                        title: 'pdfs'.tr(), value: pdfs),
                   ],
                 ),
               ),
@@ -206,7 +224,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             case ProfileFeature.logOut:
                               Navigator.pushNamedAndRemoveUntil(
                                   context, RoutePaths.logIn, (route) => false);
-                              ref.watch(profileStateNotifierProvider.notifier).signOut();
+                              ref
+                                  .watch(profileStateNotifierProvider.notifier)
+                                  .signOut();
                               break;
                           }
                         },
