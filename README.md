@@ -75,6 +75,8 @@ Migrate from old project: https://github.com/xuanthai2/book-exchange
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+### **You can download app directly in App Gallery :** https://appgallery.huawei.com/app/C108305069
+
 ### 1. Authnetication
 - login screen, forgot password screen, register screen.
 
@@ -89,10 +91,8 @@ Migrate from old project: https://github.com/xuanthai2/book-exchange
 - Home screen, add book screen, book detail screen, read book screen
 
 <div align="center">
-  <img src="screens/my_book.png" alt="Logo" width="300" height="600">
   <img src="screens/add_book.png" alt="Logo" width="300" height="600">
   <img src="screens/book_detail.png" alt="Logo" width="300" height="600">
-  <img src="screens/read_book.png" alt="Logo" width="300" height="600">
 </div>
 
 ### 3. My shelf
