@@ -1,6 +1,6 @@
 import 'package:book_story/features/onboarding/presentation/state/splash_state.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/navigation/route_paths.dart';
 import '../di/on_boarding_module.dart';

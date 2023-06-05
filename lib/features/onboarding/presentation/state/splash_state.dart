@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:book_story/features/onboarding/domain/usecase/check_logged_use_case.dart';
 import 'package:book_story/features/onboarding/domain/usecase/get_is_first_time_app.dart';
 import 'package:book_story/features/onboarding/domain/usecase/save_is_first_time_app.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/presentation/state.dart';
 

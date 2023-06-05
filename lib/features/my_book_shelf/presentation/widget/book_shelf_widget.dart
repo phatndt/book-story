@@ -29,7 +29,7 @@ class BookShelfWidget extends StatelessWidget {
         elevation: 0.5,
         color: Color(int.parse("0x$color")),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24.r),
+          borderRadius: BorderRadius.circular(8.r),
         ),
         child: SizedBox(
           height: 104.h,

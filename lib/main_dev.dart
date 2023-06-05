@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,18 +22,18 @@ void main() async {
   await Hive.openBox<BookShelfModel>(bookShelf);
   final prefs = await SharedPreferences.getInstance();
   runApp(
-  EasyLocalization(
-  supportedLocales: const [
-  Locale.fromSubtags(languageCode: 'en'),
-  Locale.fromSubtags(languageCode: 'vi')
-  ],
-  path: 'assets/translations',
-  child: ProviderScope(
-  overrides: [
-  sharePreferences.overrideWithValue(prefs),
-  ],
-  child: const MyApp(),
-  ),
-  ),
+    EasyLocalization(
+      supportedLocales: const [
+        Locale.fromSubtags(languageCode: 'en'),
+        Locale.fromSubtags(languageCode: 'vi')
+      ],
+      path: 'assets/translations',
+      child: ProviderScope(
+        overrides: [
+          sharePreferences.overrideWithValue(prefs),
+        ],
+        child: const MyApp(),
+      ),
+    ),
   );
 }

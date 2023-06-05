@@ -233,7 +233,7 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
           Card(
             clipBehavior: Clip.antiAliasWithSaveLayer,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(8),
             ),
             elevation: 2,
             child: CachedNetworkImage(

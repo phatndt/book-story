@@ -1,8 +1,8 @@
 import 'package:book_story/main_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Application extends HookConsumerWidget {
+class Application extends ConsumerWidget {
   const Application({Key? key}) : super(key: key);
 
   @override

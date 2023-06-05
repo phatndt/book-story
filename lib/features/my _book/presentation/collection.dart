@@ -7,8 +7,8 @@ import 'package:book_story/features/my%20_book/domain/entity/book.dart';
 import 'package:book_story/features/my%20_book/presentation/state/my_book_state.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -80,6 +80,9 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
         appBar: AppBar(
           backgroundColor: S.colors.white,
           elevation: 0.5,
+          leading: Image.asset(
+            'assets/logo/logo.png',
+          ),
           title: Text(
             'Shelfie',
             style: S.textStyles.heading3,
@@ -249,9 +252,7 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
         },
         positiveButton: () {
           Navigator.pop(context);
-          ref
-              .watch(myBookStateNotifierProvider.notifier)
-              .deleteBook(bookId);
+          ref.watch(myBookStateNotifierProvider.notifier).deleteBook(bookId);
         },
       ),
     );
@@ -283,15 +284,15 @@ class _BookWidgetState extends ConsumerState<BookWidget> {
         width: double.infinity,
         child: Card(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(8),
           ),
           elevation: 0.5,
           child: Row(
             children: [
               ClipRRect(
                 borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(12),
-                  bottomLeft: Radius.circular(12),
+                  topLeft: Radius.circular(8),
+                  bottomLeft: Radius.circular(8),
                 ),
                 child: SizedBox(
                   width: 120.w,

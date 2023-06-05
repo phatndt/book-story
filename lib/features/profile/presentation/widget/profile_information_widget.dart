@@ -26,7 +26,7 @@ class ProfileInformationWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 8.h,
+          height: 4.h,
         ),
         Text(
           title,

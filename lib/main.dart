@@ -5,9 +5,9 @@ import 'package:book_story/features/my_book_shelf/data/model/book_shelf_model.da
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/app_module.dart';
@@ -37,7 +37,7 @@ void main() async {
         overrides: [
           sharePreferences.overrideWithValue(prefs),
         ],
-        child: MyApp(),
+        child: const MyApp(),
       ),
     ),
   );

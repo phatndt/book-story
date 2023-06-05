@@ -1,5 +1,5 @@
 import 'package:book_story/core/presentation/state.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/repository/auth_repo.dart';
 

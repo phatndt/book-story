@@ -94,7 +94,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       child: ModalProgressHUD(
         inAsyncCall: isShowLoading,
         child: Scaffold(
-          backgroundColor: S.colors.scaffordBackgroundColor,
+          backgroundColor: S.colors.white,
           appBar: CustomAppBar(
             leading: Image.asset(
               'assets/logo/logo.png',
@@ -152,7 +152,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ),
               ),
               SizedBox(
-                height: 8.h,
+                height: 16.h,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -168,24 +168,26 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               SizedBox(
                 height: 16.h,
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ProfileInformationWidget(
-                        title: 'books'.tr(), value: bookListLength),
-                    const ProfileInformationDivider(),
-                    ProfileInformationWidget(
-                        title: 'shelfs'.tr(), value: bookShelfLength),
-                    const ProfileInformationDivider(),
-                    ProfileInformationWidget(
-                        title: 'pdfs'.tr(), value: pdfs),
-                  ],
+              Container(color: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ProfileInformationWidget(
+                          title: 'books'.tr(), value: bookListLength),
+                      const ProfileInformationDivider(),
+                      ProfileInformationWidget(
+                          title: 'shelfs'.tr(), value: bookShelfLength),
+                      const ProfileInformationDivider(),
+                      ProfileInformationWidget(
+                          title: 'pdfs'.tr(), value: pdfs),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
-                height: 32.h,
+                height: 16.h,
               ),
               Expanded(
                 child: Container(
@@ -194,19 +196,19 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       topLeft: Radius.circular(24.r),
                       topRight: Radius.circular(24.r),
                     ),
-                    color: S.colors.white,
+                    color: S.colors.primary_1.withOpacity(0.3),
                   ),
                   child: ListView.separated(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 32.h),
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
                     itemCount: ProfileFeature.values.length,
-                    separatorBuilder: (context, index) => Divider(
-                      color: S.colors.primary_3,
+                    separatorBuilder: (context, index) => Container(
+                      height: 16.h,
                     ),
                     itemBuilder: (context, index) {
                       return CustomElevatedButton(
                         elevation: 0,
-                        backgroundColor: S.colors.primary_5,
+                        backgroundColor: S.colors.primary_3.withOpacity(0.8),
                         child: Text(
                           ProfileFeature.values[index].name,
                         ),
