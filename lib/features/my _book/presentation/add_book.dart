@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:book_story/core/presentation/state.dart';
 import 'package:book_story/core/widget/custom_elevated_button.dart';
 import 'package:book_story/core/widget/snack_bar.dart';
+import 'package:edge_detection/edge_detection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,6 +12,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../core/colors/colors.dart';
 import '../../../core/widget/custom_text_form_fill.dart';
@@ -187,15 +191,15 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                       inputType: TextInputType.name,
                       suffixIconData: isShowClearIconNameController
                           ? IconButton(
-                              splashColor: Colors.transparent,
-                              icon: const Icon(Icons.clear),
-                              onPressed: () {
-                                nameController.clear();
-                                setState(() {
-                                  isShowClearIconNameController = false;
-                                });
-                              },
-                            )
+                        splashColor: Colors.transparent,
+                        icon: const Icon(Icons.clear),
+                        onPressed: () {
+                          nameController.clear();
+                          setState(() {
+                            isShowClearIconNameController = false;
+                          });
+                        },
+                      )
                           : null,
                     ),
                     SizedBox(
@@ -230,15 +234,15 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                       inputType: TextInputType.text,
                       suffixIconData: isShowClearIconAuthorController
                           ? IconButton(
-                              splashColor: Colors.transparent,
-                              icon: const Icon(Icons.clear),
-                              onPressed: () {
-                                authorController.clear();
-                                setState(() {
-                                  isShowClearIconAuthorController = false;
-                                });
-                              },
-                            )
+                        splashColor: Colors.transparent,
+                        icon: const Icon(Icons.clear),
+                        onPressed: () {
+                          authorController.clear();
+                          setState(() {
+                            isShowClearIconAuthorController = false;
+                          });
+                        },
+                      )
                           : null,
                     ),
                     SizedBox(
@@ -265,15 +269,15 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                       inputType: TextInputType.text,
                       suffixIconData: isShowClearIconDescriptionController
                           ? IconButton(
-                              splashColor: Colors.transparent,
-                              icon: const Icon(Icons.clear),
-                              onPressed: () {
-                                descriptionController.clear();
-                                setState(() {
-                                  isShowClearIconDescriptionController = false;
-                                });
-                              },
-                            )
+                        splashColor: Colors.transparent,
+                        icon: const Icon(Icons.clear),
+                        onPressed: () {
+                          descriptionController.clear();
+                          setState(() {
+                            isShowClearIconDescriptionController = false;
+                          });
+                        },
+                      )
                           : null,
                     ),
                     SizedBox(
@@ -313,18 +317,18 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                         children: [
                           isShowClearIconLanguageController
                               ? InkWell(
-                                  child: const Icon(Icons.clear),
-                                  onTap: () {
-                                    languageController.clear();
-                                    setState(() {
-                                      isShowClearIconLanguageController = false;
-                                    });
-                                  },
-                                )
+                            child: const Icon(Icons.clear),
+                            onTap: () {
+                              languageController.clear();
+                              setState(() {
+                                isShowClearIconLanguageController = false;
+                              });
+                            },
+                          )
                               : const SizedBox(
-                                  height: 0,
-                                  width: 0,
-                                ),
+                            height: 0,
+                            width: 0,
+                          ),
                           IconButton(
                               padding: const EdgeInsets.only(),
                               splashColor: Colors.transparent,
@@ -372,18 +376,18 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                         children: [
                           isShowClearIconCategoryController
                               ? InkWell(
-                                  child: const Icon(Icons.clear),
-                                  onTap: () {
-                                    categoryController.clear();
-                                    setState(() {
-                                      isShowClearIconCategoryController = false;
-                                    });
-                                  },
-                                )
+                            child: const Icon(Icons.clear),
+                            onTap: () {
+                              categoryController.clear();
+                              setState(() {
+                                isShowClearIconCategoryController = false;
+                              });
+                            },
+                          )
                               : const SizedBox(
-                                  height: 0,
-                                  width: 0,
-                                ),
+                            height: 0,
+                            width: 0,
+                          ),
                           IconButton(
                               padding: const EdgeInsets.only(),
                               splashColor: Colors.transparent,
@@ -433,13 +437,13 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                           ref
                               .watch(addBookStateNotifierProvider.notifier)
                               .addBook(
-                                  nameController.text,
-                                  authorController.text,
-                                  descriptionController.text,
-                                  languageController.text,
-                                  releaseYearController.text,
-                                  categoryController.text,
-                                  imagePath);
+                              nameController.text,
+                              authorController.text,
+                              descriptionController.text,
+                              languageController.text,
+                              releaseYearController.text,
+                              categoryController.text,
+                              imagePath);
                         }
                       },
                     ),
@@ -527,69 +531,196 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
         );
       },
     ).then((value) {
-      if(releaseYearController.text.isEmpty) {
+      if (releaseYearController.text.isEmpty) {
         releaseYearController.text = selectedDate.year.toString();
       }
     });
   }
 
-  void showImageSourceActionSheet(BuildContext context) {
-    if (Platform.isIOS) {
-      showCupertinoModalPopup(
-        context: context,
-        builder: (context) => CupertinoActionSheet(
-          actions: [
-            CupertinoActionSheetAction(
-              child: const Text('Camera'),
-              onPressed: () {
-                Navigator.pop(context);
-                selectImageSource(ImageSource.camera);
-              },
-            ),
-            CupertinoActionSheetAction(
-              child: const Text('Gallery'),
-              onPressed: () {
-                Navigator.pop(context);
-                selectImageSource(ImageSource.gallery);
-              },
-            )
-          ],
-        ),
-      );
-    } else {
-      showModalBottomSheet(
-        context: context,
-        builder: (context) => Wrap(children: [
-          ListTile(
-            leading: const Icon(Icons.camera_alt),
-            title: const Text('Camera'),
-            onTap: () {
-              Navigator.pop(context);
-              selectImageSource(ImageSource.camera);
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.photo_album),
-            title: const Text('Gallery'),
-            onTap: () {
-              Navigator.pop(context);
-              selectImageSource(ImageSource.gallery);
-            },
-          ),
-        ]),
-      );
+  void showImageSourceActionSheet(BuildContext context) async {
+    var status = await Permission.camera.status;
+    if (status.isDenied || status.isPermanentlyDenied) {
+      await showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text("Permission"),
+              content: const Text(
+                  "Permission is denied! Please allow permission to access storage"),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Cancel")),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      openAppSettings();
+                    },
+                    child: const Text("Ok"))
+              ],
+            );
+          });
+    } else if (status.isGranted) {
+      if (Platform.isIOS) {
+        showCupertinoModalPopup(
+          context: context,
+          builder: (context) =>
+              CupertinoActionSheet(
+                actions: [
+                  CupertinoActionSheetAction(
+                    child: const Text('Camera'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                      selectImageSource(context, ImageSource.camera);
+                    },
+                  ),
+                  CupertinoActionSheetAction(
+                    child: const Text('Gallery'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                      selectImageSourceFromGallery(context);
+                    },
+                  )
+                ],
+              ),
+        );
+      } else {
+        showModalBottomSheet(
+          context: context,
+          builder: (context) =>
+              Wrap(children: [
+                ListTile(
+                  leading: const Icon(Icons.camera_alt),
+                  title: const Text('Camera edge detection'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    selectImageSource(context, null);
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.camera_alt),
+                  title: const Text('Camera'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    selectImageSource(context, ImageSource.camera);
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.photo_album),
+                  title: const Text('Gallery'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    selectImageSourceFromGallery(context);
+                  },
+                ),
+              ]),
+        );
+      }
     }
   }
 
-  void selectImageSource(ImageSource imageSource) async {
-    final pickedImage = await ImagePicker().pickImage(source: imageSource);
-    if (pickedImage == null) {
-      return;
+  void selectImageSource(BuildContext context, ImageSource? imageSource) async {
+    var status = await Permission.storage.status;
+    if (status.isDenied || status.isPermanentlyDenied) {
+      await showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text("Permission"),
+              content: const Text(
+                  "Permission is denied! Please allow permission to access storage"),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Cancel")),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      openAppSettings();
+                    },
+                    child: const Text("Ok"))
+              ],
+            );
+          });
+    } else if (status.isGranted) {
+      if (imageSource != null) {
+        final pickedImage = await ImagePicker().pickImage(source: imageSource);
+        if (pickedImage == null) {
+          return;
+        }
+        setState(() {
+          decorationImage = DecorationImage(
+              image: FileImage(File(pickedImage.path)), fit: BoxFit.fill);
+          imagePath = pickedImage.path;
+        });
+      } else {
+        String imagePath = join((await getApplicationSupportDirectory()).path,
+            "${(DateTime
+                .now()
+                .millisecondsSinceEpoch / 1000).round()}.jpeg");
+        try {
+          //Make sure to await the call to detectEdge.
+          bool success = await EdgeDetection.detectEdge(
+            imagePath,
+            canUseGallery: true,
+            androidScanTitle: 'Scanning',
+            androidCropTitle: 'Crop',
+            androidCropBlackWhiteTitle: 'Black White',
+            androidCropReset: 'Reset',
+          ); if (success) {
+            setState(() {
+              decorationImage = DecorationImage(
+                  image: FileImage(File(imagePath)), fit: BoxFit.fill);
+              this.imagePath = imagePath;
+            });
+          }
+        } catch (e) {
+          print(e);
+        }
+      }
     }
-    setState(() {
-      decorationImage = DecorationImage(
-          image: FileImage(File(pickedImage.path)), fit: BoxFit.fill);
-      imagePath = pickedImage.path;
-    });
+  }
+
+  void selectImageSourceFromGallery(BuildContext context) async {
+    var status = await Permission.storage.status;
+    if (status.isDenied || status.isPermanentlyDenied) {
+      await showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text("Permission"),
+              content: const Text(
+                  "Permission is denied! Please allow permission to access storage"),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Cancel")),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      openAppSettings();
+                    },
+                    child: const Text("Ok"))
+              ],
+            );
+          });
+    } else if (status.isGranted) {
+      final pickedImage =
+      await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (pickedImage == null) {
+        return;
+      }
+      setState(() {
+        decorationImage = DecorationImage(
+            image: FileImage(File(pickedImage.path)), fit: BoxFit.fill);
+        imagePath = pickedImage.path;
+      });
+    }
   }
 }

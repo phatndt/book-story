@@ -137,13 +137,6 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
                   final path = await pickedFile(book!.id);
                   if (path != null) {
                     uploadFile(path, book!.id);
-                  } else {
-                    final errorSnackbar = ErrorSnackBar(
-                      message: "Something wrong! Please try again",
-                    );
-                    if (!mounted) return;
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(errorSnackbar);
                   }
                 },
               )
@@ -327,13 +320,6 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
                     final path = await pickedFile(book!.id);
                     if (path != null) {
                       uploadFile(path, book!.id);
-                    } else {
-                      final errorSnackbar = ErrorSnackBar(
-                       message: "Something wrong! Please try again",
-                      );
-                      if (!mounted) return;
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(errorSnackbar);
                     }
                   },
             child: Text(book!.readFile.isNotEmpty ? "Read" : "Add file"),
