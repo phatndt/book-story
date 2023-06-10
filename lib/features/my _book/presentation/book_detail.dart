@@ -92,7 +92,7 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Uploading'.tr(),
+              'uploading'.tr(),
               style: TextStyle(
                 color: S.colors.primary_3,
                 fontSize: 16.sp,
@@ -270,24 +270,32 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
           SizedBox(
             height: 16.h,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              BookDetailAttributeWidget(
-                title: 'category'.tr(),
-                value: book!.category,
-              ),
-              const BookDetailDivider(),
-              BookDetailAttributeWidget(
-                title: 'language'.tr(),
-                value: book!.language,
-              ),
-              const BookDetailDivider(),
-              BookDetailAttributeWidget(
-                title: 'release'.tr(),
-                value: book!.releaseDate,
-              ),
-            ],
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: BookDetailAttributeWidget(
+                    title: 'category'.tr(),
+                    value: book!.category,
+                  ),
+                ),
+                const BookDetailDivider(),
+                Expanded(
+                  child: BookDetailAttributeWidget(
+                    title: 'language'.tr(),
+                    value: book!.language,
+                  ),
+                ),
+                const BookDetailDivider(),
+                Expanded(
+                  child: BookDetailAttributeWidget(
+                    title: 'release'.tr(),
+                    value: book!.releaseDate,
+                  ),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 16.h,
@@ -324,7 +332,8 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
                       uploadFile(path, book!.id);
                     }
                   },
-            child: Text(book!.readFile.isNotEmpty ? 'read'.tr() : 'add_file'.tr()),
+            child:
+                Text(book!.readFile.isNotEmpty ? 'read'.tr() : 'add_file'.tr()),
           )
         ],
       ),
@@ -344,18 +353,19 @@ class BookDetailAttributeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           title,
+          textAlign: TextAlign.center,
           style: S.textStyles.heading3.copyWith(
             fontWeight: FontWeight.bold,
             color: S.colors.primary_3,
           ),
         ),
-        SizedBox(
-          height: 8.h,
+        Expanded(
+          child: SizedBox(
+            height: 8.h,
+          ),
         ),
         Text(
           value,
