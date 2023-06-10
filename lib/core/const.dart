@@ -9,6 +9,7 @@ const bookShelf = 'book_shelf';
 enum ProfileFeature {
   editProfile,
   changePassword,
+  changeLanguage,
   logOut,
 }
 
@@ -20,6 +21,8 @@ extension ProfileFeatureExtension on ProfileFeature {
         return 'edit_profile'.tr();
       case ProfileFeature.changePassword:
         return 'change_password'.tr();
+      case ProfileFeature.changeLanguage:
+        return 'change_language'.tr();
       case ProfileFeature.logOut:
         return 'log_out'.tr();
       default:

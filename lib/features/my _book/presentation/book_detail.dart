@@ -8,6 +8,7 @@ import 'package:book_story/features/my%20_book/di/my_book_module.dart';
 import 'package:book_story/features/my%20_book/domain/entity/book.dart';
 import 'package:book_story/features/my%20_book/presentation/state/book_detail_state.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -74,7 +75,7 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
           isShowLoading = false;
         });
         final snackBar = SuccessSnackBar(
-          message: "Update read file success!",
+          message: 'upload_read_file_success'.tr(),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         ref.watch(getBookDetailStateNotifierProvider.notifier).getBookDetail(
@@ -91,7 +92,7 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Uploading...",
+              'Uploading'.tr(),
               style: TextStyle(
                 color: S.colors.primary_3,
                 fontSize: 16.sp,
@@ -128,7 +129,7 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
             ),
             actions: [
               IconButton(
-                tooltip: "Update read file book",
+                tooltip: 'update_read_file_book'.tr(),
                 icon: Icon(
                   Icons.edit_note,
                   color: S.colors.primary_3,
@@ -156,21 +157,20 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: const Text("Permission"),
-              content: const Text(
-                  "Permission is denied! Please allow permission to access storage"),
+              title: Text('permission'.tr()),
+              content: Text('permission_storage_denies'.tr()),
               actions: [
                 TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text("Cancel")),
+                    child: Text('cancel'.tr())),
                 TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                       openAppSettings();
                     },
-                    child: const Text("Ok"))
+                    child: Text('ok'.tr()))
               ],
             );
           });
@@ -180,7 +180,7 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
         allowedExtensions: ['jpg', 'pdf', 'doc'],
       );
       if (result != null && result.files.single.path != null) {
-       return result.files.single.path;
+        return result.files.single.path;
       } else {
         return null;
       }
@@ -194,22 +194,24 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text("Add file"),
-            content: const Text("You want to link this file to the book"),
+            title: Text('add_file'.tr()),
+            content: Text('you_want_to_link_this_file_to_the_book'.tr()),
             actions: [
               TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text("Cancel")),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('cancel'.tr()),
+              ),
               TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    ref
-                        .watch(getBookDetailStateNotifierProvider.notifier)
-                        .addReadFileOfBook(bookId, file);
-                  },
-                  child: const Text("Ok"))
+                onPressed: () {
+                  Navigator.pop(context);
+                  ref
+                      .watch(getBookDetailStateNotifierProvider.notifier)
+                      .addReadFileOfBook(bookId, file);
+                },
+                child: Text('ok'.tr()),
+              )
             ],
           );
         });
@@ -272,17 +274,17 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               BookDetailAttributeWidget(
-                title: "Category",
+                title: 'category'.tr(),
                 value: book!.category,
               ),
               const BookDetailDivider(),
               BookDetailAttributeWidget(
-                title: "Language",
+                title: 'language'.tr(),
                 value: book!.language,
               ),
               const BookDetailDivider(),
               BookDetailAttributeWidget(
-                title: "Release",
+                title: 'release'.tr(),
                 value: book!.releaseDate,
               ),
             ],
@@ -294,7 +296,7 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
             Column(
               children: [
                 Text(
-                  "Description",
+                  'description'.tr(),
                   style: S.textStyles.heading3
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -322,7 +324,7 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
                       uploadFile(path, book!.id);
                     }
                   },
-            child: Text(book!.readFile.isNotEmpty ? "Read" : "Add file"),
+            child: Text(book!.readFile.isNotEmpty ? 'read'.tr() : 'add_file'.tr()),
           )
         ],
       ),

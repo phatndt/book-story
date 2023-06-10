@@ -168,7 +168,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               SizedBox(
                 height: 16.h,
               ),
-              Container(color: Colors.white,
+              Container(
+                color: Colors.white,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
                   child: Row(
@@ -180,8 +181,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       ProfileInformationWidget(
                           title: 'shelfs'.tr(), value: bookShelfLength),
                       const ProfileInformationDivider(),
-                      ProfileInformationWidget(
-                          title: 'pdfs'.tr(), value: pdfs),
+                      ProfileInformationWidget(title: 'pdfs'.tr(), value: pdfs),
                     ],
                   ),
                 ),
@@ -222,6 +222,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             case ProfileFeature.changePassword:
                               Navigator.pushNamed(
                                   context, RoutePaths.changePassword);
+                              break;
+                            case ProfileFeature.changeLanguage:
+                              setState(() {
+                                context.setLocale(context.locale == const Locale('en')
+                                    ? const Locale('vi')
+                                    : const Locale('en'));
+                              });
                               break;
                             case ProfileFeature.logOut:
                               Navigator.pushNamedAndRemoveUntil(

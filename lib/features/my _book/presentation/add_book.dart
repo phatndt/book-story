@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:book_story/core/presentation/state.dart';
 import 'package:book_story/core/widget/custom_elevated_button.dart';
 import 'package:book_story/core/widget/snack_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:edge_detection/edge_detection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,8 +46,42 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
   late DecorationImage? decorationImage;
   late String? imagePath;
   late bool isShowLoading;
-  List<String> list = <String>['Vietnamese', 'English', 'Other'];
-  List<String> categories = <String>['Novel', 'Comic', 'Other'];
+  List<String> list = <String>[
+    'book_languages.en',
+    'book_languages.vi',
+    'book_languages.other'
+  ];
+  List<String> categories = <String>[
+    'book_categories.adventure',
+    'book_categories.art',
+    'book_categories.biography',
+    'book_categories.business',
+    'book_categories.comics',
+    'book_categories.cooking',
+    'book_categories.crime',
+    'book_categories.economics',
+    'book_categories.fantasy',
+    'book_categories.fiction',
+    'book_categories.health',
+    'book_categories.history',
+    'book_categories.horror',
+    'book_categories.humor',
+    'book_categories.kids',
+    'book_categories.music',
+    'book_categories.mystery',
+    'book_categories.nonfiction',
+    'book_categories.philosophy',
+    'book_categories.romance',
+    'book_categories.science',
+    'book_categories.poetry',
+    'book_categories.psychology',
+    'book_categories.self_help',
+    'book_categories.sports',
+    'book_categories.thriller',
+    'book_categories.travel',
+    'book_categories.religion',
+    'book_categories.other',
+  ];
   DateTime selectedDate = DateTime.now();
 
   @override
@@ -81,8 +116,8 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
           isShowLoading = next.loading;
         });
       } else if (next is UISuccessState) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SuccessSnackBar(message: "Add book successfully!"));
+        ScaffoldMessenger.of(context).showSnackBar(
+            SuccessSnackBar(message: 'add_book_successfully'.tr()));
         Navigator.pop(context);
         ref.watch(myBookStateNotifierProvider.notifier).getBook();
       } else if (next is UIErrorState) {
@@ -98,7 +133,7 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
           child: Scaffold(
             appBar: AppBar(
               title: Text(
-                "Create a new book",
+                'create_new_book'.tr(),
                 style: S.textStyles.heading3,
               ),
               leading: BackButton(
@@ -177,29 +212,29 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                       validator: (value) {
                         if (value != null) {
                           if (value.isEmpty) {
-                            return "Please enter your book's name";
+                            return 'please_enter_your_book_name'.tr();
                           } else if (value.length < 2) {
-                            return "Book's name must be at least 1 characters";
+                            return 'book_name_at_least_one_character'.tr();
                           }
                         }
                         return null;
                       },
-                      hintText: "Name",
+                      hintText: "book_name".tr(),
                       obscureText: false,
                       controller: nameController,
                       textInputAction: TextInputAction.next,
                       inputType: TextInputType.name,
                       suffixIconData: isShowClearIconNameController
                           ? IconButton(
-                        splashColor: Colors.transparent,
-                        icon: const Icon(Icons.clear),
-                        onPressed: () {
-                          nameController.clear();
-                          setState(() {
-                            isShowClearIconNameController = false;
-                          });
-                        },
-                      )
+                              splashColor: Colors.transparent,
+                              icon: const Icon(Icons.clear),
+                              onPressed: () {
+                                nameController.clear();
+                                setState(() {
+                                  isShowClearIconNameController = false;
+                                });
+                              },
+                            )
                           : null,
                     ),
                     SizedBox(
@@ -220,29 +255,29 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                       validator: (value) {
                         if (value != null) {
                           if (value.isEmpty) {
-                            return "Please enter book's author!";
+                            return 'please_enter_your_book_author'.tr();
                           } else if (value.length < 2) {
-                            return "Book's author must be at least 1 characters!";
+                            return 'book_author_at_least_one_character'.tr();
                           }
                         }
                         return null;
                       },
-                      hintText: "Author",
+                      hintText: "book_author".tr(),
                       obscureText: false,
                       controller: authorController,
                       textInputAction: TextInputAction.next,
                       inputType: TextInputType.text,
                       suffixIconData: isShowClearIconAuthorController
                           ? IconButton(
-                        splashColor: Colors.transparent,
-                        icon: const Icon(Icons.clear),
-                        onPressed: () {
-                          authorController.clear();
-                          setState(() {
-                            isShowClearIconAuthorController = false;
-                          });
-                        },
-                      )
+                              splashColor: Colors.transparent,
+                              icon: const Icon(Icons.clear),
+                              onPressed: () {
+                                authorController.clear();
+                                setState(() {
+                                  isShowClearIconAuthorController = false;
+                                });
+                              },
+                            )
                           : null,
                     ),
                     SizedBox(
@@ -260,7 +295,7 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                           });
                         }
                       },
-                      hintText: "Description (Optional)",
+                      hintText: "book_description".tr(),
                       obscureText: false,
                       maxLength: 1000,
                       maxLines: null,
@@ -269,15 +304,15 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                       inputType: TextInputType.text,
                       suffixIconData: isShowClearIconDescriptionController
                           ? IconButton(
-                        splashColor: Colors.transparent,
-                        icon: const Icon(Icons.clear),
-                        onPressed: () {
-                          descriptionController.clear();
-                          setState(() {
-                            isShowClearIconDescriptionController = false;
-                          });
-                        },
-                      )
+                              splashColor: Colors.transparent,
+                              icon: const Icon(Icons.clear),
+                              onPressed: () {
+                                descriptionController.clear();
+                                setState(() {
+                                  isShowClearIconDescriptionController = false;
+                                });
+                              },
+                            )
                           : null,
                     ),
                     SizedBox(
@@ -301,12 +336,12 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                       validator: (value) {
                         if (value != null) {
                           if (value.isEmpty) {
-                            return "Please enter book's language!";
+                            return 'please_enter_book_language'.tr();
                           }
                         }
                         return null;
                       },
-                      hintText: "Language",
+                      hintText: 'book_language'.tr(),
                       obscureText: false,
                       readOnly: true,
                       controller: languageController,
@@ -317,18 +352,18 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                         children: [
                           isShowClearIconLanguageController
                               ? InkWell(
-                            child: const Icon(Icons.clear),
-                            onTap: () {
-                              languageController.clear();
-                              setState(() {
-                                isShowClearIconLanguageController = false;
-                              });
-                            },
-                          )
+                                  child: const Icon(Icons.clear),
+                                  onTap: () {
+                                    languageController.clear();
+                                    setState(() {
+                                      isShowClearIconLanguageController = false;
+                                    });
+                                  },
+                                )
                               : const SizedBox(
-                            height: 0,
-                            width: 0,
-                          ),
+                                  height: 0,
+                                  width: 0,
+                                ),
                           IconButton(
                               padding: const EdgeInsets.only(),
                               splashColor: Colors.transparent,
@@ -360,12 +395,12 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                       validator: (value) {
                         if (value != null) {
                           if (value.isEmpty) {
-                            return "Please enter book's category!";
+                            return 'please_enter_book_category'.tr();
                           }
                         }
                         return null;
                       },
-                      hintText: "Category",
+                      hintText: "book_category".tr(),
                       obscureText: false,
                       readOnly: true,
                       controller: categoryController,
@@ -376,18 +411,18 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                         children: [
                           isShowClearIconCategoryController
                               ? InkWell(
-                            child: const Icon(Icons.clear),
-                            onTap: () {
-                              categoryController.clear();
-                              setState(() {
-                                isShowClearIconCategoryController = false;
-                              });
-                            },
-                          )
+                                  child: const Icon(Icons.clear),
+                                  onTap: () {
+                                    categoryController.clear();
+                                    setState(() {
+                                      isShowClearIconCategoryController = false;
+                                    });
+                                  },
+                                )
                               : const SizedBox(
-                            height: 0,
-                            width: 0,
-                          ),
+                                  height: 0,
+                                  width: 0,
+                                ),
                           IconButton(
                               padding: const EdgeInsets.only(),
                               splashColor: Colors.transparent,
@@ -408,12 +443,12 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                       validator: (value) {
                         if (value != null) {
                           if (value.isEmpty) {
-                            return "Please enter book's release year!";
+                            return 'please_enter_book_release_year'.tr();
                           }
                         }
                         return null;
                       },
-                      hintText: "Release year",
+                      hintText: "book_release".tr(),
                       obscureText: false,
                       readOnly: true,
                       controller: releaseYearController,
@@ -431,19 +466,19 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                       height: 24.h,
                     ),
                     CustomElevatedButton(
-                      child: const Center(child: Text("Add book")),
+                      child: Center(child: Text("add_book".tr())),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           ref
                               .watch(addBookStateNotifierProvider.notifier)
                               .addBook(
-                              nameController.text,
-                              authorController.text,
-                              descriptionController.text,
-                              languageController.text,
-                              releaseYearController.text,
-                              categoryController.text,
-                              imagePath);
+                                  nameController.text,
+                                  authorController.text,
+                                  descriptionController.text,
+                                  languageController.text,
+                                  releaseYearController.text,
+                                  categoryController.text,
+                                  imagePath);
                         }
                       },
                     ),
@@ -511,7 +546,7 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text("Pick release year"),
+          title: Text('select_release_year'.tr()),
           content: SizedBox(
             height: 200.h,
             width: 300.w,
@@ -538,111 +573,82 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
   }
 
   void showImageSourceActionSheet(BuildContext context) async {
+    if (Platform.isIOS) {
+      showCupertinoModalPopup(
+        context: context,
+        builder: (context) => CupertinoActionSheet(
+          actions: [
+            CupertinoActionSheetAction(
+              child: Text('camera'.tr()),
+              onPressed: () {
+                Navigator.pop(context);
+                selectImageSource(context, ImageSource.camera);
+              },
+            ),
+            CupertinoActionSheetAction(
+              child: Text('gallery'.tr()),
+              onPressed: () {
+                Navigator.pop(context);
+                selectImageSourceFromGallery(context);
+              },
+            )
+          ],
+        ),
+      );
+    } else {
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => Wrap(children: [
+          ListTile(
+            leading: const Icon(Icons.camera_alt),
+            title: Text('camera_edge_detector'.tr()),
+            onTap: () {
+              Navigator.pop(context);
+              selectImageSource(context, null);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.camera_alt),
+            title: Text('camera'.tr()),
+            onTap: () {
+              Navigator.pop(context);
+              selectImageSource(context, ImageSource.camera);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.photo_album),
+            title: Text('gallery'.tr()),
+            onTap: () {
+              Navigator.pop(context);
+              selectImageSourceFromGallery(context);
+            },
+          ),
+        ]),
+      );
+    }
+  }
+
+  void selectImageSource(BuildContext context, ImageSource? imageSource) async {
     var status = await Permission.camera.status;
     if (status.isDenied || status.isPermanentlyDenied) {
       await showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: const Text("Permission"),
-              content: const Text(
-                  "Permission is denied! Please allow permission to access storage"),
+              title: Text('permission'.tr()),
+              content: Text('permission_camera_denies'.tr()),
               actions: [
                 TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text("Cancel")),
+                    child: Text('cancel'.tr())),
                 TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                       openAppSettings();
                     },
-                    child: const Text("Ok"))
-              ],
-            );
-          });
-    } else if (status.isGranted) {
-      if (Platform.isIOS) {
-        showCupertinoModalPopup(
-          context: context,
-          builder: (context) =>
-              CupertinoActionSheet(
-                actions: [
-                  CupertinoActionSheetAction(
-                    child: const Text('Camera'),
-                    onPressed: () {
-                      Navigator.pop(context);
-                      selectImageSource(context, ImageSource.camera);
-                    },
-                  ),
-                  CupertinoActionSheetAction(
-                    child: const Text('Gallery'),
-                    onPressed: () {
-                      Navigator.pop(context);
-                      selectImageSourceFromGallery(context);
-                    },
-                  )
-                ],
-              ),
-        );
-      } else {
-        showModalBottomSheet(
-          context: context,
-          builder: (context) =>
-              Wrap(children: [
-                ListTile(
-                  leading: const Icon(Icons.camera_alt),
-                  title: const Text('Camera edge detection'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    selectImageSource(context, null);
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.camera_alt),
-                  title: const Text('Camera'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    selectImageSource(context, ImageSource.camera);
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.photo_album),
-                  title: const Text('Gallery'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    selectImageSourceFromGallery(context);
-                  },
-                ),
-              ]),
-        );
-      }
-    }
-  }
-
-  void selectImageSource(BuildContext context, ImageSource? imageSource) async {
-    var status = await Permission.storage.status;
-    if (status.isDenied || status.isPermanentlyDenied) {
-      await showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text("Permission"),
-              content: const Text(
-                  "Permission is denied! Please allow permission to access storage"),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text("Cancel")),
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      openAppSettings();
-                    },
-                    child: const Text("Ok"))
+                    child: Text('ok'.tr()))
               ],
             );
           });
@@ -659,27 +665,26 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
         });
       } else {
         String imagePath = join((await getApplicationSupportDirectory()).path,
-            "${(DateTime
-                .now()
-                .millisecondsSinceEpoch / 1000).round()}.jpeg");
+            "${(DateTime.now().millisecondsSinceEpoch / 1000).round()}.jpeg");
         try {
-          //Make sure to await the call to detectEdge.
           bool success = await EdgeDetection.detectEdge(
             imagePath,
             canUseGallery: true,
-            androidScanTitle: 'Scanning',
-            androidCropTitle: 'Crop',
-            androidCropBlackWhiteTitle: 'Black White',
-            androidCropReset: 'Reset',
-          ); if (success) {
+            androidScanTitle: 'scanning'.tr(),
+            androidCropTitle: 'crop'.tr(),
+            androidCropReset: 'reset'.tr(),
+          );
+          if (success) {
             setState(() {
               decorationImage = DecorationImage(
-                  image: FileImage(File(imagePath)), fit: BoxFit.fill);
+                image: FileImage(File(imagePath)),
+                fit: BoxFit.fill,
+              );
               this.imagePath = imagePath;
             });
           }
         } catch (e) {
-          print(e);
+          log(e.toString());
         }
       }
     }
@@ -692,27 +697,26 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: const Text("Permission"),
-              content: const Text(
-                  "Permission is denied! Please allow permission to access storage"),
+              title: Text('permission'.tr()),
+              content: Text('permission_storage_denies'.tr()),
               actions: [
                 TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text("Cancel")),
+                    child: Text('cancel'.tr())),
                 TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                       openAppSettings();
                     },
-                    child: const Text("Ok"))
+                    child: Text('oke'.tr()))
               ],
             );
           });
     } else if (status.isGranted) {
       final pickedImage =
-      await ImagePicker().pickImage(source: ImageSource.gallery);
+          await ImagePicker().pickImage(source: ImageSource.gallery);
       if (pickedImage == null) {
         return;
       }
