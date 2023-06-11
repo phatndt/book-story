@@ -1,5 +1,6 @@
 import 'package:book_story/features/my%20_book/domain/entity/book.dart';
 import 'package:book_story/features/my%20_book/domain/repository/book_repo.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,7 +15,7 @@ class ReadBookFileStateNotifier extends StateNotifier<UIState> {
   getBookDetail(String bookId) {
     state = const UILoadingState(true);
     if (FirebaseAuth.instance.currentUser == null) {
-      state = UIErrorState(Exception("User is null. Please login again!"));
+      state = UIErrorState(Exception('user_is_null_login_again'.tr()));
       return;
     }
     _bookRepo
@@ -36,7 +37,7 @@ class ReadBookFileStateNotifier extends StateNotifier<UIState> {
 
   updateReadFilePageBook(String bookId, int currentPage) async {
     if (FirebaseAuth.instance.currentUser == null) {
-      state = UIErrorState(Exception("User is null. Please login again!"));
+      state = UIErrorState(Exception('user_is_null_login_again'.tr()));
       return;
     }
     await _bookRepo.updateReadFilePageBook(FirebaseAuth.instance.currentUser!.uid, bookId, currentPage);

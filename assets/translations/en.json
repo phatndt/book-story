@@ -119,5 +119,57 @@
   "language": "Language",
   "release": "Release",
   "description": "Description",
-  "read": "Read"
+  "read": "Read",
+  "delete_book_successfully": "Delete this book successfully!",
+  "shelfie": "Shelfie",
+  "add_some_books_to_your_collection_now": "Add some books to your \ncollection now!",
+  "edit_book": "Edit this book",
+  "delete_book": "Delete this book",
+  "delete_this_book": "Delete this book?",
+  "delete_this_book_description": "You want to delete this book?",
+  "edit_book_successfully": "Edit this book successfully!",
+  "reset_to_first_page": "Reset to first page",
+  "save_current_page": "Save current page",
+  "page": "Page: ",
+  "loading_file": "Loading file: ",
+  "wc_1": "Experience reading and sharing \nbooks like never before",
+  "wc_2": "Login now!",
+  "wc_3": "Register now!",
+  "authentication": {
+    "login": {
+      "please_enter_your_email": "Please enter your email!",
+      "please_enter_valid_email": "Please enter a valid email!",
+      "email": "Email",
+      "please_enter_your_password": "Please enter your password!",
+      "password": "Password",
+      "forgot_password": "Forgot_password?",
+      "login": "Login",
+      "not_a_member": "Not a member? ",
+      "register_now": "Register now",
+      "please_enter_your_email_and_password": "Please enter your email and password!",
+      "welcome": "Welcome"
+    },
+    "forgot_password": {
+      "reset_password_successfully": "Reset password successfully! Please check your email!",
+      "forgot_password_1": "Reset_your_password",
+      "forgot_password_2": "Let we send you a email to reset password",
+      "confirm": "Confirm"
+    },
+    "register": {
+      "register successfully": "Register successfully!",
+      "register_1": "Sign up now!",
+      "please_enter_your_name": "Please enter your name",
+      "your_name_at_least_one_character": "Name must be at least one character",
+      "name": "Name",
+      "your_password_at_least_six_character": "Name must be at least six characters",
+      "password_not_matching": "Password does not match",
+      "confirm_password": "Confirm password",
+      "sign_up": "Sign up",
+      "register_2": "Already have an account? ",
+      "register_3": "Login now"
+    }
+  },
+  "image_is_empty": "Image is empty",
+  "upload_file_error": "Upload file error!",
+  "nothing_to_update": "Nothing to update"
 }

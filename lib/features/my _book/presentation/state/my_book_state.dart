@@ -1,5 +1,6 @@
 import 'package:book_story/features/my%20_book/domain/entity/book.dart';
 import 'package:book_story/features/my%20_book/domain/repository/book_repo.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,7 +15,7 @@ class MyBookStateNotifier extends StateNotifier<UIState> {
   getBook() {
     state = const UILoadingState(true);
     if (FirebaseAuth.instance.currentUser == null) {
-      state = UIErrorState(Exception("User is null. Please login again!"));
+      state = UIErrorState(Exception('user_is_null_login_again'.tr()));
       return;
     }
     _bookRepo.getBooksByUser(FirebaseAuth.instance.currentUser!.uid).then(
@@ -34,7 +35,7 @@ class MyBookStateNotifier extends StateNotifier<UIState> {
 
   deleteBook(String bookId) {
     if (FirebaseAuth.instance.currentUser == null) {
-      state = UIErrorState(Exception("User is null. Please login again!"));
+      state = UIErrorState(Exception('user_is_null_login_again'.tr()));
       return;
     }
     state = const UILoadingState(true);

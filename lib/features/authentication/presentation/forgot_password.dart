@@ -1,5 +1,6 @@
 import 'package:book_story/core/widget/custom_elevated_button.dart';
 import 'package:book_story/features/authentication/di/authentication_module.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,7 +47,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
           isLoading = false;
         });
         final snackBar = SuccessSnackBar(
-          message: "Reset password successfully! Please check your email!",
+          message: 'authentication.forgot_password.reset_password_successfully'.tr(),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         Navigator.pop(context);
@@ -83,7 +84,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                       height: S.size.length_40Vertical,
                     ),
                     Text(
-                      'Reset your password',
+                      'authentication.forgot_password.forgot_password_1'.tr(),
                       style: S.textStyles.heading1.copyWith(
                           fontWeight: FontWeight.bold,
                           color: S.colors.primary_3),
@@ -93,7 +94,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                       height: 8.h,
                     ),
                     Text(
-                      'Let we send you a email to reset password',
+                      'authentication.forgot_password.forgot_password_2'.tr(),
                       style: S.textStyles.paragraph,
                       textAlign: TextAlign.start,
                     ),
@@ -114,14 +115,14 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                       },
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please enter your email!";
+                          return 'authentication.login.please_enter_your_email'.tr();
                         } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
                             .hasMatch(value)) {
-                          return "Please enter a valid email";
+                          return 'authentication.login.please_enter_valid_email'.tr();
                         }
                         return null;
                       },
-                      hintText: "Email",
+                      hintText: 'authentication.login.email'.tr(),
                       obscureText: false,
                       controller: emailController,
                       textInputAction: TextInputAction.done,
@@ -145,7 +146,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                     CustomElevatedButton(
                       child: Center(
                         child: Text(
-                          "Confirm",
+                          'authentication.forgot_password.confirm'.tr(),
                           style: S.textStyles.button
                               .copyWith(color: S.colors.white),
                         ),

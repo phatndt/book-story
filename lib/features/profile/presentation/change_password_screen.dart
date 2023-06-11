@@ -110,9 +110,11 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
                       validator: (value) {
                         if (value != null) {
                           if (value.isEmpty) {
-                            return "Please enter your password";
+                            return 'authentication.login.please_enter_your_password'
+                                .tr();
                           } else if (value.length < 6) {
-                            return "Name must be at least 6 characters";
+                            return 'authentication.register.your_password_at_least_six_character'
+                                .tr();
                           }
                         }
                         return null;
@@ -120,7 +122,7 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
                       onFieldSubmitted: (value) {
                         confirmPasswordFocusNode.requestFocus();
                       },
-                      hintText: "Password",
+                      hintText: 'authentication.login.password'.tr(),
                       obscureText: isObscureOldPasswordController,
                       controller: oldPasswordController,
                       textInputAction: TextInputAction.next,
@@ -177,9 +179,11 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
                       validator: (value) {
                         if (value != null) {
                           if (value.isEmpty) {
-                            return "Please enter your password";
+                            return 'authentication.login.please_enter_your_password'
+                                .tr();
                           } else if (value.length < 6) {
-                            return "Name must be at least 6 characters";
+                            return 'authentication.register.your_password_at_least_six_character'
+                                .tr();
                           }
                         }
                         return null;
@@ -187,7 +191,7 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
                       onFieldSubmitted: (value) {
                         confirmNewPasswordFocusNode.requestFocus();
                       },
-                      hintText: "Password",
+                      hintText: 'authentication.login.password'.tr(),
                       obscureText: isObscurePasswordController,
                       controller: passwordController,
                       focusNode: confirmPasswordFocusNode,
@@ -244,16 +248,18 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
                       validator: (value) {
                         if (value != null) {
                           if (value.isEmpty) {
-                            return "Please enter your password";
+                            return 'authentication.login.please_enter_your_password'
+                                .tr();
                           } else if (value.length < 6) {
-                            return "Name must be at least 6 characters";
+                            return 'authentication.register.your_password_at_least_six_character'
+                                .tr();
                           } else if (value != passwordController.text) {
-                            return "Password does not match";
+                            return 'password_not_matching'.tr();
                           }
                         }
                         return null;
                       },
-                      hintText: "Confirm password",
+                      hintText: 'authentication.register.confirm_password'.tr(),
                       obscureText: isObscurePasswordConfirmController,
                       controller: passwordConfirmController,
                       focusNode: confirmNewPasswordFocusNode,

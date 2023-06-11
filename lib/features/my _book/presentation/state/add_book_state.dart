@@ -1,4 +1,5 @@
 import 'package:book_story/features/my%20_book/domain/repository/book_repo.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,7 +21,7 @@ class AddBookStateNotifier extends StateNotifier<UIState> {
     String? image,
   ) {
     if (image == null) {
-      state = UIErrorState(Exception("Image is empty"));
+      state = UIErrorState(Exception('image_is_empty'.tr()));
       return;
     }
     state = const UILoadingState(true);

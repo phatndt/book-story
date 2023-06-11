@@ -4,12 +4,12 @@ import 'dart:developer';
 import 'package:book_story/core/extension/function_extension.dart';
 import 'package:book_story/features/my%20_book/di/my_book_module.dart';
 import 'package:book_story/features/my%20_book/domain/entity/book.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:skeletons/skeletons.dart';
 
 import '../../../core/colors/colors.dart';
 import '../../../core/presentation/state.dart';
@@ -96,7 +96,7 @@ class _ReadBookFileState extends ConsumerState<ReadBookFile> {
                   Icons.lock_reset_outlined,
                   color: S.colors.primary_3,
                 ),
-                tooltip: "Reset to first page",
+                tooltip: 'reset_to_first_page'.tr(),
               ),
               TextButton(
                 onPressed: () {
@@ -104,7 +104,7 @@ class _ReadBookFileState extends ConsumerState<ReadBookFile> {
                       .watch(readBookFileStateNotifierProvider.notifier)
                       .updateReadFilePageBook(book!.id, currentPage);
                 },
-                child: const Text("Save current page"),
+                child: Text('reset_to_first_page'.tr()),
               ),
             ],
           ),
@@ -124,12 +124,12 @@ class _ReadBookFileState extends ConsumerState<ReadBookFile> {
                       color: S.colors.primary_3,
                       size: 32,
                     ),
-                    tooltip: "Reset to first page",
+                    tooltip: 'reset_to_first_page'.tr(),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.w),
                     child: Text(
-                      "Page: $currentPage/$totalPage",
+                      "${'page'.tr()} $currentPage/$totalPage",
                       style: S.textStyles.paragraph,
                     ),
                   ),
@@ -143,7 +143,7 @@ class _ReadBookFileState extends ConsumerState<ReadBookFile> {
                       color: S.colors.primary_3,
                       size: 32,
                     ),
-                    tooltip: "Reset to first page",
+                    tooltip: 'reset_to_first_page'.tr(),
                   ),
                 ],
               ),
@@ -182,9 +182,9 @@ class _ReadBookFileState extends ConsumerState<ReadBookFile> {
       ).cachedFromUrl(
         book!.readFile,
         placeholder: (double progress) =>
-            Center(child: Text('Loading file: $progress %')),
+            Center(child: Text('${'loading_file'.tr()} $progress %')),
         errorWidget: (dynamic error) =>
-            const Center(child: Text('Something wrong! Please try later')),
+            Center(child: Text('something_wrong'.tr())),
       ),
     );
   }

@@ -6,6 +6,7 @@ import 'package:book_story/features/my%20_book/di/my_book_module.dart';
 import 'package:book_story/features/my%20_book/domain/entity/book.dart';
 import 'package:book_story/features/my%20_book/presentation/state/my_book_state.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -69,7 +70,7 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
         });
       } else if (next is DeleteBookSuccess) {
         final snackBar = SuccessSnackBar(
-          message: "Delete this book successfully!",
+          message: 'delete_book_successfully'.tr(),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         ref.watch(myBookStateNotifierProvider.notifier).getBook();
@@ -84,7 +85,7 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
             'assets/logo/logo.png',
           ),
           title: Text(
-            'Shelfie',
+            'shelfie'.tr(),
             style: S.textStyles.heading3,
           ),
           actions: [
@@ -133,7 +134,7 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
                     focusNode: focusNode,
                     controller: searchController,
                     height: 50,
-                    hintText: "Search",
+                    hintText: 'search'.tr(),
                     obscureText: false,
                     onChanged: (value) {
                       if (value.isEmpty) {
@@ -183,7 +184,7 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
         padding: EdgeInsets.symmetric(horizontal: 12.h),
         child: Center(
           child: Text(
-            'Add some books to your \ncollection now!',
+            'add_some_books_to_your_collection_now'.tr(),
             style: S.textStyles.bigTitle,
             textAlign: TextAlign.center,
           ),
@@ -222,7 +223,7 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
       builder: (context) => Wrap(children: [
         ListTile(
           leading: const Icon(Icons.edit),
-          title: const Text('Edit this book'),
+          title: Text('edit_book'.tr()),
           onTap: () {
             Navigator.pop(context);
             Navigator.pushNamed(context, RoutePaths.editBook,
@@ -231,7 +232,7 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
         ),
         ListTile(
           leading: const Icon(Icons.delete),
-          title: const Text('Delete this book'),
+          title: Text('delete_book'.tr()),
           onTap: () {
             Navigator.pop(context);
             showConfirmDeleteBookDialog(context, bookId);
@@ -245,8 +246,8 @@ class _MyBookScreenState extends ConsumerState<MyBookScreen> {
     showDialog(
       context: context,
       builder: (context) => BasicAlertDialog(
-        title: "Delete this book?",
-        content: "You want to delete this book",
+        title: 'delete_this_book'.tr(),
+        content: 'delete_this_book_description'.tr(),
         negativeButton: () {
           Navigator.pop(context);
         },

@@ -1,6 +1,7 @@
 import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/core/widget/custom_elevated_button.dart';
 import 'package:book_story/features/onboarding/di/on_boarding_module.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,7 +31,7 @@ class WelcomeScreen extends ConsumerWidget {
                 height: S.size.length_50Vertical,
               ),
               Text(
-                'Experience reading and sharing \nbooks like never before',
+                'wc_1'.tr(),
                 style: S.textStyles.mediumTitle,
                 textAlign: TextAlign.center,
               ),
@@ -42,7 +43,7 @@ class WelcomeScreen extends ConsumerWidget {
                   CustomElevatedButton(
                     child: Center(
                       child: Text(
-                        "Login now!",
+                        'wc_2'.tr(),
                         style: S.textStyles.button,
                       ),
                     ),
@@ -63,7 +64,7 @@ class WelcomeScreen extends ConsumerWidget {
                     backgroundColor: S.colors.white,
                     child: Center(
                       child: Text(
-                        "Register now!",
+                        'wc_3'.tr(),
                         style: S.textStyles.button
                             .copyWith(color: S.colors.primary_3),
                       ),

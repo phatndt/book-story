@@ -1,4 +1,5 @@
 import 'package:book_story/features/authentication/di/authentication_module.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,6 +34,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   late bool isLoading;
   late FocusNode confirmPasswordFocusNode;
   late GlobalKey<FormState> _formKey;
+
   @override
   void initState() {
     super.initState();
@@ -62,7 +64,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         setState(() {
           isLoading = false;
         });
-        final snackBar = SuccessSnackBar(message: "Register successfully!",);
+        final snackBar = SuccessSnackBar(
+          message: 'authentication.register.successfully'.tr(),
+        );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         Navigator.pop(context);
       } else if (next is UIErrorState) {
@@ -99,8 +103,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       height: S.size.length_40Vertical,
                     ),
                     Text(
-                      'Sign up now!',
-                      style: S.textStyles.heading1.copyWith(fontWeight: FontWeight.bold, color: S.colors.primary_3),
+                      'authentication.register.register_1'.tr(),
+                      style: S.textStyles.heading1.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: S.colors.primary_3),
                       textAlign: TextAlign.start,
                     ),
                     SizedBox(
@@ -121,29 +127,31 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       validator: (value) {
                         if (value != null) {
                           if (value.isEmpty) {
-                            return "Please enter your name";
+                            return 'authentication.register.please_enter_your_name'
+                                .tr();
                           } else if (value.length < 2) {
-                            return "Name must be at least 1 characters";
+                            return 'authentication.register.your_name_at_least_one_character'
+                                .tr();
                           }
                         }
                         return null;
                       },
-                      hintText: "Name",
+                      hintText: 'authentication.register.name'.tr(),
                       obscureText: false,
                       controller: nameController,
                       textInputAction: TextInputAction.next,
                       inputType: TextInputType.name,
                       suffixIconData: isShowClearIconNameController
                           ? IconButton(
-                        splashColor: Colors.transparent,
-                        icon: const Icon(Icons.clear),
-                        onPressed: () {
-                          nameController.clear();
-                          setState(() {
-                            isShowClearIconNameController = false;
-                          });
-                        },
-                      )
+                              splashColor: Colors.transparent,
+                              icon: const Icon(Icons.clear),
+                              onPressed: () {
+                                nameController.clear();
+                                setState(() {
+                                  isShowClearIconNameController = false;
+                                });
+                              },
+                            )
                           : null,
                     ),
                     SizedBox(
@@ -163,14 +171,16 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       },
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please enter your email";
+                          return 'authentication.login.please_enter_your_email'
+                              .tr();
                         } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
                             .hasMatch(value)) {
-                          return "Please enter a valid email";
+                          return 'authentication.login.please_enter_valid_email'
+                              .tr();
                         }
                         return null;
                       },
-                      hintText: "Email",
+                      hintText: 'authentication.login.email'.tr(),
                       obscureText: false,
                       controller: emailController,
                       textInputAction: TextInputAction.next,
@@ -206,9 +216,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       validator: (value) {
                         if (value != null) {
                           if (value.isEmpty) {
-                            return "Please enter your password";
+                            return 'authentication.login.please_enter_your_password'
+                                .tr();
                           } else if (value.length < 6) {
-                            return "Name must be at least 6 characters";
+                            return 'authentication.register.your_password_at_least_six_character'
+                                .tr();
                           }
                         }
                         return null;
@@ -216,7 +228,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       onFieldSubmitted: (value) {
                         confirmPasswordFocusNode.requestFocus();
                       },
-                      hintText: "Password",
+                      hintText: 'authentication.login.password'.tr(),
                       obscureText: isObscurePasswordController,
                       controller: passwordController,
                       textInputAction: TextInputAction.next,
@@ -226,18 +238,18 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         children: [
                           isShowClearIconPasswordController
                               ? InkWell(
-                            child: const Icon(Icons.clear),
-                            onTap: () {
-                              passwordController.clear();
-                              setState(() {
-                                isShowClearIconPasswordController = false;
-                              });
-                            },
-                          )
+                                  child: const Icon(Icons.clear),
+                                  onTap: () {
+                                    passwordController.clear();
+                                    setState(() {
+                                      isShowClearIconPasswordController = false;
+                                    });
+                                  },
+                                )
                               : const SizedBox(
-                            height: 0,
-                            width: 0,
-                          ),
+                                  height: 0,
+                                  width: 0,
+                                ),
                           IconButton(
                             padding: const EdgeInsets.only(),
                             splashColor: Colors.transparent,
@@ -247,7 +259,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             onPressed: () {
                               setState(() {
                                 isObscurePasswordController =
-                                !isObscurePasswordController;
+                                    !isObscurePasswordController;
                               });
                             },
                           )
@@ -273,16 +285,18 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       validator: (value) {
                         if (value != null) {
                           if (value.isEmpty) {
-                            return "Please enter your password";
+                            return 'authentication.login.please_enter_your_password'
+                                .tr();
                           } else if (value.length < 6) {
-                            return "Name must be at least 6 characters";
+                            return 'authentication.register.your_password_at_least_six_character'
+                                .tr();
                           } else if (value != passwordController.text) {
-                            return "Password does not match";
+                            return 'password_not_matching'.tr();
                           }
                         }
                         return null;
                       },
-                      hintText: "Confirm password",
+                      hintText: 'authentication.register.confirm_password'.tr(),
                       obscureText: isObscurePasswordConfirmController,
                       controller: passwordConfirmController,
                       textInputAction: TextInputAction.done,
@@ -292,18 +306,19 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         children: [
                           isShowClearIconPasswordConfirmController
                               ? InkWell(
-                            child: const Icon(Icons.clear),
-                            onTap: () {
-                              passwordConfirmController.clear();
-                              setState(() {
-                                isShowClearIconPasswordConfirmController = false;
-                              });
-                            },
-                          )
+                                  child: const Icon(Icons.clear),
+                                  onTap: () {
+                                    passwordConfirmController.clear();
+                                    setState(() {
+                                      isShowClearIconPasswordConfirmController =
+                                          false;
+                                    });
+                                  },
+                                )
                               : const SizedBox(
-                            height: 0,
-                            width: 0,
-                          ),
+                                  height: 0,
+                                  width: 0,
+                                ),
                           IconButton(
                             padding: const EdgeInsets.only(),
                             splashColor: Colors.transparent,
@@ -313,7 +328,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             onPressed: () {
                               setState(() {
                                 isObscurePasswordConfirmController =
-                                !isObscurePasswordConfirmController;
+                                    !isObscurePasswordConfirmController;
                               });
                             },
                           )
@@ -326,15 +341,17 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     CustomElevatedButton(
                       child: Center(
                         child: Text(
-                          "Sign up",
+                          'authentication.register.sign_up'.tr(),
                           style: S.textStyles.button
                               .copyWith(color: S.colors.white),
                         ),
                       ),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          ref.read(registerStateNotifierProvider.notifier).register(
-                              emailController.text, passwordController.text, nameController.text);
+                          ref
+                              .read(registerStateNotifierProvider.notifier)
+                              .register(emailController.text,
+                                  passwordController.text, nameController.text);
                           setState(() {
                             isLoading = true;
                           });
@@ -348,18 +365,20 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Already have an account? ",
+                          'authentication.register.register_2'.tr(),
                           style: S.textStyles.paragraph,
                         ),
                         InkWell(
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: Text("Login now",
-                              style: S.textStyles.paragraph.copyWith(
-                                color: S.colors.primary_3,
-                                fontWeight: FontWeight.bold,
-                              )),
+                          child: Text(
+                            'authentication.register.register_3'.tr(),
+                            style: S.textStyles.paragraph.copyWith(
+                              color: S.colors.primary_3,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ],
                     ),

@@ -6,12 +6,17 @@ import 'package:book_story/core/widget/custom_elevated_button.dart';
 import 'package:book_story/core/widget/snack_bar.dart';
 import 'package:book_story/features/my%20_book/domain/entity/book.dart';
 import 'package:book_story/features/my%20_book/presentation/state/edit_book_state.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:edge_detection/edge_detection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../core/colors/colors.dart';
 import '../../../core/widget/custom_text_form_fill.dart';
@@ -42,8 +47,42 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
   late DecorationImage? decorationImage;
   late String? imagePath;
   late bool isShowLoading;
-  List<String> list = <String>['Vietnamese', 'English', 'Other'];
-  List<String> categories = <String>['Novel', 'Comic', 'Other'];
+  List<String> list = <String>[
+    'book_languages.en',
+    'book_languages.vi',
+    'book_languages.other'
+  ];
+  List<String> categories = <String>[
+    'book_categories.adventure',
+    'book_categories.art',
+    'book_categories.biography',
+    'book_categories.business',
+    'book_categories.comics',
+    'book_categories.cooking',
+    'book_categories.crime',
+    'book_categories.economics',
+    'book_categories.fantasy',
+    'book_categories.fiction',
+    'book_categories.health',
+    'book_categories.history',
+    'book_categories.horror',
+    'book_categories.humor',
+    'book_categories.kids',
+    'book_categories.music',
+    'book_categories.mystery',
+    'book_categories.nonfiction',
+    'book_categories.philosophy',
+    'book_categories.romance',
+    'book_categories.science',
+    'book_categories.poetry',
+    'book_categories.psychology',
+    'book_categories.self_help',
+    'book_categories.sports',
+    'book_categories.thriller',
+    'book_categories.travel',
+    'book_categories.religion',
+    'book_categories.other',
+  ];
   DateTime selectedDate = DateTime.now();
   late Book? book;
 
@@ -85,7 +124,6 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
           isShowLoading = next.loading;
         });
       } else if (next is UISuccessState) {
-        log("bookId");
         final book = next.data as Book;
         setState(() {
           decorationImage = DecorationImage(
@@ -107,10 +145,10 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
             .showSnackBar(WarningSnackBar(message: next.message));
       } else if (next is EditBookError) {
         ScaffoldMessenger.of(context)
-            .showSnackBar(ErrorSnackBar(message: "Something wrong! Please try later!"));
+            .showSnackBar(ErrorSnackBar(message: 'something_wrong'.tr()));
       } else if (next is EditBookSuccess) {
         ScaffoldMessenger.of(context)
-            .showSnackBar(SuccessSnackBar(message: "Edit successfully!"));
+            .showSnackBar(SuccessSnackBar(message: 'edit_book_successfully'.tr()));
         Navigator.pop(context);
         ref.watch(myBookStateNotifierProvider.notifier).getBook();
       }
@@ -125,7 +163,7 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
               backgroundColor: S.colors.white,
               elevation: 0.5,
               title: Text(
-                "Edit a new book",
+                'edit_book'.tr(),
                 style: S.textStyles.heading3,
               ),
               leading: BackButton(
@@ -186,14 +224,14 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
                       validator: (value) {
                         if (value != null) {
                           if (value.isEmpty) {
-                            return "Please enter your book's name";
+                            return 'please_enter_your_book_name'.tr();
                           } else if (value.length < 2) {
-                            return "Book's name must be at least 1 characters";
+                            return 'book_name_at_least_one_character'.tr();
                           }
                         }
                         return null;
                       },
-                      hintText: "Name",
+                      hintText: 'book_name'.tr(),
                       obscureText: false,
                       controller: nameController,
                       textInputAction: TextInputAction.next,
@@ -229,14 +267,14 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
                       validator: (value) {
                         if (value != null) {
                           if (value.isEmpty) {
-                            return "Please enter book's author!";
+                            return 'please_enter_your_book_author'.tr();
                           } else if (value.length < 2) {
-                            return "Book's author must be at least 1 characters!";
+                            return 'book_author_at_least_one_character'.tr();
                           }
                         }
                         return null;
                       },
-                      hintText: "Author",
+                      hintText: 'book_author'.tr(),
                       obscureText: false,
                       controller: authorController,
                       textInputAction: TextInputAction.next,
@@ -269,7 +307,7 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
                           });
                         }
                       },
-                      hintText: "Description (Optional)",
+                      hintText: 'book_description'.tr(),
                       obscureText: false,
                       maxLength: 1000,
                       maxLines: null,
@@ -310,12 +348,12 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
                       validator: (value) {
                         if (value != null) {
                           if (value.isEmpty) {
-                            return "Please enter book's language!";
+                            return 'please_enter_book_language'.tr();
                           }
                         }
                         return null;
                       },
-                      hintText: "Language",
+                      hintText: 'book_language'.tr(),
                       obscureText: false,
                       readOnly: true,
                       controller: languageController,
@@ -369,12 +407,12 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
                       validator: (value) {
                         if (value != null) {
                           if (value.isEmpty) {
-                            return "Please enter book's category!";
+                            return 'please_enter_book_category'.tr();
                           }
                         }
                         return null;
                       },
-                      hintText: "Category",
+                      hintText: 'book_category'.tr(),
                       obscureText: false,
                       readOnly: true,
                       controller: categoryController,
@@ -417,12 +455,12 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
                       validator: (value) {
                         if (value != null) {
                           if (value.isEmpty) {
-                            return "Please enter book's release year!";
+                            return 'please_enter_book_release_year'.tr();
                           }
                         }
                         return null;
                       },
-                      hintText: "Release year",
+                      hintText: 'book_release'.tr(),
                       obscureText: false,
                       readOnly: true,
                       controller: releaseYearController,
@@ -440,7 +478,7 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
                       height: 24.h,
                     ),
                     CustomElevatedButton(
-                      child: const Center(child: Text("Edit book")),
+                      child: Center(child: Text('edit_book'.tr())),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           ref
@@ -520,7 +558,7 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text("Pick release year"),
+          title: Text('picker_release_year'.tr()),
           content: SizedBox(
             height: 200.h,
             width: 300.w,
@@ -546,24 +584,24 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
     });
   }
 
-  void showImageSourceActionSheet(BuildContext context) {
+  void showImageSourceActionSheet(BuildContext context) async {
     if (Platform.isIOS) {
       showCupertinoModalPopup(
         context: context,
         builder: (context) => CupertinoActionSheet(
           actions: [
             CupertinoActionSheetAction(
-              child: const Text('Camera'),
+              child: Text('camera'.tr()),
               onPressed: () {
                 Navigator.pop(context);
-                selectImageSource(ImageSource.camera);
+                selectImageSource(context, ImageSource.camera);
               },
             ),
             CupertinoActionSheetAction(
-              child: const Text('Gallery'),
+              child: Text('gallery'.tr()),
               onPressed: () {
                 Navigator.pop(context);
-                selectImageSource(ImageSource.gallery);
+                selectImageSourceFromGallery(context);
               },
             )
           ],
@@ -575,18 +613,26 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
         builder: (context) => Wrap(children: [
           ListTile(
             leading: const Icon(Icons.camera_alt),
-            title: const Text('Camera'),
+            title: Text('camera_edge_detector'.tr()),
             onTap: () {
               Navigator.pop(context);
-              selectImageSource(ImageSource.camera);
+              selectImageSource(context, null);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.camera_alt),
+            title: Text('camera'.tr()),
+            onTap: () {
+              Navigator.pop(context);
+              selectImageSource(context, ImageSource.camera);
             },
           ),
           ListTile(
             leading: const Icon(Icons.photo_album),
-            title: const Text('Gallery'),
+            title: Text('gallery'.tr()),
             onTap: () {
               Navigator.pop(context);
-              selectImageSource(ImageSource.gallery);
+              selectImageSourceFromGallery(context);
             },
           ),
         ]),
@@ -594,15 +640,103 @@ class _EditBookScreenState extends ConsumerState<EditBookScreen> {
     }
   }
 
-  void selectImageSource(ImageSource imageSource) async {
-    final pickedImage = await ImagePicker().pickImage(source: imageSource);
-    if (pickedImage == null) {
-      return;
+  void selectImageSource(BuildContext context, ImageSource? imageSource) async {
+    var status = await Permission.camera.status;
+    if (status.isDenied || status.isPermanentlyDenied) {
+      await showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('permission'.tr()),
+              content: Text('permission_camera_denies'.tr()),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('cancel'.tr())),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      openAppSettings();
+                    },
+                    child: Text('ok'.tr()))
+              ],
+            );
+          });
+    } else if (status.isGranted) {
+      if (imageSource != null) {
+        final pickedImage = await ImagePicker().pickImage(source: imageSource);
+        if (pickedImage == null) {
+          return;
+        }
+        setState(() {
+          decorationImage = DecorationImage(
+              image: FileImage(File(pickedImage.path)), fit: BoxFit.fill);
+          imagePath = pickedImage.path;
+        });
+      } else {
+        String imagePath = path.join((await getApplicationSupportDirectory()).path,
+            "${(DateTime.now().millisecondsSinceEpoch / 1000).round()}.jpeg");
+        try {
+          bool success = await EdgeDetection.detectEdge(
+            imagePath,
+            canUseGallery: true,
+            androidScanTitle: 'scanning'.tr(),
+            androidCropTitle: 'crop'.tr(),
+            androidCropReset: 'reset'.tr(),
+          );
+          if (success) {
+            setState(() {
+              decorationImage = DecorationImage(
+                image: FileImage(File(imagePath)),
+                fit: BoxFit.fill,
+              );
+              this.imagePath = imagePath;
+            });
+          }
+        } catch (e) {
+          log(e.toString());
+        }
+      }
     }
-    setState(() {
-      decorationImage = DecorationImage(
-          image: FileImage(File(pickedImage.path)), fit: BoxFit.fill);
-      imagePath = pickedImage.path;
-    });
+  }
+
+  void selectImageSourceFromGallery(BuildContext context) async {
+    var status = await Permission.storage.status;
+    if (status.isDenied || status.isPermanentlyDenied) {
+      await showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('permission'.tr()),
+              content: Text('permission_storage_denies'.tr()),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('cancel'.tr())),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      openAppSettings();
+                    },
+                    child: Text('oke'.tr()))
+              ],
+            );
+          });
+    } else if (status.isGranted) {
+      final pickedImage =
+      await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (pickedImage == null) {
+        return;
+      }
+      setState(() {
+        decorationImage = DecorationImage(
+            image: FileImage(File(pickedImage.path)), fit: BoxFit.fill);
+        imagePath = pickedImage.path;
+      });
+    }
   }
 }

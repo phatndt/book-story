@@ -1,5 +1,6 @@
 
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/presentation/state.dart';
@@ -26,7 +27,7 @@ class ForgotPasswordStateNotifier extends StateNotifier<UIState> {
         },
       );
     } else {
-      state = UIErrorState(Exception('Please enter your email!'));
+      state = UIErrorState(Exception('authentication.login.please_enter_your_email'.tr()));
     }
   }
 

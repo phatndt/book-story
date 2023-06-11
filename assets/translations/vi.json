@@ -119,5 +119,57 @@
   "language": "Ngôn ngữ",
   "release": "Năm xuất bản",
   "description": "Mô tả",
-  "read": "Đọc"
+  "read": "Đọc",
+  "delete_book_successfully": "Xoá sách thành công",
+  "shelfie": "Shelfie",
+  "add_some_books_to_your_collection_now": "Thêm sách vào bộ sưu tập ngay bây giờ",
+  "edit_book": "Chỉnh sửa sách",
+  "delete_book": "Xoá sách",
+  "delete_this_book": "Xoá sách?",
+  "delete_this_book_description": "Bạn xác nhận xoá sách này?",
+  "edit_book_successfully": "Chỉnh sửa sách thành công",
+  "reset_to_first_page": "Đặt lại",
+  "save_current_page": "Lưu trang hiện tại",
+  "page": "Trang: ",
+  "loading_file": "Tải file: ",
+  "wc_1": "Kinh nghiệm đọc và chia sẻ\nsách hơn bao giờ hết",
+  "wc_2": "Đăng nhập",
+  "wc_3": "Đăng ký",
+  "authentication": {
+    "login": {
+      "please_enter_your_email": "Vui lòng nhập email",
+      "please_enter_valid_email": "Vui lòng nhập email hợp lệ",
+      "email": "Email",
+      "please_enter_your_password": "Vui lòng nhập mật khẩu",
+      "password": "Mật khẩu",
+      "forgot_password": "Quên mật khẩu?",
+      "login": "Đăng nhập",
+      "not_a_member": "Chưa có tài khoản? ",
+      "register_now": "Đăng ký ngay",
+      "please_enter_your_email_and_password": "Vui lòng nhập email và mật khẩu",
+      "welcome": "Chào mừng bạn đến với Shelfie"
+    },
+    "forgot_password": {
+      "reset_password_successfully": "Đặt lại mật khẩu thành công. Vui lòng kiểm tra email của bạn",
+      "forgot_password_1": "Quên mật khẩu?",
+      "forgot_password_2": "Vui lòng nhập email của bạn để đặt lại mật khẩu",
+      "confirm": "Xác nhận"
+    },
+    "register": {
+      "register successfully": "Đăng ký thành công",
+      "register_1": "Đăng ký",
+      "please_enter_your_name": "Vui lòng nhập tên",
+      "your_name_at_least_one_character": "Tên ít nhất một kí tự",
+      "name": "Tên",
+      "your_password_at_least_six_character": "Mật khẩu ít nhất 6 kí tự",
+      "password_not_matching": "Mật khẩu không khớp",
+      "confirm_password": "Xác nhận mật khẩu",
+      "sign_up": "Đăng ký",
+      "register_2": "Bạn đã có tài khoản? ",
+      "register_3": "Đăng nhập ngay"
+    }
+  },
+  "image_is_empty": "Ảnh trống",
+  "upload_file_error": "Lỗi tải file",
+  "nothing_to_update": "Không có gì để cập nhập"
 }

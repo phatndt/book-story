@@ -1,4 +1,5 @@
 import 'package:book_story/features/authentication/domain/repository/auth_repo.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/presentation/state.dart';
@@ -24,7 +25,8 @@ class LoginStateNotifier extends StateNotifier<UIState> {
         },
       );
     } else {
-      state = UIErrorState(Exception('Please enter your email and password!'));
+      state =
+          UIErrorState(Exception('authentication.login.please_enter_your_email_and_password'.tr()));
     }
   }
 }

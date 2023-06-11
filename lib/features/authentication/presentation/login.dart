@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:book_story/core/navigation/route_paths.dart';
 import 'package:book_story/core/widget/custom_elevated_button.dart';
 import 'package:book_story/core/widget/snack_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -101,7 +102,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         height: S.size.length_40Vertical,
                       ),
                       Text(
-                        'Welcome!',
+                        'authentication.login.welcome'.tr(),
                         style: S.textStyles.heading1.copyWith(
                             fontWeight: FontWeight.bold,
                             color: S.colors.primary_3),
@@ -124,15 +125,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         },
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Please enter your email!";
+                            return 'authentication.login.please_enter_your_email'.tr();
                           } else if (!RegExp(
                                   r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
                               .hasMatch(value)) {
-                            return "Please enter a valid email";
+                            return 'authentication.login.please_enter_valid_email'.tr();
                           }
                           return null;
                         },
-                        hintText: "Email",
+                        hintText: 'authentication.login.email'.tr(),
                         obscureText: false,
                         inputType: TextInputType.emailAddress,
                         controller: emailController,
@@ -167,11 +168,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         },
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Please enter your password!";
+                            return 'authentication.login.please_enter_your_password'.tr();
                           }
                           return null;
                         },
-                        hintText: "Password",
+                        hintText: 'authentication.login.password'.tr(),
                         obscureText: isObscurePasswordController,
                         controller: passwordController,
                         textInputAction: TextInputAction.done,
@@ -217,7 +218,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           Navigator.pushNamed(context, RoutePaths.forgot);
                         },
                         child: Text(
-                          "Forgot password?",
+                          'authentication.login.forgot_password'.tr(),
                           style: S.textStyles.paragraph.copyWith(
                             fontWeight: FontWeight.w700,
                             color: S.colors.primary_3,
@@ -230,7 +231,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       CustomElevatedButton(
                         child: Center(
                           child: Text(
-                            "Login",
+                            'authentication.login.login'.tr(),
                             style: S.textStyles.button
                                 .copyWith(color: S.colors.white),
                           ),
@@ -252,18 +253,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Not a member? ",
+                            'authentication.login.not_a_member'.tr(),
                             style: S.textStyles.paragraph,
                           ),
                           InkWell(
                             onTap: () {
                               Navigator.pushNamed(context, RoutePaths.signUp);
                             },
-                            child: Text("Register now",
-                                style: S.textStyles.paragraph.copyWith(
-                                  color: S.colors.primary_3,
-                                  fontWeight: FontWeight.bold,
-                                )),
+                            child: Text(
+                              'authentication.login.register_now'.tr(),
+                              style: S.textStyles.paragraph.copyWith(
+                                color: S.colors.primary_3,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ],
                       ),
