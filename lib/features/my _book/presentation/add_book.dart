@@ -2,8 +2,10 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:book_story/core/presentation/state.dart';
+import 'package:book_story/core/utils/camera_utils.dart';
 import 'package:book_story/core/widget/custom_elevated_button.dart';
 import 'package:book_story/core/widget/snack_bar.dart';
+import 'package:camera/camera.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:edge_detection/edge_detection.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,6 +22,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../../core/colors/colors.dart';
 import '../../../core/widget/custom_text_form_fill.dart';
 import '../di/my_book_module.dart';
+import 'ocr_scan_screen.dart';
 
 class AddBookScreen extends ConsumerStatefulWidget {
   const AddBookScreen({
@@ -83,6 +86,7 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
     'book_categories.other',
   ];
   DateTime selectedDate = DateTime.now();
+  late List<CameraDescription>? _cameras;
 
   @override
   void initState() {
@@ -90,7 +94,7 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
     _init();
   }
 
-  _init() {
+  _init() async {
     nameController = TextEditingController();
     authorController = TextEditingController();
     languageController = TextEditingController();
@@ -106,6 +110,7 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
     imagePath = null;
     isShowLoading = false;
     _formKey = GlobalKey<FormState>();
+    _cameras = await availableCameras();
   }
 
   @override
@@ -144,22 +149,6 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
               ),
               backgroundColor: S.colors.white,
               elevation: 0.5,
-              actions: [
-                IconButton(
-                  color: S.colors.primary_3,
-                  icon: const Icon(
-                    FontAwesomeIcons.barcode,
-                  ),
-                  onPressed: () {
-                    // ref
-                    //     .watch(addBookSettingNotifierProvider.notifier)
-                    //     .updateImagePath(File(''));
-                    // ref
-                    //     .watch(addBookSettingNotifierProvider.notifier)
-                    //     .scanBarcode(context);
-                  },
-                ),
-              ],
             ),
             body: SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -184,7 +173,7 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                           image: decorationImage,
                         ),
                         child: TextButton(
-                          onPressed: () {
+                          onPressed: () async {
                             showImageSourceActionSheet(context);
                           },
                           child: Icon(
@@ -224,18 +213,41 @@ class _AddBookScreenState extends ConsumerState<AddBookScreen> {
                       controller: nameController,
                       textInputAction: TextInputAction.next,
                       inputType: TextInputType.name,
-                      suffixIconData: isShowClearIconNameController
-                          ? IconButton(
-                              splashColor: Colors.transparent,
-                              icon: const Icon(Icons.clear),
-                              onPressed: () {
-                                nameController.clear();
-                                setState(() {
-                                  isShowClearIconNameController = false;
-                                });
-                              },
-                            )
-                          : null,
+                      suffixIconData: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          isShowClearIconNameController
+                              ? IconButton(
+                                  splashColor: Colors.transparent,
+                                  icon: const Icon(Icons.clear),
+                                  onPressed: () {
+                                    nameController.clear();
+                                    setState(() {
+                                      isShowClearIconNameController = false;
+                                    });
+                                  },
+                                )
+                              : const SizedBox.shrink(),
+                          IconButton(
+                            padding: const EdgeInsets.only(),
+                            splashColor: Colors.transparent,
+                            icon: const Icon(Icons.camera_alt),
+                            onPressed: () async {
+                              if (_cameras != null) {
+                                final result = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => OcrScanScreen(
+                                      cameraDescription: _cameras!,
+                                    ),
+                                  ),
+                                );
+                                nameController.text = result;
+                              }
+                            },
+                          )
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 24.h,

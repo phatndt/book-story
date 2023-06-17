@@ -10,6 +10,7 @@ import '../../../core/presentation/state.dart';
 import '../presentation/state/add_book_state.dart';
 import '../presentation/state/book_detail_state.dart';
 import '../presentation/state/my_book_state.dart';
+import '../presentation/state/ocr_scan_state.dart';
 import '../presentation/state/read_book_file_state.dart';
 
 final bookRepoProvider = Provider<BookRepo>((ref) {
@@ -39,4 +40,8 @@ final readBookFileStateNotifierProvider =
 final editBookStateNotifierProvider =
     StateNotifierProvider<EditBookStateNotifier, UIState>((ref) {
   return EditBookStateNotifier(ref, ref.read(bookRepoProvider));
+});
+final ocrScanStateNotifierProvider =
+    StateNotifierProvider<OcrScanStateNotifier, UIState>((ref) {
+  return OcrScanStateNotifier(ref);
 });
