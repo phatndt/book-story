@@ -79,7 +79,7 @@ class CustomTextFormField extends StatelessWidget {
         maxLength: maxLength,
         decoration: InputDecoration(
           filled: true,
-          fillColor: fillColor,
+          fillColor: enabled ? fillColor : S.colors.gray_6,
           contentPadding:
               EdgeInsets.symmetric(vertical: 16.h, horizontal: 12.w),
           counterText: "",
@@ -106,6 +106,10 @@ class CustomTextFormField extends StatelessWidget {
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: S.colors.red, width: 2),
+            borderRadius: BorderRadius.all(const Radius.circular(12).w),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide.none,
             borderRadius: BorderRadius.all(const Radius.circular(12).w),
           ),
           prefixIcon: prefixIconData,

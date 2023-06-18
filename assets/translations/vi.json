@@ -171,5 +171,19 @@
   },
   "image_is_empty": "Ảnh trống",
   "upload_file_error": "Lỗi tải file",
-  "nothing_to_update": "Không có gì để cập nhập"
+  "nothing_to_update": "Không có gì để cập nhập",
+  "email_is_null": "Email is null",
+  "book_feature": {
+    "book": {
+      "select_release_year": "Chọn năm xuất bản"
+    },
+    "ocr": {
+      "screen_title": "OCR",
+      "gallery": "Thư viện ảnh",
+      "camera": "Máy ảnh",
+      "ok": "Xác nhận",
+      "live_feed_dia_log_title": "Đổi sang chế độ live feed?",
+      "live_feed_dia_log_description": "Tính năng đang được phát triển. Bạn có muốn thử chức năng này không?"
+    }
+  }
 }

@@ -337,6 +337,9 @@ class _BookShelfDetailState extends ConsumerState<BookShelfDetail> {
                         : null,
                     child: Text('update_book_shelf_button'.tr()),
                   ),
+                  SizedBox(
+                    height: 12.h,
+                  ),
                 ],
               ),
             ),

@@ -87,6 +87,16 @@ class EditProfileState extends StateNotifier<UIState> {
       }
     }
   }
+
+  getEmail() async {
+    state = const UILoadingState(true);
+    final result = await _profileRepo.getEmail();
+    state = const UILoadingState(false);
+    result.fold(
+      (l) => state = UIErrorState(l),
+      (r) => state = UIGetEmailSuccessState(r),
+    );
+  }
 }
 
 class UIUpdateProfilePhotoUrlSuccessState extends UIState {
@@ -111,4 +121,10 @@ class UIUpdateProfileNameSuccessState extends UIState {
   final String message;
 
   const UIUpdateProfileNameSuccessState(this.message);
+}
+
+class UIGetEmailSuccessState extends UIState {
+  final String email;
+
+  const UIGetEmailSuccessState(this.email);
 }

@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:book_story/core/extension/function_extension.dart';
@@ -9,154 +7,12 @@ import 'package:book_story/features/my%20_book/presentation/widget/text_recogniz
 import 'package:camera/camera.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../../../core/colors/colors.dart';
-import '../../../core/presentation/state.dart';
-import '../../../core/widget/snack_bar.dart';
-import '../di/my_book_module.dart';
 
-// class OcrScanScreen extends ConsumerStatefulWidget {
-//   const OcrScanScreen({
-//     Key? key,
-//     required this.cameraDescription,
-//   }) : super(key: key);
-//   final CameraDescription cameraDescription;
-//
-//   @override
-//   ConsumerState createState() => _OcrScanScreenState();
-// }
-//
-// class _OcrScanScreenState extends ConsumerState<OcrScanScreen> {
-//   late List<CameraDescription>? _cameras;
-//   late CameraController? _controller;
-//   late bool isShowLoading;
-//   late Future<void> _initializeControllerFuture;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     _cameras = null;
-//     isShowLoading = false;
-//     _controller = CameraController(
-//       widget.cameraDescription,
-//       ResolutionPreset.max,
-//       enableAudio: false,
-//       imageFormatGroup: Platform.isAndroid
-//           ? ImageFormatGroup.nv21 // for Android
-//           : ImageFormatGroup.bgra8888, // for iOS
-//     );
-//     _initializeControllerFuture = _controller!.initialize();
-//   }
-//
-//   Future<void> startCamera() async {
-//     _cameras = await availableCameras();
-//     _controller = CameraController(
-//       widget.cameraDescription,
-//       ResolutionPreset.max,
-//       enableAudio: false,
-//       imageFormatGroup: Platform.isAndroid
-//           ? ImageFormatGroup.nv21 // for Android
-//           : ImageFormatGroup.bgra8888, // for iOS
-//     );
-//     _initializeControllerFuture = _controller!.initialize();
-//   }
-//
-//   @override
-//   void dispose() {
-//     _controller!.dispose();
-//     super.dispose();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     ref.listen(ocrScanStateNotifierProvider, (previous, next) async {
-//       if (next is UILoadingState) {
-//         setState(() {
-//           isShowLoading = next.loading;
-//         });
-//       } else if (next is UISuccessState) {
-//         setState(() {
-//           _cameras = next.data;
-//           _controller = CameraController(
-//             _cameras![0],
-//             ResolutionPreset.max,
-//           );
-//         });
-//         await _controller?.initialize();
-//       } else if (next is UIErrorState) {
-//         ScaffoldMessenger.of(context)
-//             .showSnackBar(ErrorSnackBar(message: next.error.toString()));
-//       }
-//     });
-//     return SafeArea(
-//       child: ModalProgressHUD(
-//         inAsyncCall: isShowLoading,
-//         child: Scaffold(
-//           appBar: CustomAppBar(
-//             leading: Image.asset(
-//               'assets/logo/logo.png',
-//             ),
-//             title: Text(
-//               'shelfie'.tr(),
-//               style: S.textStyles.heading3,
-//             ),
-//           ),
-//           backgroundColor: const Color(0xffF2F6FA),
-//           body: FutureBuilder<void>(
-//             future: _initializeControllerFuture,
-//             builder: (context, snapshot) {
-//               if (snapshot.connectionState == ConnectionState.done) {
-//                 // If the Future is complete, display the preview.
-//                 return CameraPreview(_controller!);
-//               } else {
-//                 // Otherwise, display a loading indicator.
-//                 return const Center(child: CircularProgressIndicator());
-//               }
-//             },
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-//
-//   InputImage? _inputImageFromCameraImage(CameraImage image) {
-//     // get camera rotation
-//     final camera = widget.cameraDescription;
-//     final rotation =
-//         InputImageRotationValue.fromRawValue(camera.sensorOrientation);
-//     if (rotation == null) return null;
-//
-//     // get image format
-//     final format = InputImageFormatValue.fromRawValue(image.format.raw);
-//     // validate format depending on platform
-//     // only supported formats:
-//     // * nv21 for Android
-//     // * bgra8888 for iOS
-//     if (format == null ||
-//         (Platform.isAndroid && format != InputImageFormat.nv21) ||
-//         (Platform.isIOS && format != InputImageFormat.bgra8888)) return null;
-//
-//     // since format is constraint to nv21 or bgra8888, both only have one plane
-//     if (image.planes.length != 1) return null;
-//     final plane = image.planes.first;
-//
-//     // compose InputImage using bytes
-//     return InputImage.fromBytes(
-//       bytes: plane.bytes,
-//       metadata: InputImageMetadata(
-//         size: Size(image.width.toDouble(), image.height.toDouble()),
-//         rotation: rotation, // used only in Android
-//         format: format, // used only in iOS
-//         bytesPerRow: plane.bytesPerRow, // used only in iOS
-//       ),
-//     );
-//   }
-// }
 class OcrScanScreen extends StatefulWidget {
   const OcrScanScreen({
     Key? key,
@@ -187,7 +43,7 @@ class _OcrScanScreenState extends State<OcrScanScreen> {
   @override
   Widget build(BuildContext context) {
     return CameraView(
-      title: 'Text Detector',
+      title: 'book_feature.ocr.screen_title'.tr(),
       customPaint: _customPaint,
       text: _text,
       onImage: (inputImage) {
@@ -297,7 +153,7 @@ class _CameraViewState extends State<CameraView> {
     }
     _imagePicker = ImagePicker();
 
-    if (_cameraIndex != -1) {
+    if (_cameraIndex == -1) {
       _startLiveFeed();
     } else {
       _mode = ScreenMode.gallery;
@@ -416,11 +272,11 @@ class _CameraViewState extends State<CameraView> {
       child: Column(
         children: [
           CustomElevatedButton(
-              child: Text('From Gallery'),
+              child: Text('book_feature.ocr.gallery'.tr()),
               onPressed: () => _getImage(ImageSource.gallery)),
           SizedBox(height: 16.h),
           CustomElevatedButton(
-            child: Text('Take a picture'),
+            child: Text('book_feature.ocr.camera'.tr()),
             onPressed: () => _getImage(ImageSource.camera),
           ),
           SizedBox(height: 16.h),
@@ -452,14 +308,14 @@ class _CameraViewState extends State<CameraView> {
               ).isShow(widget.text != null),
             ),
           CustomElevatedButton(
-              child: Text('Submit'),
               onPressed: selectedIndex.isNotEmpty
                   ? () {
                       List<String> temp = selectedIndex.map((e) => widget.text![e]).toList();
                       String nums = temp.reduce((value, element) => "$value $element");
                       Navigator.of(context).pop(nums);
                     }
-                  : null),
+                  : null,
+              child: Text('book_feature.ocr.ok'.tr())),
         ],
       ),
     );
@@ -595,17 +451,41 @@ class _CameraViewState extends State<CameraView> {
   }
 
   void _switchScreenMode() {
-    _image = null;
     if (_mode == ScreenMode.liveFeed) {
-      _mode = ScreenMode.gallery;
-      _stopLiveFeed();
-    } else {
-      _mode = ScreenMode.liveFeed;
-      _startLiveFeed();
+      setState(() {
+        _mode = ScreenMode.gallery;
+        _stopLiveFeed();
+      });
+      return;
     }
-    if (widget.onScreenModeChanged != null) {
-      widget.onScreenModeChanged!(_mode);
-    }
-    setState(() {});
+    showDialog(context: context, builder: (context) {
+      return AlertDialog(
+        title: Text('book_feature.ocr.live_feed_dia_log_title'.tr()),
+        content: Text('book_feature.ocr.live_feed_dia_log_description'.tr()),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('cancel'.tr()),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _image = null;
+              if (_mode == ScreenMode.liveFeed) {
+                _mode = ScreenMode.gallery;
+                _stopLiveFeed();
+              } else {
+                _mode = ScreenMode.liveFeed;
+                _startLiveFeed();
+              }
+              if (widget.onScreenModeChanged != null) {
+                widget.onScreenModeChanged!(_mode);
+              }
+            },
+            child: Text('ok'.tr()),
+          ),
+        ],
+      );
+    });
   }
 }

@@ -38,7 +38,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   late GlobalKey<FormState> formState;
   late bool isShowLoading;
   late bool flagDisplayName;
-
+  late String email;
   @override
   void initState() {
     super.initState();
@@ -51,11 +51,13 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     imageUrl =
         "https://firebasestorage.googleapis.com/v0/b/book-story-d79dd.appspot.com/o/local_profile_avatar.png?alt=media&token=e0224436-ab20-4c73-afa5-06784e090fae";
     pickedImageUrl = null;
+    email = "";
     Future.delayed(Duration.zero, () {
       nameController = TextEditingController(
           text: ModalRoute.of(context)?.settings.arguments as String);
       displayName = ModalRoute.of(context)?.settings.arguments as String;
       ref.watch(editProfileStateNotifierProvider.notifier).getProfilePhoto();
+      ref.watch(editProfileStateNotifierProvider.notifier).getEmail();
       // ref.watch(editProfileStateNotifierProvider.notifier).getProfileName();
     });
   }
@@ -99,6 +101,10 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
         setState(() {
           displayName = next.name;
           nameController.text = next.name;
+        });
+      } else if (next is UIGetEmailSuccessState) {
+        setState(() {
+          email = next.email;
         });
       }
     });
@@ -147,6 +153,13 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                       );
                     },
                     child: _imageBuilder(),
+                  ),
+                  SizedBox(height: 24.h),
+                  CustomTextFormField(
+                    hintText: "",
+                    obscureText: false,
+                    controller: TextEditingController(text: email),
+                    enabled: false,
                   ),
                   SizedBox(height: 24.h),
                   CustomTextFormField(

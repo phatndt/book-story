@@ -171,5 +171,19 @@
   },
   "image_is_empty": "Image is empty",
   "upload_file_error": "Upload file error!",
-  "nothing_to_update": "Nothing to update"
+  "nothing_to_update": "Nothing to update",
+  "email_is_null": "Email is null",
+  "book_feature": {
+    "book": {
+      "select_release_year": "Select release year"
+    },
+    "ocr": {
+      "screen_title": "Book name Detector",
+      "gallery": "From Gallery",
+      "camera": "Take a picture",
+      "ok": "Submit",
+      "live_feed_dia_log_title": "Switch to live feed mode",
+      "live_feed_dia_log_description": "This feature is still in development. Do you want to switch to live feed mode?"
+    }
+  }
 }

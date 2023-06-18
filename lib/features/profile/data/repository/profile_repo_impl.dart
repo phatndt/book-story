@@ -104,4 +104,21 @@ class ProfileRepoImpl extends ProfileRepo {
       //Nothing
     }
   }
+
+  @override
+  Future<Either<Exception, String>> getEmail() async {
+    try {
+      if (FirebaseAuth.instance.currentUser == null) {
+        return left(Exception('user_is_null_login_again'.tr()));
+      }
+      final result = FirebaseAuth.instance.currentUser!.email;
+      if (result != null) {
+        return right(result);
+      } else {
+        return left(Exception('email_is_null'.tr()));
+      }
+    } catch (e) {
+      return left(Exception(e.toString()));
+    }
+  }
 }
