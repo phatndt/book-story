@@ -16,7 +16,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:skeletons/skeletons.dart';
-
+import 'package:path/path.dart' as p;
 import '../../../core/colors/colors.dart';
 import '../../../core/widget/snack_bar.dart';
 
@@ -177,7 +177,7 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
     } else if (status.isGranted) {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
-        allowedExtensions: ['jpg', 'pdf', 'doc'],
+        allowedExtensions: ['pdf'],
       );
       if (result != null && result.files.single.path != null) {
         return result.files.single.path;
@@ -189,6 +189,13 @@ class _BookDetailScreenState extends ConsumerState<BookDetailScreen> {
   }
 
   void uploadFile(String path, String bookId) {
+    if (p.extension(path) != ".pdf") {
+      final snackBar = ErrorSnackBar(
+        message: 'Exception: ${'book_feature.book.file_format_not_support'.tr()}',
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      return;
+    }
     File file = File(path);
     showDialog(
         context: context,

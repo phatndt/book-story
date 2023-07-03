@@ -98,14 +98,18 @@ class _ReadBookFileState extends ConsumerState<ReadBookFile> {
                 ),
                 tooltip: 'reset_to_first_page'.tr(),
               ),
-              TextButton(
+              IconButton(
                 onPressed: () {
                   ref
                       .watch(readBookFileStateNotifierProvider.notifier)
                       .updateReadFilePageBook(book!.id, currentPage);
                 },
-                child: Text('reset_to_first_page'.tr()),
-              ),
+                icon: Icon(
+                  Icons.save_outlined,
+                  color: S.colors.primary_3,
+                ),
+                tooltip: 'save_current_page'.tr(),
+              )
             ],
           ),
           bottomNavigationBar: BottomAppBar(

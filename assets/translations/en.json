@@ -142,7 +142,7 @@
       "email": "Email",
       "please_enter_your_password": "Please enter your password!",
       "password": "Password",
-      "forgot_password": "Forgot_password?",
+      "forgot_password": "Forgot password?",
       "login": "Login",
       "not_a_member": "Not a member? ",
       "register_now": "Register now",
@@ -175,7 +175,8 @@
   "email_is_null": "Email is null",
   "book_feature": {
     "book": {
-      "select_release_year": "Select release year"
+      "select_release_year": "Select release year",
+      "file_format_not_support": "File format not support"
     },
     "ocr": {
       "screen_title": "Book name Detector",
