@@ -175,7 +175,8 @@
   "email_is_null": "Email is null",
   "book_feature": {
     "book": {
-      "select_release_year": "Chọn năm xuất bản"
+      "select_release_year": "Chọn năm xuất bản",
+      "file_format_not_support": "Định dạng file không được hỗ trợ"
     },
     "ocr": {
       "screen_title": "OCR",
