@@ -254,7 +254,7 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
                             return 'authentication.register.your_password_at_least_six_character'
                                 .tr();
                           } else if (value != passwordController.text) {
-                            return 'password_not_matching'.tr();
+                            return 'authentication.register.password_not_matching'.tr();
                           }
                         }
                         return null;
